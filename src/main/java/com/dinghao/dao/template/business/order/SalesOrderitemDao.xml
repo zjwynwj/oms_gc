@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.order.SalesOrderitemDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.order.SalesOrderitem" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="OID" property="oid" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="TB_ID" property="tbId" jdbcType="VARCHAR" />
+    <result column="OUTER_IID" property="outerIid" jdbcType="VARCHAR" />
+    <result column="OUTER_SKU_ID" property="outerSkuId" jdbcType="VARCHAR" />
+    <result column="LOC_ID" property="locId" jdbcType="BIGINT" />
+    <result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+    <result column="QTY" property="qty" jdbcType="BIGINT" />
+    <result column="SALSE_PRICE" property="salsePrice" jdbcType="DECIMAL" />
+    <result column="TOTSAL_MONEY" property="totsalMoney" jdbcType="DECIMAL" />
+    <result column="PAYMENT" property="payment" jdbcType="DECIMAL" />
+    <result column="DISCOUNT_FEE" property="discountFee" jdbcType="DECIMAL" />
+    <result column="ADJUST_FEE" property="adjustFee" jdbcType="DECIMAL" />
+    <result column="ISGIFT" property="isgift" jdbcType="BIT" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="NUMIID" property="numiid" jdbcType="BIGINT" />
+    <result column="TOP_SKUID" property="topSkuid" jdbcType="VARCHAR" />
+    <result column="REFUND_STATUS" property="refundStatus" jdbcType="VARCHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="PLAT_STATUS" property="platStatus" jdbcType="VARCHAR" />
+    <result column="PLAT_REFUND_STATUS" property="platRefundStatus" jdbcType="VARCHAR" />
+    <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+   <result column="GDS_NO" property="gdsNo" jdbcType="VARCHAR" />
+    <result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+    <result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMap1" type="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="OID" property="oid" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="TB_ID" property="tbId" jdbcType="VARCHAR" />
+    <result column="OUTER_IID" property="outerIid" jdbcType="VARCHAR" />
+    <result column="OUTER_SKU_ID" property="outerSkuId" jdbcType="VARCHAR" />
+    <result column="LOC_ID" property="locId" jdbcType="BIGINT" />
+    <result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+    <result column="QTY" property="qty" jdbcType="BIGINT" />
+    <result column="SALSE_PRICE" property="salsePrice" jdbcType="DECIMAL" />
+    <result column="TOTSAL_MONEY" property="totsalMoney" jdbcType="DECIMAL" />
+    <result column="PAYMENT" property="payment" jdbcType="DECIMAL" />
+    <result column="DISCOUNT_FEE" property="discountFee" jdbcType="DECIMAL" />
+    <result column="ADJUST_FEE" property="adjustFee" jdbcType="DECIMAL" />
+    <result column="ISGIFT" property="isgift" jdbcType="BIT" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="NUMIID" property="numiid" jdbcType="BIGINT" />
+    <result column="TOP_SKUID" property="topSkuid" jdbcType="VARCHAR" />
+    <result column="REFUND_STATUS" property="refundStatus" jdbcType="VARCHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="PLAT_STATUS" property="platStatus" jdbcType="VARCHAR" />
+    <result column="PLAT_REFUND_STATUS" property="platRefundStatus" jdbcType="VARCHAR" />
+    <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+    <result column="GDS_NO" property="gdsNo" jdbcType="VARCHAR" />
+    <result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+    <result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, OID, ORDER_ID, TB_ID, OUTER_IID, OUTER_SKU_ID, LOC_ID ,GDS_ID, QTY, SALSE_PRICE, TOTSAL_MONEY, 
+    ISGIFT, MEMO, NUMIID, TOP_SKUID, REFUND_STATUS, REMARK1, REMARK2, REMARK3, STATUS, 
+    PLAT_STATUS, PLAT_REFUND_STATUS , GDS_NAME, PAYMENT, DISCOUNT_FEE, ADJUST_FEE
+  </sql>
+  
+   <sql id="Base_Column_List1" >
+    orderItem.ID, orderItem.OID, orderItem.ORDER_ID, orderItem.TB_ID, orderItem.OUTER_IID, orderItem.OUTER_SKU_ID, 
+    orderItem.LOC_ID ,orderItem.GDS_ID, orderItem.QTY, orderItem.SALSE_PRICE, orderItem.TOTSAL_MONEY, 
+    orderItem.ISGIFT, orderItem.MEMO, orderItem.NUMIID, orderItem.TOP_SKUID, orderItem.REFUND_STATUS, 
+    orderItem.REMARK1, orderItem.REMARK2, orderItem.REMARK3, orderItem.STATUS, 
+    orderItem.PLAT_STATUS, orderItem.PLAT_REFUND_STATUS , orderItem.GDS_NAME, 
+    orderItem.PAYMENT, orderItem.DISCOUNT_FEE, orderItem.ADJUST_FEE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_sales_orderitem
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_sales_orderitem
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" >
+    insert into dh_sales_orderitem (ID, OID, ORDER_ID, 
+      TB_ID, OUTER_IID, OUTER_SKU_ID, LOC_ID,
+      GDS_ID, QTY, SALSE_PRICE, 
+      TOTSAL_MONEY, ISGIFT, MEMO, 
+      NUMIID, TOP_SKUID, REFUND_STATUS, 
+      REMARK1, REMARK2, REMARK3, 
+      STATUS, PLAT_STATUS, PLAT_REFUND_STATUS , GDS_NAME,
+      PAYMENT, DISCOUNT_FEE, ADJUST_FEE
+      )
+    values (#{id,jdbcType=BIGINT}, #{oid,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{tbId,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR}, #{outerSkuId,jdbcType=VARCHAR}, #{locId,jdbcType=BIGINT},
+      #{gdsId,jdbcType=BIGINT}, #{qty,jdbcType=BIGINT}, #{salsePrice,jdbcType=DECIMAL}, 
+      #{totsalMoney,jdbcType=DECIMAL}, #{isgift,jdbcType=BIT}, #{memo,jdbcType=VARCHAR}, 
+      #{numiid,jdbcType=BIGINT}, #{topSkuid,jdbcType=VARCHAR}, #{refundStatus,jdbcType=VARCHAR}, 
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{platStatus,jdbcType=VARCHAR}, #{platRefundStatus,jdbcType=VARCHAR},
+      #{gdsName,jdbcType=VARCHAR},
+      #{payment,jdbcType=DECIMAL},#{discountFee,jdbcType=DECIMAL},#{adjustFee,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" >
+    insert into dh_sales_orderitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="oid != null" >
+        OID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="tbId != null" >
+        TB_ID,
+      </if>
+      <if test="outerIid != null" >
+        OUTER_IID,
+      </if>
+      <if test="outerSkuId != null" >
+        OUTER_SKU_ID,
+      </if>
+      <if test="locId != null" >
+        LOC_ID,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="salsePrice != null" >
+        SALSE_PRICE,
+      </if>
+      <if test="totsalMoney != null" >
+        TOTSAL_MONEY,
+      </if>
+      <if test="isgift != null" >
+        ISGIFT,
+      </if>
+      <if test="memo != null" >
+        MEMO,
+      </if>
+      <if test="numiid != null" >
+        NUMIID,
+      </if>
+      <if test="topSkuid != null" >
+        TOP_SKUID,
+      </if>
+      <if test="refundStatus != null" >
+        REFUND_STATUS,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="remark3 != null" >
+        REMARK3,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="platStatus != null" >
+        PLAT_STATUS,
+      </if>
+      <if test="platRefundStatus != null" >
+        PLAT_REFUND_STATUS,
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME,
+      </if>
+       <if test="payment != null" >
+        PAYMENT,
+      </if>
+        <if test="discountFee != null" >
+        DISCOUNT_FEE,
+      </if>
+        <if test="adjustFee != null" >
+        ADJUST_FEE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbId != null" >
+        #{tbId,jdbcType=VARCHAR},
+      </if>
+      <if test="outerIid != null" >
+        #{outerIid,jdbcType=VARCHAR},
+      </if>
+      <if test="outerSkuId != null" >
+        #{outerSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="locId != null" >
+        #{locId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=BIGINT},
+      </if>
+      <if test="salsePrice != null" >
+        #{salsePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totsalMoney != null" >
+        #{totsalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isgift != null" >
+        #{isgift,jdbcType=BIT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="numiid != null" >
+        #{numiid,jdbcType=BIGINT},
+      </if>
+      <if test="topSkuid != null" >
+        #{topSkuid,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null" >
+        #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="platStatus != null" >
+        #{platStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="platRefundStatus != null" >
+        #{platRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsName != null" >
+        #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=DECIMAL},
+      </if>
+       <if test="discountFee != null" >
+        #{discountFee,jdbcType=DECIMAL},
+      </if>
+       <if test="adjustFee != null" >
+        #{adjustFee,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" >
+    update dh_sales_orderitem
+    <set >
+      <if test="oid != null" >
+        OID = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbId != null" >
+        TB_ID = #{tbId,jdbcType=VARCHAR},
+      </if>
+      <if test="outerIid != null" >
+        OUTER_IID = #{outerIid,jdbcType=VARCHAR},
+      </if>
+      <if test="outerSkuId != null" >
+        OUTER_SKU_ID = #{outerSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="locId != null" >
+        LOC_ID = #{locId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID = #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=BIGINT},
+      </if>
+      <if test="salsePrice != null" >
+        SALSE_PRICE = #{salsePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totsalMoney != null" >
+        TOTSAL_MONEY = #{totsalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isgift != null" >
+        ISGIFT = #{isgift,jdbcType=BIT},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="numiid != null" >
+        NUMIID = #{numiid,jdbcType=BIGINT},
+      </if>
+      <if test="topSkuid != null" >
+        TOP_SKUID = #{topSkuid,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null" >
+        REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        REMARK3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="platStatus != null" >
+        PLAT_STATUS = #{platStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="platRefundStatus != null" >
+        PLAT_REFUND_STATUS = #{platRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME = #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        PAYMENT = #{payment,jdbcType=DECIMAL},
+      </if>
+       <if test="discountFee != null" >
+        DISCOUNT_FEE = #{discountFee,jdbcType=DECIMAL},
+      </if>
+       <if test="adjustFee != null" >
+        ADJUST_FEE = #{adjustFee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" >
+    update dh_sales_orderitem
+    set OID = #{oid,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      TB_ID = #{tbId,jdbcType=VARCHAR},
+      OUTER_IID = #{outerIid,jdbcType=VARCHAR},
+      OUTER_SKU_ID = #{outerSkuId,jdbcType=VARCHAR},
+      LOC_ID = #{locId,jdbcType=BIGINT},
+      GDS_ID = #{gdsId,jdbcType=BIGINT},
+      QTY = #{qty,jdbcType=BIGINT},
+      SALSE_PRICE = #{salsePrice,jdbcType=DECIMAL},
+      TOTSAL_MONEY = #{totsalMoney,jdbcType=DECIMAL},
+      ISGIFT = #{isgift,jdbcType=BIT},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      NUMIID = #{numiid,jdbcType=BIGINT},
+      TOP_SKUID = #{topSkuid,jdbcType=VARCHAR},
+      REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR},
+      REMARK3 = #{remark3,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PLAT_STATUS = #{platStatus,jdbcType=VARCHAR},
+      PLAT_REFUND_STATUS = #{platRefundStatus,jdbcType=VARCHAR},
+      GDS_NAME = #{gdsName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+<sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="oid != null" >
+	        	and OID = #{oid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="orderId != null" >
+	        	and ORDER_ID = #{orderId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="tbId != null" >
+	        	and TB_ID = #{tbId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerIid != null" >
+	        	and OUTER_IID = #{outerIid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerSkuId != null" >
+	        	and OUTER_SKU_ID = #{outerSkuId,jdbcType=VARCHAR}
+	      </if>
+	       <if test="locId != null" >
+	        	and LOC_ID = #{locId,jdbcType=BIGINT}
+	      </if>
+	      <if test="gdsId != null" >
+	        	and GDS_ID = #{gdsId,jdbcType=BIGINT}
+	      </if>
+	      <if test="qty != null" >
+	        	and QTY = #{qty,jdbcType=BIGINT}
+	      </if>
+	      <if test="salsePrice != null" >
+	        	and SALSE_PRICE = #{salsePrice,jdbcType=DECIMAL}
+	      </if>
+	      <if test="totsalMoney != null" >
+	        	and TOTSAL_MONEY = #{totsalMoney,jdbcType=DECIMAL}
+	      </if>
+	      <if test="isgift != null" >
+	        	and ISGIFT = #{isgift,jdbcType=BIT}
+	      </if>
+	      <if test="memo != null" >
+	        	and MEMO = #{memo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="numiid != null" >
+	        	and NUMIID = #{numiid,jdbcType=BIGINT}
+	      </if>
+	      <if test="topSkuid != null" >
+	        	and TOP_SKUID = #{topSkuid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="refundStatus != null" >
+	        	and REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark1 != null" >
+	        	and REMARK1 = #{remark1,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark2 != null" >
+	        	and REMARK2 = #{remark2,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark3 != null" >
+	        	and REMARK3 = #{remark3,jdbcType=VARCHAR}
+	      </if>
+	      <if test="status != null" >
+	        	and STATUS = #{status,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platStatus != null" >
+	        	and PLAT_STATUS = #{platStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platRefundStatus != null" >
+	        	and PLAT_REFUND_STATUS = #{platRefundStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsName != null" >
+	        	and GDS_NAME = #{gdsName,jdbcType=VARCHAR}
+	      </if>
+	  </where>
+  </sql>
+  
+  <select id="selectOrderItemListCount" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultType="int">
+  		select
+		count(1)
+		from dh_sales_orderitem
+		<include refid="whereFields"></include>
+    </select>
+  
+    <select id="selectOrderItemListGrid" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_sales_orderitem
+		<include refid="whereFields"></include>
+		limit #{offset},#{rows}
+    </select>
+    
+    <select id="selectOrderItemList" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultMap="BaseResultMap1">
+    	SELECT a.ID,a.OID,a.ORDER_ID,a.TB_ID,a.OUTER_IID,a.OUTER_SKU_ID,a.LOC_ID,a.GDS_ID,b.GDS_FORMAT as gdsFormat,b.GDS_NO as gdsNo,a.QTY,
+			   a.SALSE_PRICE,a.TOTSAL_MONEY,a.ISGIFT,a.MEMO,a.NUMIID,a.TOP_SKUID,a.REFUND_STATUS,a.REMARK1,a.REMARK2,
+	           a.REMARK3,a.STATUS,a.PLAT_STATUS,a.PLAT_REFUND_STATUS,a.PAYMENT,a.DISCOUNT_FEE,a.ADJUST_FEE,
+	           b.SKU_OUTER_ID,c.Warehouse_positions_code locNo,b.ATTBS,ifnull(a.OUTER_IID,b.GDS_NO) GDS_NO,a.GDS_NAME
+		from dh_sales_orderitem a 
+		   LEFT JOIN dh_gds_info b on a.GDS_ID=b.ID
+		     LEFT JOIN dh_warehouse_positions c on a.LOC_ID=c.Id
+		 <where>
+		  <if test="id != null and id >0">
+				and a.ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="oid != null" >
+	        	and a.OID = #{oid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="orderId != null" >
+	        	and a.ORDER_ID = #{orderId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="tbId != null" >
+	        	and a.TB_ID = #{tbId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerIid != null" >
+	        	and a.OUTER_IID = #{outerIid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerSkuId != null" >
+	        	and a.OUTER_SKU_ID = #{outerSkuId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="locId != null" >
+	        	and a.LOC_ID = #{locId,jdbcType=BIGINT}
+	      </if>
+	      <if test="gdsId != null" >
+	        	and a.GDS_ID = #{gdsId,jdbcType=BIGINT}
+	      </if>
+	      <if test="status != null" >
+	        	and a.STATUS = #{status,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platStatus != null" >
+	        	and a.PLAT_STATUS = #{platStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platRefundStatus != null" >
+	        	and a.PLAT_REFUND_STATUS = #{platRefundStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsName != null" >
+	        	and b.GDS_NAME = #{gdsName,jdbcType=VARCHAR}
+	      </if>
+	  </where>
+    </select>
+    
+    <select id="selectOrderItemListByOid" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_sales_orderitem
+		where OID = #{oid,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectOrderItemListByOrderId" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultMap="BaseResultMap1">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_sales_orderitem
+		where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectOrderItemListByParam" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderitemVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List1" />
+		,gds.GDS_NO as gdsNo ,CONCAT(IFNULL(gds.GDS_NAME,''),' ', IFNULL(gds.GDS_FORMAT,''),'',IFNULL(gds.attbs,'')) AS gdsInfo,
+		gds.STAND_WEIGHT as gdsStandWeight,
+		warehouse.Warehouse_name as stockName , warepositions.Warehouse_positions_code as locNo,
+		express.`NAME` as expressName ,salesorder.EXPCODE as expcode ,salesorder.order_num as orderNum,salesorder.wave_id as waveId
+		from dh_sales_orderitem orderItem	 LEFT JOIN dh_gds_info gds on orderItem.GDS_ID=gds.ID
+											 LEFT JOIN dh_sales_order salesorder on orderItem.ORDER_ID=salesorder.ID
+											 LEFT JOIN dh_warehouse warehouse on salesorder.STOCK_ID=warehouse.Id
+											 LEFT JOIN dh_dms_express express on salesorder.EXPID = express.ID
+											 LEFT JOIN dh_warehouse_positions warepositions on orderItem.LOC_ID=warepositions.Id
+		<where>
+	          <if test="id != null and id >0">
+				    and orderItem.ID = #{id,jdbcType=BIGINT}
+			  </if>
+		      <if test="orderId != null" >
+		        	and orderItem.ORDER_ID = #{orderId,jdbcType=VARCHAR}
+		      </if>
+		      <if test="tbId != null" >
+	        	    and orderItem.TB_ID = #{tbId,jdbcType=VARCHAR}
+	           </if>
+	          <if test="orderIds != null and orderIds != ''" >
+	        	    and orderItem.ORDER_ID in
+	                <foreach collection="orderIds" item="id"
+	                    index="index" open="(" close=")" separator=",">
+	                    #{id}
+	                </foreach>
+	          </if>
+	          <if test="waveNo != null and waveNo != ''" >
+	        	and salesorder.WAVE_NO = #{waveNo,jdbcType=INTEGER}
+	          </if>
+	           <if test="gdsId != null and waveNo != ''" >
+	        	and orderItem.GDS_ID = #{gdsId,jdbcType=INTEGER}
+	          </if>
+	    </where>
+    </select>
+    
+     <delete id="deleteByOrderId" parameterType="java.lang.String" >
+	    delete from dh_sales_orderitem
+	    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+	  </delete>
+</mapper>

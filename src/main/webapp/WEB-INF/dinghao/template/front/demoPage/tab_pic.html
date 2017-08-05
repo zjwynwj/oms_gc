@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tab切换</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<style>
+/*======== 标签切换样式 ========*/
+ul.cutTab{ zoom:1; overflow:hidden;}
+ul.cutTab li{ float:left; width:200px; height:30px; line-height:30px; margin-right:20px; border:1px solid #999; text-align:center; background:#f1f1f1; cursor:pointer;}
+ul.cutTab li.readOn{ background:#FFC; color:#00C;}
+.cutTabCon{ display:none; border:1px solid #999; height:200px;}
+.upload-box{position:relative; width:200px;height:200px; text-align:center;}
+.transparent_class{filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;padding: 0px;top: 0px;right: 0px;font-family: Arial;font-size: 20px;cursor: pointer;position: absolute;margin: 0;}
+.selectPics{position: absolute;top:142px;left: 20px;width:160px;height: 30px;line-height: 30px;border-radius: 0;background: #000;opacity:.8;filter:alpha(opacity=80);color: #fff;text-align: center;font-size: 12px;cursor:pointer;}
+.selectPics:hover{opacity:1;filter:alpha(opacity=100);}
+</style>
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="../js/oms_common.js"></script>
+<script src="../js/picLoad.js"></script>
+<script>
+$(function(){
+	oms.cutCon("cutTab","click","readOn");  //标签切换调用
+	$("#photoUpload").uploadImgs();
+})
+</script>
+</head>
+
+<body style="background:#fff;">
+<div style="width:800px; margin:50px auto;">
+	<ul id="cutTab" class="cutTab">
+		<li class="readOn">标签一</li>
+		<li>标签二</li>
+		<li>标签三</li>
+	</ul>
+	<div id="cutTabCon0" class="cutTabCon" style="display:block;">内容一</div>
+	<div id="cutTabCon1" class="cutTabCon">内容二</div>
+	<div id="cutTabCon2" class="cutTabCon">内容三</div>
+</div>
+<div style="width:800px; margin:50px auto;">
+	<dl style="height:210px;">
+         <dt>图片上传：</dt>
+         <dd>
+         	<div class="upload-box">
+         		<div style="width:160px;height:160px;margin:10px auto 0;">
+         			<img src="http://imgcache.qq.com/club/item/wallpic/items/1/5411/1366_768_5411.jpg" width="160" height="160" class="Img"/>
+         		</div>
+         		<input type="file" name="file" accept="" id="photoUpload" class="transparent_class" />
+         		<span class="selectPics" onclick="$('#photoUpload').click()">点击上传图片</span>                  		
+         	</div>
+         </dd>
+     </dl>
+</div>
+</body>
+</html>

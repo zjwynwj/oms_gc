@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.purchase.PurOrderDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.purchase.PurOrder" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PUR_NO" property="purNo" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="BUSI_DATE" property="busiDate" jdbcType="DATE" />
+    <result column="PUR_TYPE" property="purType" jdbcType="CHAR" />
+    <result column="PAY_MONEY" property="payMoney" jdbcType="DECIMAL" />
+    <result column="PUR_ORDER_STATUS" property="purOrderStatus" jdbcType="CHAR" />
+    <result column="PUR_IM_STATUS" property="purImStatus" jdbcType="CHAR" />
+    <result column="PUR_PAY_STATUS" property="purPayStatus" jdbcType="CHAR" />
+    <result column="TOTAL_PAY_AMT" property="totalPayAmt" jdbcType="DECIMAL" />
+    <result column="DUE_DATE" property="dueDate" jdbcType="DATE" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PUR_NO, CUST_ID, BUSI_DATE, PUR_TYPE, PAY_MONEY, PUR_ORDER_STATUS, PUR_IM_STATUS, 
+    PUR_PAY_STATUS, TOTAL_PAY_AMT, DUE_DATE, FILE_PATH, REMARK, CREATE_BY, CREATE_DATE, 
+    MODIFY_BY, MODIFY_DATE, REMARK1, REMARK2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+     a.ID, a.PUR_NO, a.CUST_ID, b.CUST_NAME, a.BUSI_DATE, a.PUR_TYPE, a.PAY_MONEY, a.PUR_ORDER_STATUS, a.PUR_IM_STATUS, 
+    a.PUR_PAY_STATUS, a.TOTAL_PAY_AMT, a.DUE_DATE, a.FILE_PATH, REMARK, a.CREATE_BY, a.CREATE_DATE, 
+    a.MODIFY_BY, a.MODIFY_DATE, a.REMARK1, a.REMARK2 
+    from dh_pur_order a LEFT JOIN dh_custinfo b on a.CUST_ID=b.ID
+    where a.ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_pur_order
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" >
+    insert into dh_pur_order (ID, PUR_NO, CUST_ID, 
+      BUSI_DATE, PUR_TYPE, PAY_MONEY, 
+      PUR_ORDER_STATUS, PUR_IM_STATUS, PUR_PAY_STATUS, 
+      TOTAL_PAY_AMT, DUE_DATE, FILE_PATH, 
+      REMARK, CREATE_BY, CREATE_DATE, 
+      MODIFY_BY, MODIFY_DATE, REMARK1, 
+      REMARK2)
+    values (#{id,jdbcType=BIGINT}, #{purNo,jdbcType=VARCHAR}, #{custId,jdbcType=BIGINT}, 
+      #{busiDate,jdbcType=DATE}, #{purType,jdbcType=CHAR}, #{payMoney,jdbcType=DECIMAL}, 
+      #{purOrderStatus,jdbcType=CHAR}, #{purImStatus,jdbcType=CHAR}, #{purPayStatus,jdbcType=CHAR}, 
+      #{totalPayAmt,jdbcType=DECIMAL}, #{dueDate,jdbcType=DATE}, #{filePath,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" useGeneratedKeys="true" keyProperty="id">
+    insert into dh_pur_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="purNo != null" >
+        PUR_NO,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="busiDate != null" >
+        BUSI_DATE,
+      </if>
+      <if test="purType != null" >
+        PUR_TYPE,
+      </if>
+      <if test="payMoney != null" >
+        PAY_MONEY,
+      </if>
+      <if test="purOrderStatus != null" >
+        PUR_ORDER_STATUS,
+      </if>
+      <if test="purImStatus != null" >
+        PUR_IM_STATUS,
+      </if>
+      <if test="purPayStatus != null" >
+        PUR_PAY_STATUS,
+      </if>
+      <if test="totalPayAmt != null" >
+        TOTAL_PAY_AMT,
+      </if>
+      <if test="dueDate != null" >
+        DUE_DATE,
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purNo != null" >
+        #{purNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="busiDate != null" >
+        #{busiDate,jdbcType=DATE},
+      </if>
+      <if test="purType != null" >
+        #{purType,jdbcType=CHAR},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purOrderStatus != null" >
+        #{purOrderStatus,jdbcType=CHAR},
+      </if>
+      <if test="purImStatus != null" >
+        #{purImStatus,jdbcType=CHAR},
+      </if>
+      <if test="purPayStatus != null" >
+        #{purPayStatus,jdbcType=CHAR},
+      </if>
+      <if test="totalPayAmt != null" >
+        #{totalPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="dueDate != null" >
+        #{dueDate,jdbcType=DATE},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" >
+    update dh_pur_order
+    <set >
+      <if test="purNo != null" >
+        PUR_NO = #{purNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="busiDate != null" >
+        BUSI_DATE = #{busiDate,jdbcType=DATE},
+      </if>
+      <if test="purType != null" >
+        PUR_TYPE = #{purType,jdbcType=CHAR},
+      </if>
+      <if test="payMoney != null" >
+        PAY_MONEY = #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purOrderStatus != null" >
+        PUR_ORDER_STATUS = #{purOrderStatus,jdbcType=CHAR},
+      </if>
+      <if test="purImStatus != null" >
+        PUR_IM_STATUS = #{purImStatus,jdbcType=CHAR},
+      </if>
+      <if test="purPayStatus != null" >
+        PUR_PAY_STATUS = #{purPayStatus,jdbcType=CHAR},
+      </if>
+      <if test="totalPayAmt != null" >
+        TOTAL_PAY_AMT = #{totalPayAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="dueDate != null" >
+        DUE_DATE = #{dueDate,jdbcType=DATE},
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" >
+    update dh_pur_order
+    set PUR_NO = #{purNo,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=BIGINT},
+      BUSI_DATE = #{busiDate,jdbcType=DATE},
+      PUR_TYPE = #{purType,jdbcType=CHAR},
+      PAY_MONEY = #{payMoney,jdbcType=DECIMAL},
+      PUR_ORDER_STATUS = #{purOrderStatus,jdbcType=CHAR},
+      PUR_IM_STATUS = #{purImStatus,jdbcType=CHAR},
+      PUR_PAY_STATUS = #{purPayStatus,jdbcType=CHAR},
+      TOTAL_PAY_AMT = #{totalPayAmt,jdbcType=DECIMAL},
+      DUE_DATE = #{dueDate,jdbcType=DATE},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="purNo != null" >
+	        	and PUR_NO = #{purNo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="custId != null" >
+	        	and CUST_ID = #{custId,jdbcType=BIGINT}
+	      </if>
+	      <if test="busiDate != null" >
+	        	and BUSI_DATE = #{busiDate,jdbcType=DATE}
+	      </if>
+	      <if test="purType != null" >
+	        	and PUR_TYPE = #{purType,jdbcType=CHAR}
+	      </if>
+	      <if test="payMoney != null" >
+	        	and PAY_MONEY = #{payMoney,jdbcType=DECIMAL}
+	      </if>
+	      <if test="purOrderStatus != null" >
+	        	and PUR_ORDER_STATUS = #{purOrderStatus,jdbcType=CHAR}
+	      </if>
+	      <if test="purImStatus != null" >
+	        	and PUR_IM_STATUS = #{purImStatus,jdbcType=CHAR}
+	      </if>
+	      <if test="purPayStatus != null" >
+	        	and PUR_PAY_STATUS = #{purPayStatus,jdbcType=CHAR}
+	      </if>
+	      <if test="totalPayAmt != null" >
+	        	and TOTAL_PAY_AMT = #{totalPayAmt,jdbcType=DECIMAL}
+	      </if>
+	      <if test="dueDate != null" >
+	        	and DUE_DATE = #{dueDate,jdbcType=DATE}
+	      </if>
+	      <if test="filePath != null" >
+	        	and FILE_PATH = #{filePath,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark != null" >
+	        	and REMARK = #{remark,jdbcType=VARCHAR}
+	      </if>
+	      <if test="createBy != null" >
+	        	and CREATE_BY = #{createBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="createDate != null" >
+	        	and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="modifyBy != null" >
+	        	and MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="modifyDate != null" >
+	        	and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="remark1 != null" >
+	        	and REMARK1 = #{remark1,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark2 != null" >
+	        	and REMARK2 = #{remark2,jdbcType=VARCHAR}
+	      </if>
+	      <if test="keyWord != null" >
+	        	and (PUR_NO like CONCAT('%',#{keyWord},'%'))
+	      </if>
+	  </where>
+	</sql>
+	
+	<select id="selectPurOrderGridListPage" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" resultMap="BaseResultMap">
+		 select 
+	     a.ID, a.PUR_NO, a.CUST_ID, b.CUST_NAME, a.BUSI_DATE, a.PUR_TYPE, a.PAY_MONEY, a.PUR_ORDER_STATUS, a.PUR_IM_STATUS, 
+	    a.PUR_PAY_STATUS, a.TOTAL_PAY_AMT, a.DUE_DATE, a.FILE_PATH, REMARK, a.CREATE_BY, a.CREATE_DATE, 
+	    a.MODIFY_BY, a.MODIFY_DATE, a.REMARK1, a.REMARK2 
+	    from dh_pur_order a LEFT JOIN dh_custinfo b on a.CUST_ID=b.ID
+	    <where>
+	  
+		  <if test="keyWord != null" >
+	        	and (a.PUR_NO like CONCAT('%',#{keyWord},'%')  or b.CUST_NAME like CONCAT('%',#{keyWord},'%')  )
+	      </if>
+	     </where>
+	     order by a.Id desc
+	    limit #{offset},#{rows}
+	    
+ 	 </select>
+ 	 
+ 	 <select id="selectPurOrderGridListCount" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderVo" resultType="int">
+	  	select
+		count(1)
+		from dh_pur_order
+		<where>
+	      <if test="custId != null" >
+	        	and CUST_ID = #{custId,jdbcType=BIGINT}
+	      </if>
+		  <if test="keyWord != null" >
+	        	and (PUR_NO like CONCAT('%',#{keyWord},'%'))
+	      </if>
+	     </where>
+	 </select>
+	 
+	 <select id="selectPurOrderCountByPurNo" parameterType="java.lang.String" resultType="int">
+	  	select
+		count(1)
+		from dh_pur_order
+		where PUR_NO = #{purNo}
+	 </select>
+</mapper>

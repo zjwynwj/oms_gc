@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.goods.GdsInfoDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.goods.GdsInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="GDS_NO" property="gdsNo" jdbcType="VARCHAR" />
+    <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+    <result column="GDS_FORMAT" property="gdsFormat" jdbcType="VARCHAR" />
+    <result column="GDS_PACT" property="gdsPact" jdbcType="VARCHAR" />
+    <result column="CLS_ID" property="clsId" jdbcType="BIGINT" />
+    <result column="GDS_SEL_PRICE" property="gdsSelPrice" jdbcType="DECIMAL" />
+    <result column="CAL" property="cal" jdbcType="VARCHAR" />
+    <result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+    <result column="STAND_WEIGHT" property="standWeight" jdbcType="DECIMAL" />
+    <result column="GDS_STATUS" property="gdsStatus" jdbcType="CHAR" />
+    <result column="GDS_LOW_AMOUNT" property="gdsLowAmount" jdbcType="DECIMAL" />
+    <result column="GDS_HIGH_AMOUNT" property="gdsHighAmount" jdbcType="DECIMAL" />
+    <result column="IMG_PATH" property="imgPath" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="ingredient" property="ingredient" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="producer" property="producer" jdbcType="VARCHAR" />
+    <result column="countrycode" property="countrycode" jdbcType="VARCHAR" />
+    <result column="countryname" property="countryname" jdbcType="VARCHAR" />
+    <result column="expiration" property="expiration" jdbcType="VARCHAR" />
+  
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="SKU_OUTER_ID"  property="skuOuterId"  jdbcType="VARCHAR"/>
+    <result column="GDS_FLAG" property="gdsFlag" jdbcType="CHAR" />
+    <result column="ART_NO" property="artNo" jdbcType="VARCHAR" />
+    <result column="GENERATE_PACT" property="generatePact" jdbcType="VARCHAR" />
+    <result column="CLS_NAME" property="clsName" jdbcType="VARCHAR" />
+  </resultMap>
+ <sql id="Base_Column_List">
+     ID, GDS_NO, GDS_NAME, ifnull(GDS_FORMAT,'') GDS_FORMAT, GDS_PACT, CLS_ID, GDS_SEL_PRICE, CAL, ATTBS,STAND_WEIGHT, GDS_STATUS, 
+    GDS_LOW_AMOUNT, GDS_HIGH_AMOUNT, IMG_PATH, REMARK, CREATE_BY, CREATE_DATE, MODIFY_BY, 
+    MODIFY_DATE, SKU_OUTER_ID, GDS_FLAG, ART_NO, GENERATE_PACT,
+    brand,ingredient,purpose,producer,countrycode,countryname,expiration
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_gds_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" >
+     insert into dh_gds_info (ID, GDS_NO, GDS_NAME, 
+      GDS_FORMAT, GDS_PACT, CLS_ID, 
+      GDS_SEL_PRICE, CAL, ATTBS, STAND_WEIGHT,
+      GDS_STATUS, GDS_LOW_AMOUNT, GDS_HIGH_AMOUNT, 
+      IMG_PATH, REMARK, CREATE_BY, 
+      CREATE_DATE, MODIFY_BY, MODIFY_DATE, 
+      SKU_OUTER_ID, GDS_FLAG, ART_NO, 
+      GENERATE_PACT,brand,ingredient,purpose,producer,countrycode,countryname,expiration)
+    values (#{id,jdbcType=BIGINT}, #{gdsNo,jdbcType=VARCHAR}, #{gdsName,jdbcType=VARCHAR}, 
+      #{gdsFormat,jdbcType=VARCHAR}, #{gdsPact,jdbcType=VARCHAR}, #{clsId,jdbcType=BIGINT}, 
+      #{gdsSelPrice,jdbcType=DECIMAL}, #{cal,jdbcType=VARCHAR}, #{attbs,jdbcType=VARCHAR}, #{standWeight,jdbcType=VARCHAR}, 
+      #{gdsStatus,jdbcType=CHAR}, #{gdsLowAmount,jdbcType=DECIMAL}, #{gdsHighAmount,jdbcType=DECIMAL}, 
+      #{imgPath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{skuOuterId,jdbcType=VARCHAR}, #{gdsFlag,jdbcType=CHAR}, #{artNo,jdbcType=VARCHAR}, 
+      #{generatePact,jdbcType=VARCHAR},  #{brand,jdbcType=VARCHAR},  #{ingredient,jdbcType=VARCHAR},
+        #{purpose,jdbcType=VARCHAR},  #{producer,jdbcType=VARCHAR},  #{countrycode,jdbcType=VARCHAR},
+        #{countryname,jdbcType=VARCHAR},  #{expiration,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" useGeneratedKeys="true" keyProperty="id">
+    insert into dh_gds_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="gdsNo != null" >
+        GDS_NO,
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME,
+      </if>
+      <if test="gdsFormat != null" >
+        GDS_FORMAT,
+      </if>
+      <if test="gdsPact != null" >
+        GDS_PACT,
+      </if>
+      <if test="clsId != null" >
+        CLS_ID,
+      </if>
+      <if test="gdsSelPrice != null" >
+        GDS_SEL_PRICE,
+      </if>
+      <if test="cal != null" >
+        CAL,
+      </if>
+      <if test="attbs != null" >
+        ATTBS,
+      </if>
+      <if test="standWeight != null" >
+        STAND_WEIGHT,
+      </if>
+      <if test="gdsStatus != null" >
+        GDS_STATUS,
+      </if>
+      <if test="gdsLowAmount != null" >
+        GDS_LOW_AMOUNT,
+      </if>
+      <if test="gdsHighAmount != null" >
+        GDS_HIGH_AMOUNT,
+      </if>
+      <if test="imgPath != null" >
+        IMG_PATH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="skuOuterId != null">
+        SKU_OUTER_ID,
+      </if>
+       <if test="gdsFlag != null" >
+        GDS_FLAG,
+      </if>
+      <if test="artNo != null" >
+        ART_NO,
+      </if>
+      <if test="generatePact != null" >
+        GENERATE_PACT,
+      </if>
+     <if test="brand != null" >
+        brand,
+      </if>
+     <if test="ingredient != null" >
+        ingredient,
+      </if>
+     <if test="purpose != null" >
+        purpose,
+      </if>
+     <if test="producer != null" >
+        producer,
+      </if>
+     <if test="countrycode != null" >
+        countrycode,
+      </if>
+     <if test="countryname != null" >
+        countryname,
+      </if>
+    <if test="expiration != null" >
+        expiration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gdsNo != null" >
+        #{gdsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsName != null" >
+        #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsFormat != null" >
+        #{gdsFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsPact != null" >
+        #{gdsPact,jdbcType=VARCHAR},
+      </if>
+      <if test="clsId != null" >
+        #{clsId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsSelPrice != null" >
+        #{gdsSelPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cal != null" >
+        #{cal,jdbcType=VARCHAR},
+      </if>
+      <if test="attbs != null" >
+        #{attbs,jdbcType=VARCHAR},
+      </if>
+      <if test="standWeight != null" >
+        #{standWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsStatus != null" >
+        #{gdsStatus,jdbcType=CHAR},
+      </if>
+      <if test="gdsLowAmount != null" >
+        #{gdsLowAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsHighAmount != null" >
+        #{gdsHighAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="imgPath != null" >
+        #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skuOuterId != null">
+        #{skuOuterId,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsFlag != null" >
+        #{gdsFlag,jdbcType=CHAR},
+      </if>
+      <if test="artNo != null" >
+        #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="generatePact != null" >
+        #{generatePact,jdbcType=VARCHAR},
+      </if>
+      
+       <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+       <if test="ingredient != null" >
+        #{ingredient,jdbcType=VARCHAR},
+      </if>
+       <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+       <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+       <if test="countrycode != null" >
+        #{countrycode,jdbcType=VARCHAR},
+      </if>
+       <if test="countryname != null" >
+        #{countryname,jdbcType=VARCHAR},
+      </if>
+       <if test="expiration != null" >
+        #{expiration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" >
+    update dh_gds_info
+    <set >
+      <if test="gdsNo != null" >
+        GDS_NO = #{gdsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME = #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsFormat != null" >
+        GDS_FORMAT = #{gdsFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsPact != null" >
+        GDS_PACT = #{gdsPact,jdbcType=VARCHAR},
+      </if>
+      <if test="clsId != null" >
+        CLS_ID = #{clsId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsSelPrice != null" >
+        GDS_SEL_PRICE = #{gdsSelPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cal != null" >
+        CAL = #{cal,jdbcType=VARCHAR},
+      </if>
+      <if test="attbs != null" >
+        ATTBS = #{attbs,jdbcType=VARCHAR},
+      </if>
+      <if test="standWeight != null" >
+        STAND_WEIGHT = #{standWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsStatus != null" >
+        GDS_STATUS = #{gdsStatus,jdbcType=CHAR},
+      </if>
+      <if test="gdsLowAmount != null" >
+        GDS_LOW_AMOUNT = #{gdsLowAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsHighAmount != null" >
+        GDS_HIGH_AMOUNT = #{gdsHighAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="imgPath != null" >
+        IMG_PATH = #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skuOuterId != null">
+        SKU_OUTER_ID = #{skuOuterId,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsFlag != null" >
+        GDS_FLAG = #{gdsFlag,jdbcType=CHAR},
+      </if>
+      <if test="artNo != null" >
+        ART_NO = #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="generatePact != null" >
+        GENERATE_PACT = #{generatePact,jdbcType=VARCHAR},
+      </if>
+       <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+       <if test="ingredient != null" >
+        ingredient = #{ingredient,jdbcType=VARCHAR},
+      </if>
+       <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+       <if test="producer != null" >
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+       <if test="countrycode != null" >
+        countrycode = #{countrycode,jdbcType=VARCHAR},
+      </if>
+       <if test="countryname != null" >
+        countryname = #{countryname,jdbcType=VARCHAR},
+      </if>
+       <if test="expiration != null" >
+        expiration = #{expiration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" >
+    update dh_gds_info
+    set GDS_NO = #{gdsNo,jdbcType=VARCHAR},
+      GDS_NAME = #{gdsName,jdbcType=VARCHAR},
+      GDS_FORMAT = #{gdsFormat,jdbcType=VARCHAR},
+      GDS_PACT = #{gdsPact,jdbcType=VARCHAR},
+      CLS_ID = #{clsId,jdbcType=BIGINT},
+      GDS_SEL_PRICE = #{gdsSelPrice,jdbcType=DECIMAL},
+      CAL = #{cal,jdbcType=VARCHAR},
+      ATTBS = #{attbs,jdbcType=VARCHAR},
+      STAND_WEIGHT = #{standWeight,jdbcType=VARCHAR},
+      GDS_STATUS = #{gdsStatus,jdbcType=CHAR},
+      GDS_LOW_AMOUNT = #{gdsLowAmount,jdbcType=DECIMAL},
+      GDS_HIGH_AMOUNT = #{gdsHighAmount,jdbcType=DECIMAL},
+      IMG_PATH = #{imgPath,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      SKU_OUTER_ID = #{skuOuterId,jdbcType=VARCHAR},
+      GDS_FLAG = #{gdsFlag,jdbcType=CHAR},
+      ART_NO = #{artNo,jdbcType=VARCHAR},
+      GENERATE_PACT = #{generatePact,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      ingredient = #{ingredient,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      producer = #{producer,jdbcType=VARCHAR},
+      countrycode = #{countrycode,jdbcType=VARCHAR},
+      countryname = #{countryname,jdbcType=VARCHAR},
+      expiration = #{expiration,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="gdsNo != null and gdsNo != '' " >
+	        	and GDS_NO = #{gdsNo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsName != null" >
+	        	and GDS_NAME = #{gdsName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsFormat != null" >
+	        	and GDS_FORMAT = #{gdsFormat,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsPact != null" >
+	        	and GDS_PACT = #{gdsPact,jdbcType=VARCHAR} 
+	      </if>
+	      <if test="clsId != null and gdsStatus != ''" >
+	        	and CLS_ID = #{clsId,jdbcType=BIGINT}
+	      </if>
+	      <if test="gdsSelPrice != null" >
+	       		and GDS_SEL_PRICE = #{gdsSelPrice,jdbcType=DECIMAL}
+	      </if>
+	      <if test="cal != null" >
+	        	and CAL = #{cal,jdbcType=VARCHAR}
+	      </if>
+	      <if test="attbs != null" >
+	        	and ATTBS = #{attbs,jdbcType=VARCHAR}
+	      </if>
+	       <if test="standWeight != null" >
+	        	and STAND_WEIGHT = #{standWeight,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsStatus != null  and gdsStatus != ''" >
+	        	and GDS_STATUS = #{gdsStatus,jdbcType=CHAR}
+	      </if>
+	      <if test="gdsLowAmount != null" >
+	        	and GDS_LOW_AMOUNT = #{gdsLowAmount,jdbcType=DECIMAL}
+	      </if>
+	      <if test="gdsHighAmount != null" >
+	        	and GDS_HIGH_AMOUNT = #{gdsHighAmount,jdbcType=DECIMAL}
+	      </if>
+	      <if test="imgPath != null" >
+	        	and IMG_PATH = #{imgPath,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark != null" >
+	        	and REMARK = #{remark,jdbcType=VARCHAR}
+	      </if>
+	      <if test="createBy != null" >
+	        	and CREATE_BY = #{createBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="createDate != null" >
+	        	and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="modifyBy != null" >
+	        	and MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="modifyDate != null" >
+	        	and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="skuOuterId != null">
+	        	and SKU_OUTER_ID = #{skuOuterId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="gdsFlag != null" >
+	        	and GDS_FLAG = #{gdsFlag,jdbcType=CHAR}
+	      </if>
+	      <if test="artNo != null" >
+	        	and ART_NO = #{artNo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="generatePact != null" >
+	        	and GENERATE_PACT = #{generatePact,jdbcType=VARCHAR}
+	      </if>
+	      <if test="keyWord != null" >
+	        	and (GDS_NO like CONCAT(CONCAT('%', #{keyWord}), '%') or GDS_NAME like CONCAT(CONCAT('%', #{keyWord}), '%') or GDS_FORMAT like CONCAT(CONCAT('%', #{keyWord}), '%'))
+	      </if>
+	      <if test="clsIds!=null and clsIds.length!=0">
+                and CLS_ID in
+                <foreach collection="clsIds" item="clsId"
+                    index="index" open="(" close=")" separator=",">
+                    #{clsId}
+                </foreach>
+          </if>
+		</where>
+	</sql>
+	
+	<select id="selectGdsInfoGridListNoPage" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" resultMap="BaseResultMap">
+	    	select
+			<include refid="Base_Column_List" />
+			from dh_gds_info
+			<include refid="whereFields"></include>
+	 </select>
+	
+	 <select id="selectGdsInfoGridListPage" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" resultMap="BaseResultMap">
+	    	select
+		      ID,CONCAT(IFNULL(GDS_NO,''),' ',IFNULL(GDS_NAME,''),' ',	IFNULL(GDS_FORMAT,'')) AS gdsShowInfo,
+		      GDS_NO, GDS_NAME, ifnull(GDS_FORMAT,'') GDS_FORMAT, GDS_PACT, CLS_ID, GDS_SEL_PRICE, CAL, ATTBS,STAND_WEIGHT, GDS_STATUS, 
+		      GDS_LOW_AMOUNT, GDS_HIGH_AMOUNT, IMG_PATH, REMARK, CREATE_BY, CREATE_DATE, MODIFY_BY, 
+		      MODIFY_DATE, IFNULL(SKU_OUTER_ID,'') SKU_OUTER_ID, GDS_FLAG, ART_NO, GENERATE_PACT,
+		      brand,ingredient,purpose,producer,countrycode,countryname,expiration
+			from dh_gds_info
+			<include refid="whereFields"></include>
+			limit #{offset},#{rows}
+	 </select>
+	  
+	  <select id="selectGdsInfoGridListCount" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" resultType="int">
+	  		select
+			count(1)
+			from dh_gds_info
+			<include refid="whereFields"></include>
+	  </select>
+	  
+	  <select id="queryGdsInfoById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+	    SELECT
+			a.ID,a.GDS_NO,a.GDS_NAME,a.GDS_FORMAT,a.GDS_PACT,a.CLS_ID ,b.CLS_NAME,a.GDS_SEL_PRICE,a.CAL,a.ATTBS,a.STAND_WEIGHT,
+			a.GDS_STATUS,a.GDS_LOW_AMOUNT,	a.GDS_HIGH_AMOUNT,a.IMG_PATH ,a.REMARK ,a.CREATE_BY,a.CREATE_DATE,a.MODIFY_BY,
+			a.MODIFY_DATE ,	a.SKU_OUTER_ID,	a.SKU_OUTER_ID, a.GDS_FLAG, ART_NO,a.GENERATE_PACT,
+			a.brand,a.ingredient,a.purpose,a.producer,a.countrycode,a.countryname,a.expiration
+		FROM
+			dh_gds_info a LEFT JOIN dh_gds_cls b on a.CLS_ID=b.ID
+	    where a.ID = #{id,jdbcType=BIGINT}
+	  </select>
+	  
+	   <select id="queryGdsInfoByGdsNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			dh_gds_info
+	    where GDS_NO = #{gdsNo,jdbcType=VARCHAR}
+	  </select>
+	  
+	  <select id="queryGdsInfoByGdsNoSkuOuterId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			dh_gds_info
+	   
+	       where CONCAT(IFNULL(GDS_NO,''),IFNULL(SKU_OUTER_ID,'')) = #{gdsNoSkuOuterId}
+	  </select>
+</mapper>

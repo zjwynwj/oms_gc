@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.express.DmsExpressareaDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.express.DmsExpressarea" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="EXPRESS_ID" property="expressId" jdbcType="BIGINT" />
+    <result column="PROV_ID" property="provId" jdbcType="BIGINT" />
+    <result column="CITY_ID" property="cityId" jdbcType="BIGINT" />
+    <result column="COUNTY_ID" property="countyId" jdbcType="BIGINT" />
+    <result column="START_PRICE" property="startPrice" jdbcType="DECIMAL" />
+    <result column="START_WEIGHT" property="startWeight" jdbcType="DECIMAL" />
+    <result column="ADD_PRICE" property="addPrice" jdbcType="DECIMAL" />
+    <result column="ADD_WEIGHT" property="addWeight" jdbcType="DECIMAL" />
+    <result column="ISDELIVERY" property="isdelivery" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, EXPRESS_ID, PROV_ID, CITY_ID, COUNTY_ID, START_PRICE, START_WEIGHT, ADD_PRICE, 
+    ADD_WEIGHT, ISDELIVERY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_dms_expressarea
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_dms_expressarea
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" >
+    insert into dh_dms_expressarea (ID, EXPRESS_ID, PROV_ID, 
+      CITY_ID, COUNTY_ID, START_PRICE, 
+      START_WEIGHT, ADD_PRICE, ADD_WEIGHT, 
+      ISDELIVERY)
+    values (#{id,jdbcType=BIGINT}, #{expressId,jdbcType=BIGINT}, #{provId,jdbcType=BIGINT}, 
+      #{cityId,jdbcType=BIGINT}, #{countyId,jdbcType=BIGINT}, #{startPrice,jdbcType=DECIMAL}, 
+      #{startWeight,jdbcType=DECIMAL}, #{addPrice,jdbcType=DECIMAL}, #{addWeight,jdbcType=DECIMAL}, 
+      #{isdelivery,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" >
+    insert into dh_dms_expressarea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="expressId != null" >
+        EXPRESS_ID,
+      </if>
+      <if test="provId != null" >
+        PROV_ID,
+      </if>
+      <if test="cityId != null" >
+        CITY_ID,
+      </if>
+      <if test="countyId != null" >
+        COUNTY_ID,
+      </if>
+      <if test="startPrice != null" >
+        START_PRICE,
+      </if>
+      <if test="startWeight != null" >
+        START_WEIGHT,
+      </if>
+      <if test="addPrice != null" >
+        ADD_PRICE,
+      </if>
+      <if test="addWeight != null" >
+        ADD_WEIGHT,
+      </if>
+      <if test="isdelivery != null" >
+        ISDELIVERY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="expressId != null" >
+        #{expressId,jdbcType=BIGINT},
+      </if>
+      <if test="provId != null" >
+        #{provId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="countyId != null" >
+        #{countyId,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null" >
+        #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="startWeight != null" >
+        #{startWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="addPrice != null" >
+        #{addPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addWeight != null" >
+        #{addWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="isdelivery != null" >
+        #{isdelivery,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" >
+    update dh_dms_expressarea
+    <set >
+      <if test="expressId != null" >
+        EXPRESS_ID = #{expressId,jdbcType=BIGINT},
+      </if>
+      <if test="provId != null" >
+        PROV_ID = #{provId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        CITY_ID = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="countyId != null" >
+        COUNTY_ID = #{countyId,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null" >
+        START_PRICE = #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="startWeight != null" >
+        START_WEIGHT = #{startWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="addPrice != null" >
+        ADD_PRICE = #{addPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addWeight != null" >
+        ADD_WEIGHT = #{addWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="isdelivery != null" >
+        ISDELIVERY = #{isdelivery,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" >
+    update dh_dms_expressarea
+    set EXPRESS_ID = #{expressId,jdbcType=BIGINT},
+      PROV_ID = #{provId,jdbcType=BIGINT},
+      CITY_ID = #{cityId,jdbcType=BIGINT},
+      COUNTY_ID = #{countyId,jdbcType=BIGINT},
+      START_PRICE = #{startPrice,jdbcType=DECIMAL},
+      START_WEIGHT = #{startWeight,jdbcType=DECIMAL},
+      ADD_PRICE = #{addPrice,jdbcType=DECIMAL},
+      ADD_WEIGHT = #{addWeight,jdbcType=DECIMAL},
+      ISDELIVERY = #{isdelivery,jdbcType=SMALLINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="expressId != null" >
+	        	and EXPRESS_ID = #{expressId,jdbcType=BIGINT}
+	      </if>
+	      <if test="provId != null" >
+	        	and PROV_ID = #{provId,jdbcType=BIGINT}
+	      </if>
+	      <if test="cityId != null" >
+	        	and CITY_ID = #{cityId,jdbcType=BIGINT}
+	      </if>
+	      <if test="countyId != null" >
+	        	and COUNTY_ID = #{countyId,jdbcType=BIGINT}
+	      </if>
+	      <if test="startPrice != null" >
+	        	and START_PRICE = #{startPrice,jdbcType=DECIMAL}
+	      </if>
+	      <if test="startWeight != null" >
+	        	and START_WEIGHT = #{startWeight,jdbcType=DECIMAL}
+	      </if>
+	      <if test="addPrice != null" >
+	        	and ADD_PRICE = #{addPrice,jdbcType=DECIMAL}
+	      </if>
+	      <if test="addWeight != null" >
+	        	and ADD_WEIGHT = #{addWeight,jdbcType=DECIMAL}
+	      </if>
+	      <if test="isdelivery != null" >
+	        	and ISDELIVERY = #{isdelivery,jdbcType=SMALLINT}
+	      </if>
+	  </where>
+  </sql>
+  
+   <select id="selectExpressAreaListCount" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" resultType="int">
+  		select
+		count(1)
+		from dh_dms_expressarea
+		<include refid="whereFields"></include>
+    </select>
+  
+    <select id="selectExpressAreaListGrid" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" resultMap="BaseResultMap">
+    	SELECT
+			a.ID,
+			a.EXPRESS_ID,
+			c.`NAME` as expressName,
+			a.PROV_ID,
+			b.REGION_NAME as provName,
+			a.CITY_ID,
+			a.COUNTY_ID,
+			a.START_PRICE,
+			a.START_WEIGHT,
+			a.ADD_PRICE,
+			a.ADD_WEIGHT,
+			a.ISDELIVERY
+		FROM
+			dh_dms_expressarea a LEFT JOIN dh_base_area b on a.PROV_ID=b.ID
+								 LEFT JOIN dh_dms_express c  on a.EXPRESS_ID=c.ID
+		<where>
+		    <if test="id != null and id >0">
+				and a.ID = #{id,jdbcType=BIGINT}
+		    </if>
+		    <if test="expressId != null and expressId >0">
+				and a.EXPRESS_ID = #{expressId,jdbcType=BIGINT}
+		    </if>
+		</where>
+		limit #{offset},#{rows}
+    </select>
+    
+    <select id="selectExpressAreaList" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressareaVo" resultMap="BaseResultMap">
+    	SELECT
+			a.ID,
+			a.EXPRESS_ID,
+			c.`NAME` as expressName,
+			a.PROV_ID,
+			b.REGION_NAME as provName,
+			a.CITY_ID,
+			a.COUNTY_ID,
+			a.START_PRICE,
+			a.START_WEIGHT,
+			a.ADD_PRICE,
+			a.ADD_WEIGHT,
+			a.ISDELIVERY
+		FROM
+			dh_dms_expressarea a LEFT JOIN dh_base_area b on a.PROV_ID=b.ID
+								 LEFT JOIN dh_dms_express c  on a.EXPRESS_ID=c.ID
+		<where>
+		    <if test="id != null and id >0">
+				and a.ID = #{id,jdbcType=BIGINT}
+		    </if>
+		    <if test="expressId != null and expressId >0">
+				and a.EXPRESS_ID = #{expressId,jdbcType=BIGINT}
+		    </if>
+		</where>
+    </select>
+    
+    <select id="selectByParam" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from dh_dms_expressarea
+	    <include refid="whereFields"></include>
+    </select>
+    
+</mapper>

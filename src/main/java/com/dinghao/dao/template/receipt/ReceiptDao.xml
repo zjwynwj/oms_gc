@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.receipt.ReceiptDao">
+	<resultMap id="BaseResultMap" type="com.dinghao.entity.template.receipt.Receipt">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="Warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+		<result column="receipt_Type" property="receiptType" jdbcType="INTEGER" />
+		<result column="Warehouse_name" property="warehouseName"
+			jdbcType="VARCHAR" />
+		<result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_Date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_By" property="modifyBy" jdbcType="BIGINT" />
+		<result column="Create_By" property="createBy" jdbcType="BIGINT" />
+		<result column="Provider_id" property="providerId" jdbcType="VARCHAR" />
+		<result column="Receipt_code" property="receiptCode" jdbcType="VARCHAR" />
+		<result column="Service_type" property="serviceType" jdbcType="INTEGER" />
+		<result column="Service_num" property="serviceNum" jdbcType="VARCHAR" />
+		<result column="Handled_person" property="handledPerson"
+			jdbcType="VARCHAR" />
+		<result column="Company" property="company" jdbcType="VARCHAR" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, Warehouse_id, Warehouse_name, Create_Date, Modify_Date,
+		Modify_By,
+		Create_By,
+		Provider_id, Receipt_code, Service_type,
+		Service_num, Handled_person, Company,
+		Remarks,
+		receipt_Type,
+		Remarks1
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from dh_receipt
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_receipt
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insertSelective" parameterType="com.dinghao.entity.template.receipt.Receipt"
+	useGeneratedKeys="true" keyProperty="id">
+		insert into dh_receipt
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="warehouseId != null">
+				Warehouse_id,
+			</if>
+			<if test="warehouseName != null">
+				Warehouse_name,
+			</if>
+			<if test="receiptType != null">
+				receipt_Type,
+			</if>			
+			<if test="createDate != null">
+				Create_Date,
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date,
+			</if>
+			<if test="modifyBy != null">
+				Modify_By,
+			</if>
+			<if test="createBy != null">
+				Create_By,
+			</if>
+			<if test="providerId != null">
+				Provider_id,
+			</if>
+			<if test="receiptCode != null">
+				Receipt_code,
+			</if>
+			<if test="serviceType != null">
+				Service_type,
+			</if>
+			<if test="serviceNum != null">
+				Service_num,
+			</if>
+			<if test="handledPerson != null">
+				Handled_person,
+			</if>
+			<if test="company != null">
+				Company,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="warehouseId != null">
+				#{warehouseId,jdbcType=INTEGER},
+			</if>
+			<if test="warehouseName != null">
+				#{warehouseName,jdbcType=VARCHAR},
+			</if>
+			<if test="receiptType != null">
+				#{receiptType,jdbcType=INTEGER},
+			</if>			
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="providerId != null">
+				#{providerId,jdbcType=VARCHAR},
+			</if>
+			<if test="receiptCode != null">
+				#{receiptCode,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceType != null">
+				#{serviceType,jdbcType=INTEGER},
+			</if>
+			<if test="serviceNum != null">
+				#{serviceNum,jdbcType=VARCHAR},
+			</if>
+			<if test="handledPerson != null">
+				#{handledPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.template.receipt.Receipt">
+		update dh_receipt
+		<set>
+			<if test="warehouseId != null">
+				Warehouse_id = #{warehouseId,jdbcType=INTEGER},
+			</if>
+			<if test="receiptType != null">
+				receipt_Type = #{receiptType,jdbcType=INTEGER},
+			</if>
+			<if test="warehouseName != null">
+				Warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				Create_Date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				Modify_By = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				Create_By = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="providerId != null">
+				Provider_id = #{providerId,jdbcType=VARCHAR},
+			</if>
+			<if test="receiptCode != null">
+				Receipt_code = #{receiptCode,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceType != null">
+				Service_type = #{serviceType,jdbcType=INTEGER},
+			</if>
+			<if test="serviceNum != null">
+				Service_num = #{serviceNum,jdbcType=VARCHAR},
+			</if>
+			<if test="handledPerson != null">
+				Handled_person = #{handledPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				Company = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!--获取入库单数据 -->
+	<select id="getReceipts" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.receipt.ReceiptVo">
+		select
+		dh_receipt.Id, dh_receipt.Warehouse_id, dh_warehouse.Warehouse_name,
+		dh_receipt.Create_Date, dh_receipt.Modify_Date,
+		dh_receipt.Modify_By,dh_receipt.Create_By,
+		dh_receipt.Provider_id , dh_receipt.Receipt_code, dh_receipt.Service_type,
+		dh_receipt.Service_num, dh_receipt.Handled_person,
+		dh_receipt.Remarks,
+		dh_receipt.receipt_Type,
+		dh_receipt.Remarks1,dh_custinfo.CUST_NAME Company
+		from dh_receipt
+		left join dh_warehouse on dh_warehouse.id = dh_receipt.Warehouse_id
+		left join dh_custinfo on dh_custinfo.id = dh_receipt.Provider_id
+		<include refid="whereFields"></include>
+		order by id desc
+		limit #{offset},#{rows}
+	</select>
+	<select id="getReceiptsCount" parameterType="com.dinghao.entity.vo.template.receipt.ReceiptVo"
+		resultType="int">
+		select
+		count(1)
+		from dh_receipt
+		<include refid="whereFields"></include>
+	</select>
+	<sql id="whereFields">
+		<where>
+			<if test="warehouseId != null and warehouseId!=''">
+				and Warehouse_id = #{warehouseId,jdbcType=INTEGER}
+			</if>
+			<if test="receiptType != null and receiptType!=0">
+				and receipt_Type = #{receiptType,jdbcType=INTEGER}
+			</if>			
+			<if test="warehouseName != null">
+				and Warehouse_name = #{warehouseName,jdbcType=VARCHAR}
+			</if>
+			<if test="createDate != null">
+				and dh_receipt.Create_Date = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="beginDate != null and beginDate!=''">
+				<![CDATA[  and dh_receipt.Create_Date >= #{beginDate,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="endDate != null and endDate!=''">
+				<![CDATA[ and dh_receipt.Create_Date <= #{endDate,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="modifyDate != null">
+				and Modify_Date = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and Modify_By = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="createBy != null">
+				and Create_By = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="providerId != null and providerId!='' ">
+				and Provider_id = #{providerId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiptCode != null and receiptCode!=''">
+				and Receipt_code like
+				'%${receiptCode}%'
+			</if>
+			<if test="serviceType != null">
+				and Service_type = #{serviceType,jdbcType=INTEGER}
+			</if>
+			<if test="serviceNum != null">
+				and Service_num = #{serviceNum,jdbcType=VARCHAR}
+			</if>
+			<if test="handledPerson != null">
+				and Handled_person = #{handledPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="company != null">
+				and Company = #{company,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks != null">
+				and Remarks = #{remarks,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks1 != null">
+				and Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+</mapper>

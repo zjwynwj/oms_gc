@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dinghao.dao.template.business.goods.GdsAtvDao">
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.goods.GdsAtv">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ATTB_ID" jdbcType="BIGINT" property="attbId" />
+    <result column="ATTB_NAME" jdbcType="VARCHAR" property="attbName" />
+    <result column="ATTB_VALUE" jdbcType="VARCHAR" property="attbValue" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_BY" jdbcType="BIGINT" property="modifyBy" />
+    <result column="CLS_ID" jdbcType="BIGINT" property="clsId" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    ID, ATTB_ID, ATTB_VALUE, CREATE_DATE, CREATE_BY, MODIFY_DATE, MODIFY_BY,CLS_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_atv
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dh_gds_atv
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.goods.GdsAtvVo">
+    insert into dh_gds_atv (ID, ATTB_ID, ATTB_VALUE, 
+      CREATE_DATE, CREATE_BY, MODIFY_DATE, 
+      MODIFY_BY,CLS_ID)
+    values (#{id,jdbcType=BIGINT}, #{attbId,jdbcType=BIGINT}, #{attbValue,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=BIGINT},#{clsId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsAtvVo">
+    insert into dh_gds_atv
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="attbId != null">
+        ATTB_ID,
+      </if>
+      <if test="attbValue != null">
+        ATTB_VALUE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY,
+      </if>
+      <if test="clsId != null">
+        CLS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="attbId != null">
+        #{attbId,jdbcType=BIGINT},
+      </if>
+      <if test="attbValue != null">
+        #{attbValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="clsId != null">
+        #{clsId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsAtvVo">
+    update dh_gds_atv
+    <set>
+      <if test="attbId != null">
+        ATTB_ID = #{attbId,jdbcType=BIGINT},
+      </if>
+      <if test="attbValue != null">
+        ATTB_VALUE = #{attbValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="clsId != null">
+        CLS_ID = #{clsId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.goods.GdsAtvVo">
+    update dh_gds_atv
+    set ATTB_ID = #{attbId,jdbcType=BIGINT},
+      ATTB_VALUE = #{attbValue,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      CLS_ID = #{clsId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <select id="queryEGdsAtvListByClsIds" parameterType="com.dinghao.entity.vo.template.business.goods.GdsAtvVo" resultMap="BaseResultMap">
+  	 select
+	      a.ID as id,	 
+	      a.ATTB_ID as attbId,
+		  b.ATTB_NAME as attbName,
+	      a.ATTB_VALUE as attbValue,
+	      a.CREATE_DATE as createDate,
+	      a.CREATE_BY as createBy,
+	      a.MODIFY_DATE as modifyDate,
+	      a.MODIFY_BY as modifyBy,
+	      a.CLS_ID as clsId
+	    from dh_gds_atv a LEFT JOIN dh_gds_attb b on a.ATTB_ID=b.ID
+	    where a.CLS_ID in 
+	    	<foreach collection="clsIds" item="clsId"
+                index="index" open="(" close=")" separator=",">
+                #{clsId}
+            </foreach>
+  </select>
+</mapper>

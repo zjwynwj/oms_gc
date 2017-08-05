@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dinghao.dao.template.business.express.SenderInfoDao">
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.express.SenderInfo">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SENDER_NAME" jdbcType="VARCHAR" property="senderName" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="DISTRICT" jdbcType="VARCHAR" property="district" />
+    <result column="SEND_ADDRESS" jdbcType="VARCHAR" property="sendAddress" />
+    <result column="POSTCODE" jdbcType="CHAR" property="postcode" />
+    <result column="COMP_NAME" jdbcType="VARCHAR" property="compName" />
+    <result column="SHOP_TITLE" jdbcType="VARCHAR" property="shopTitle" />
+    <result column="memo3" jdbcType="VARCHAR" property="memo3" />
+    <result column="memo1" jdbcType="VARCHAR" property="memo1" />
+    <result column="memo2" jdbcType="VARCHAR" property="memo2" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SENDER_NAME, MOBILE, STATE, CITY, DISTRICT, SEND_ADDRESS, POSTCODE, COMP_NAME, 
+    SHOP_TITLE, memo3, memo1, memo2, telephone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_sender_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dh_sender_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.express.SenderInfoVo">
+    insert into dh_sender_info (ID, SENDER_NAME, MOBILE, 
+      STATE, CITY, DISTRICT, 
+      SEND_ADDRESS, POSTCODE, COMP_NAME, 
+      SHOP_TITLE, memo3, memo1, 
+      memo2, telephone)
+    values (#{id,jdbcType=BIGINT}, #{senderName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{sendAddress,jdbcType=VARCHAR}, #{postcode,jdbcType=CHAR}, #{compName,jdbcType=VARCHAR}, 
+      #{shopTitle,jdbcType=VARCHAR}, #{memo3,jdbcType=VARCHAR}, #{memo1,jdbcType=VARCHAR}, 
+      #{memo2,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.express.SenderInfoVo">
+    insert into dh_sender_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="senderName != null">
+        SENDER_NAME,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="district != null">
+        DISTRICT,
+      </if>
+      <if test="sendAddress != null">
+        SEND_ADDRESS,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="compName != null">
+        COMP_NAME,
+      </if>
+      <if test="shopTitle != null">
+        SHOP_TITLE,
+      </if>
+      <if test="memo3 != null">
+        memo3,
+      </if>
+      <if test="memo1 != null">
+        memo1,
+      </if>
+      <if test="memo2 != null">
+        memo2,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="senderName != null">
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null">
+        #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="compName != null">
+        #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTitle != null">
+        #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="memo3 != null">
+        #{memo3,jdbcType=VARCHAR},
+      </if>
+      <if test="memo1 != null">
+        #{memo1,jdbcType=VARCHAR},
+      </if>
+      <if test="memo2 != null">
+        #{memo2,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.express.SenderInfoVo">
+    update dh_sender_info
+    <set>
+      <if test="senderName != null">
+        SENDER_NAME = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null">
+        SEND_ADDRESS = #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        POSTCODE = #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="compName != null">
+        COMP_NAME = #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTitle != null">
+        SHOP_TITLE = #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="memo3 != null">
+        memo3 = #{memo3,jdbcType=VARCHAR},
+      </if>
+      <if test="memo1 != null">
+        memo1 = #{memo1,jdbcType=VARCHAR},
+      </if>
+      <if test="memo2 != null">
+        memo2 = #{memo2,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.express.SenderInfoVo">
+    update dh_sender_info
+    set SENDER_NAME = #{senderName,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      SEND_ADDRESS = #{sendAddress,jdbcType=VARCHAR},
+      POSTCODE = #{postcode,jdbcType=CHAR},
+      COMP_NAME = #{compName,jdbcType=VARCHAR},
+      SHOP_TITLE = #{shopTitle,jdbcType=VARCHAR},
+      memo3 = #{memo3,jdbcType=VARCHAR},
+      memo1 = #{memo1,jdbcType=VARCHAR},
+      memo2 = #{memo2,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="querySenderInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_sender_info
+  </select>
+</mapper>

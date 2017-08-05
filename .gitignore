@@ -1,0 +1,13 @@
+.externalToolBuilders/
+*/target/*
+*.bak
+*.class
+*.jar
+.idea
+*.iml
+.project
+.settings
+.classpath
+*.rar
+.gitignore
+target/

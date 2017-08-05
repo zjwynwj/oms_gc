@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.base.CustInfoDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.base.CustInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUST_NO" property="custNo" jdbcType="CHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="LINK_PHONE" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="LINK_ADDR" property="linkAddr" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="LINK_MAN" property="linkMan" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="CHAR" />
+    <result column="COMP_PHONE" property="compPhone" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CUST_NO, CUST_NAME, LINK_PHONE, LINK_ADDR, FAX, LINK_MAN, POST_CODE, COMP_PHONE, 
+    CREATE_BY, CREATE_DATE, MODIFY_BY, MODIFY_DATE, STATUS, REMARK1, REMARK2, REMARK3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_custinfo
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_custinfo
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" >
+    insert into dh_custinfo (ID, CUST_NO, CUST_NAME, 
+      LINK_PHONE, LINK_ADDR, FAX, 
+      LINK_MAN, POST_CODE, COMP_PHONE, 
+      CREATE_BY, CREATE_DATE, MODIFY_BY, 
+      MODIFY_DATE, STATUS, REMARK1, 
+      REMARK2, REMARK3)
+    values (#{id,jdbcType=BIGINT}, #{custNo,jdbcType=CHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{linkPhone,jdbcType=VARCHAR}, #{linkAddr,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{linkMan,jdbcType=VARCHAR}, #{postCode,jdbcType=CHAR}, #{compPhone,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" >
+    insert into dh_custinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="custNo != null" >
+        CUST_NO,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE,
+      </if>
+      <if test="linkAddr != null" >
+        LINK_ADDR,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="compPhone != null" >
+        COMP_PHONE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="remark3 != null" >
+        REMARK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="custNo != null" >
+        #{custNo,jdbcType=CHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddr != null" >
+        #{linkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=CHAR},
+      </if>
+      <if test="compPhone != null" >
+        #{compPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" >
+    update dh_custinfo
+    <set >
+      <if test="custNo != null" >
+        CUST_NO = #{custNo,jdbcType=CHAR},
+      </if>
+      <if test="custName != null" >
+        CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddr != null" >
+        LINK_ADDR = #{linkAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=CHAR},
+      </if>
+      <if test="compPhone != null" >
+        COMP_PHONE = #{compPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        REMARK3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" >
+    update dh_custinfo
+    set CUST_NO = #{custNo,jdbcType=CHAR},
+      CUST_NAME = #{custName,jdbcType=VARCHAR},
+      LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      LINK_ADDR = #{linkAddr,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=CHAR},
+      COMP_PHONE = #{compPhone,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=CHAR},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR},
+      REMARK3 = #{remark3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="custNo != null" >
+	        	and CUST_NO = #{custNo,jdbcType=CHAR}
+	      </if>
+	      <if test="custName != null" >
+	        	and CUST_NAME = #{custName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="linkPhone != null" >
+	        	and LINK_PHONE = #{linkPhone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="linkAddr != null" >
+	        	and LINK_ADDR = #{linkAddr,jdbcType=VARCHAR}
+	      </if>
+	      <if test="fax != null" >
+	        	and FAX = #{fax,jdbcType=VARCHAR}
+	      </if>
+	      <if test="linkMan != null" >
+	        	and LINK_MAN = #{linkMan,jdbcType=VARCHAR}
+	      </if>
+	      <if test="postCode != null" >
+	       	 	and POST_CODE = #{postCode,jdbcType=CHAR}
+	      </if>
+	      <if test="compPhone != null" >
+	        	and COMP_PHONE = #{compPhone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="createBy != null" >
+	        	and CREATE_BY = #{createBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="createDate != null" >
+	        	and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="modifyBy != null" >
+	        	and MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="modifyDate != null" >
+	        	and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="status != null" >
+	        	and STATUS = #{status,jdbcType=CHAR}
+	      </if>
+	      <if test="remark1 != null" >
+	        	and REMARK1 = #{remark1,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark2 != null" >
+	        	and REMARK2 = #{remark2,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark3 != null" >
+	        	and REMARK3 = #{remark3,jdbcType=VARCHAR}
+	      </if>
+	      <if test="keyWord != null" >
+	        	and (CUST_NO like CONCAT('%',#{keyWord},'%') or CUST_NAME like CONCAT('%',#{keyWord},'%'))
+	      </if>
+		</where>
+	</sql>
+	
+	 <select id="selectCustInfoListPage" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_custinfo
+		<include refid="whereFields"></include>
+		limit #{offset},#{rows}
+ 	 </select>
+  
+	 <select id="selectCustInfoListCount" parameterType="com.dinghao.entity.vo.template.base.CustInfoVo" resultType="int">
+	  	select
+		count(1)
+		from dh_custinfo
+		<include refid="whereFields"></include>
+	 </select>
+	 
+	  <select id="selectCustInfoCountByCustNo" parameterType="java.lang.String" resultType="int">
+	  	select
+		count(1)
+		from dh_custinfo
+		where CUST_NO = #{custNo}
+	 </select>
+</mapper>

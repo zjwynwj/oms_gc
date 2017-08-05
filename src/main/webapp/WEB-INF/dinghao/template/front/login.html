@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>basic styles</title>
+</head>
+<style>
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td { margin:0; padding:0; }
+body { font-size:12px; color:#666; font-family:Tahoma, "宋体"; background:#fff; line-height:24px; }
+body.loginbg{ background:#5da9e5 url(Img/loginbg.png) repeat-x;}
+fieldset, img { border:0; }
+ol, ul { list-style:none; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; }
+em { font-style:normal; }
+input, button, select, textarea { outline:none; }
+body.loginbg{ background:#5da9e5 url(/dinghao/dinghao/template/front/images/common/loginbg.png) repeat-x;}
+.login{ width:960px; height:520px; margin:0 auto; background:url(/dinghao/dinghao/template/front/images/common/login.png) no-repeat;}
+.login ul{ width:512px; margin:0 auto; padding:295px 0 0 0; zoom:1; overflow:hidden;}
+.login ul li{ height:28px; line-height:28px; padding-bottom:15px; zoom:1; overflow:hidden;}
+.login ul li label{ width:140px; text-align:right; display:inline-block; color:#555; font-size:14px; margin-right:10px; }
+.login ul li input.text{ width:180px; border:none; padding:0px 2px; font-family:verdana, "微软雅黑"; background:none;}
+.login ul li input.verify{ width:86px; margin-right:6px; }
+.login ul li span{ display:inline-block; height:24px; line-height:24px;}
+.login ul li span a{ color:#fff; text-decoration:none;}
+.login ul li span img{ vertical-align:middle; margin-right:5px;}
+.login ul li.btncheck{ height:auto; padding:12px 0 0 65px;}
+.login ul li.btncheck input.btn{ width:116px; height:38px; display:block; float:left; cursor:pointer; background:none; border:none; overflow:hidden; text-indent:-1000px;}
+.login ul li.btncheck input.check{ vertical-align:middle; margin:0 4px 0 20px;}
+.login ul li.btncheck em{ color:#fff;}
+.login .copyright{ display:block; text-align:center; color:#fff; padding-top:50px;}
+.login .copyright a{ color:#fff;}
+</style>
+<body class="loginbg">
+<div class="login">  
+	<ul>
+		<li><label>登录账号:</label><input type="text" name="webcjsloginName" id="username" class="text" /></li>
+		<li><label>登录密码:</label><input type="password" id="password" class="text" /></li>
+		<li><label>验 证 码:</label><input type="text" class="text verify" id="validatecode"/><span><img alt="看不清楚？换一张" src="http://www.webcjs.com/validateImage.html" width="53" height="26"/><a href="javascript:void(0);">看不清楚？换一张</a></span></li>
+		<li class="btncheck" ><input type="button" value="登录" class="btn" onclick="btnLogin_onclick()"/></li>
+	</ul>
+	<div class="copyright">Copyright 2016 | <a href="http://www.baidu.com/" target="_parent">www.baidu.com</a> . All rights reserved . 浙ICP备sdfsdf号</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dinghao.dao.template.business.goods.GdsClsDao">
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.goods.GdsCls">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="CLS_NO" jdbcType="VARCHAR" property="clsNo" />
+    <result column="CLS_PNO" jdbcType="VARCHAR" property="clsPno" />
+    <result column="LEVEL" jdbcType="INTEGER" property="level" />
+    <result column="CLS_NAME" jdbcType="VARCHAR" property="clsName" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_BY" jdbcType="BIGINT" property="modifyBy" />
+    <result column="CLS_STATUS" jdbcType="CHAR" property="clsStatus" />
+     <result column="TAX_RATE" property="taxRate" jdbcType="DOUBLE" />
+  </resultMap>
+   <sql id="Base_Column_List" >
+    ID, CLS_NO, CLS_PNO, LEVEL, CLS_NAME, CREATE_DATE, CREATE_BY, MODIFY_DATE, MODIFY_BY, 
+    CLS_STATUS, TAX_RATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_cls
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dh_gds_cls
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo">
+   insert into dh_gds_cls (ID, CLS_NO, CLS_PNO, 
+      LEVEL, CLS_NAME, CREATE_DATE, 
+      CREATE_BY, MODIFY_DATE, MODIFY_BY, 
+      CLS_STATUS, TAX_RATE)
+    values (#{id,jdbcType=BIGINT}, #{clsNo,jdbcType=VARCHAR}, #{clsPno,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{clsName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{clsStatus,jdbcType=CHAR}, #{taxRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo">
+    insert into dh_gds_cls
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="clsNo != null">
+        CLS_NO,
+      </if>
+      <if test="clsPno != null">
+        CLS_PNO,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+      <if test="clsName != null">
+        CLS_NAME,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY,
+      </if>
+      <if test="clsStatus != null">
+        CLS_STATUS,
+      </if>
+       <if test="taxRate != null" >
+        TAX_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="clsNo != null">
+        #{clsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clsPno != null">
+        #{clsPno,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="clsName != null">
+        #{clsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="clsStatus != null">
+        #{clsStatus,jdbcType=CHAR},
+      </if>
+      <if test="taxRate != null" >
+        #{taxRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo">
+    update dh_gds_cls
+    <set>
+      <if test="clsNo != null">
+        CLS_NO = #{clsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clsPno != null">
+        CLS_PNO = #{clsPno,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="clsName != null">
+        CLS_NAME = #{clsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="clsStatus != null">
+        CLS_STATUS = #{clsStatus,jdbcType=CHAR},
+      </if>
+      <if test="taxRate != null" >
+        TAX_RATE = #{taxRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo">
+    update dh_gds_cls
+    set CLS_NO = #{clsNo,jdbcType=VARCHAR},
+      CLS_PNO = #{clsPno,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      CLS_NAME = #{clsName,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      CLS_STATUS = #{clsStatus,jdbcType=CHAR},
+      TAX_RATE = #{taxRate,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+		<where>
+			<if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="clsNo != null">
+				and CLS_NO like CONCAT(#{clsNo},'%')
+			</if>
+			<if test="clsName != null  ">
+				and CLS_NAME like CONCAT(#{clsName},'%')
+			</if>
+			<if test="clsPno != null and clsPno != '-1'">
+		        and CLS_PNO = #{clsPno,jdbcType=VARCHAR}
+		     </if>
+			<if test="level != null">
+				and LEVEL = #{level,jdbcType=INTEGER}
+			</if>
+			<if test="createDate != null">
+				and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createBy != null">
+				and CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="clsStatus != null">
+				and CLS_STATUS = #{clsStatus,jdbcType=CHAR}
+			</if>
+			<if test="taxRate != null" >
+		        TAX_RATE = #{taxRate,jdbcType=DOUBLE},
+		    </if>
+		</where>
+	</sql>
+	
+   <select id="selectGdsClsList" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_cls
+    <include refid="whereFields" />
+  </select>
+  
+  <select id="selectGdsClsAllChild" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_cls where CLS_NO like CONCAT(#{clsNo},'%')
+  </select>
+  
+  <select id="selectGdsClsChild" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+   from dh_gds_cls
+    <include refid="whereFields" />
+   
+  </select>
+  
+  <select id="findMaxClsNo" parameterType="com.dinghao.entity.vo.template.business.goods.GdsClsVo" resultType="java.lang.String">
+    select   MAX(CLS_NO) as clsNo   from dh_gds_cls 	where CLS_PNO = #{clsPno,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findParentCLsInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_gds_cls
+    where CLS_NO=(select CLS_PNO from dh_gds_cls where ID = #{id,jdbcType=BIGINT})
+  </select>
+</mapper>
