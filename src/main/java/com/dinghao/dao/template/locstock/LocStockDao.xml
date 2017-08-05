@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.locstock.LocStockDao">
+	<resultMap id="BaseResultMap" type="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="STOCK_ID" property="stockId" jdbcType="BIGINT" />
+		<result column="Warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
+		<result column="LOC_ID" property="locId" jdbcType="BIGINT" />
+		<result column="CLS_ID" property="clsId" jdbcType="BIGINT" />
+		<result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+		<result column="MAX_QTY" property="maxQty" jdbcType="INTEGER" />
+		<result column="MIN_QTY" property="minQty" jdbcType="INTEGER" />
+		<result column="SAFE_QTY" property="safeQty" jdbcType="BIGINT" />
+		<result column="TOTAL_QTY" property="totalQty" jdbcType="BIGINT" />
+		<result column="LOCKED" property="locked" jdbcType="BIT" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="BIT" />
+		<result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+		<result column="ORDER_QTY" property="orderQty" jdbcType="BIGINT" />
+		<result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="gds_No" property="gdsNo" jdbcType="VARCHAR" />
+		<result column="gds_Name" property="gdsName" jdbcType="VARCHAR" />
+		<result column="gds_Format" property="gdsFormat" jdbcType="VARCHAR" />
+		<result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+		<result column="attbs" property="attbs" jdbcType="VARCHAR" />
+		<result column="cal" property="cal" jdbcType="VARCHAR" />
+
+		<result column="Warehouse_positions_code" property="warehousePositionsName"
+			jdbcType="VARCHAR" />
+		<result column="gds_Low_Amount" property="gdsLowAmount"
+			jdbcType="BIGINT" />
+		<result column="gds_High_Amount" property="gdsHighAmount"
+			jdbcType="BIGINT" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+	<result column="IN_AMOUNT" property="inAmount" jdbcType="DECIMAL" />
+	<result column="OUT_AMOUNT" property="outAmount" jdbcType="DECIMAL" />
+		<result column="INITIAL_AMOUNT" property="initialAmount" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		locstock.ID, locstock.STOCK_ID, locstock.LOC_ID,
+		locstock.GDS_ID,locstock.MAX_QTY,
+		locstock.MIN_QTY, locstock.SAFE_QTY,
+		locstock.TOTAL_QTY,
+		locstock.LOCKED, locstock.IS_DELETED,
+		locstock.TIMESTAMP, locstock.ORDER_QTY,locstock.CREATE_BY,
+		locstock.CREATE_DATE,
+		locstock.MODIFY_BY,
+		locstock.MODIFY_DATE,locstock.IN_AMOUNT,locstock.OUT_AMOUNT,locstock.INITIAL_AMOUNT
+	</sql>
+
+	<sql id="whereFields">
+		<where>
+			<if test="stockId != null">
+				and locstock.STOCK_ID = #{stockId,jdbcType=BIGINT}
+			</if>
+			<if test="locId != null">
+				and locstock.LOC_ID = #{locId,jdbcType=BIGINT}
+			</if>
+			<if test="gdsId != null">
+				and locstock.GDS_ID = #{gdsId,jdbcType=BIGINT}
+			</if>
+			<if test="gdsIds != null">
+				and locstock.GDS_ID in ( #{gdsIds,jdbcType=VARCHAR})
+			</if>
+			<if test="maxQty != null">
+				and locstock.MAX_QTY = #{maxQty,jdbcType=INTEGER}
+			</if>
+			<if test="minQty > 0 ">
+				and locstock.MIN_QTY = #{minQty,jdbcType=INTEGER}
+			</if>
+		
+			<if test="safeQty != null">
+				and locstock.SAFE_QTY = #{safeQty,jdbcType=BIGINT}
+			</if>
+			<if test="totalQty != null">
+				and locstock.TOTAL_QTY = #{totalQty,jdbcType=BIGINT}
+			</if>
+			<if test="locked != null">
+				and locstock.LOCKED = #{locked,jdbcType=BIT}
+			</if>
+			<if test="isDeleted != null">
+				and locstock.IS_DELETED = #{isDeleted,jdbcType=BIT}
+			</if>
+
+			<if test="timestamp != null">
+				and locstock.TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createBy != null">
+				and locstock.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="createDate != null">
+				and locstock.CREATE_DATE =
+				#{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and locstock.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and locstock.MODIFY_DATE =
+				#{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="clsId != null">
+				and dh_gds_info.CLS_ID like
+				concat(#{clsId,jdbcType=BIGINT},'%')
+			</if>
+			<if test="gdsNo != null and gdsNo != ''">
+				and dh_gds_info.gds_No like
+				concat('%',#{gdsNo,jdbcType=VARCHAR},'%')
+			</if>
+	
+			<if test="gdsFormat !=null and  gdsFormat != ''">
+				and dh_gds_info.gds_Format like
+				concat('%',#{gdsFormat,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_locstock locstock
+		where locstock.ID = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select
+		sum(total_Qty) AS total_Qty,
+		locstock.stock_Id,dh_warehouse.Warehouse_name,
+		locstock.gds_Id,
+		dh_gds_info.GDS_FORMAT,
+		dh_gds_info.gds_No,
+		dh_gds_info.gds_Name,
+		dh_gds_info.sku_outer_id,
+		dh_gds_info.attbs,
+		dh_gds_info.cal,
+		dh_gds_info.gds_Low_Amount,
+		dh_gds_info.gds_High_Amount,
+	    sum(ifnull(locstock.in_amount,0) - ifnull(locstock.out_amount,0) + ifnull(locstock.initial_amount,0)) AS amount
+		from
+		dh_wms_locstock locstock 
+		left join dh_gds_info on dh_gds_info.id=locstock.gds_Id
+		left join dh_warehouse on dh_warehouse.id=locstock.stock_Id
+		<include refid="whereFields" />
+		group by locstock.stock_Id,locstock.gds_Id
+		<if test="minQty == -1">
+			having sum(locstock.total_Qty) &lt; min(dh_gds_info.gds_Low_Amount )
+		</if>
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select count(1) from (
+		select count(1) from dh_wms_locstock locstock
+		left join dh_gds_info on
+		dh_gds_info.id=locstock.gds_Id
+		<include refid="whereFields" />
+		group by locstock.stock_Id,locstock.gds_Id) aa
+	</select>
+
+	<select id="selectByStatementDetail" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select
+		<include refid="Base_Column_List" />
+		,dh_gds_info.GDS_FORMAT,
+		dh_gds_info.gds_No,
+		dh_gds_info.gds_Name,
+		dh_gds_info.attbs,
+		dh_gds_info.cal,
+		dh_warehouse_positions.Warehouse_positions_code
+		from dh_wms_locstock
+		locstock
+		left
+		join dh_gds_info on
+		dh_gds_info.id=locstock.gds_Id
+		left join
+		dh_warehouse_positions on dh_warehouse_positions.id=locstock.loc_Id
+		<include refid="whereFields" />
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementDetailSelect2" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select
+		''as id,
+		'' as loc_Id,
+		'' as total_Qty,
+		dh_gds_info.id as gds_Id,
+		dh_gds_info.gds_No,
+		dh_gds_info.gds_Name,
+		dh_gds_info.attbs,
+		dh_gds_info.gds_Format,
+		dh_gds_info.cal,
+		'' as Warehouse_positions_code
+		from dh_gds_info
+		where 1=1
+		<if test="gdsNo != null">
+			and dh_gds_info.gds_No like
+			concat('%',#{gdsNo,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="gdsNo1 != null">
+			and dh_gds_info.gds_No =#{gdsNo1,jdbcType=VARCHAR}
+		</if>
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectByStatementDetailCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select count(1) from dh_wms_locstock locstock
+		left
+		join dh_gds_info on
+		dh_gds_info.id=locstock.gds_Id
+		left join
+		dh_warehouse_positions on
+		dh_warehouse_positions.id=locstock.loc_Id
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		dh_wms_locstock
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		insert into dh_wms_locstock
+		(ID, STOCK_ID, LOC_ID,
+		GDS_ID, MAX_QTY, MIN_QTY,
+		SAFE_QTY, TOTAL_QTY,
+		LOCKED,
+		IS_DELETED,ORDER_QTY, TIMESTAMP, CREATE_BY,
+		CREATE_DATE,
+		MODIFY_BY,
+		MODIFY_DATE
+		)
+		values (#{id,jdbcType=BIGINT},
+		#{stockId,jdbcType=BIGINT},
+		#{locId,jdbcType=BIGINT},
+		#{gdsId,jdbcType=BIGINT},
+		#{maxQty,jdbcType=INTEGER},
+		#{minQty,jdbcType=INTEGER},
+		#{safeQty,jdbcType=BIGINT},
+		#{totalQty,jdbcType=BIGINT},
+		#{locked,jdbcType=BIT},
+		#{isDeleted,jdbcType=BIT},#{orderQty,jdbcType=BIGINT},
+		#{timestamp,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+		#{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT},
+		#{modifyDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_wms_locstock
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="stockId != null">
+				STOCK_ID,
+			</if>
+			<if test="locId != null">
+				LOC_ID,
+			</if>
+			<if test="gdsId != null">
+				GDS_ID,
+			</if>
+			<if test="maxQty != null">
+				MAX_QTY,
+			</if>
+			<if test="minQty != null">
+				MIN_QTY,
+			</if>
+			<if test="safeQty != null">
+				SAFE_QTY,
+			</if>
+			<if test="totalQty != null">
+				TOTAL_QTY,
+			</if>
+			<if test="locked != null">
+				LOCKED,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="orderQty != null">
+				ORDER_QTY,
+			</if>
+			<if test="timestamp != null">
+				TIMESTAMP,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="stockId != null">
+				#{stockId,jdbcType=BIGINT},
+			</if>
+			<if test="locId != null">
+				#{locId,jdbcType=BIGINT},
+			</if>
+			<if test="gdsId != null">
+				#{gdsId,jdbcType=BIGINT},
+			</if>
+			<if test="maxQty != null">
+				#{maxQty,jdbcType=INTEGER},
+			</if>
+			<if test="minQty != null">
+				#{minQty,jdbcType=INTEGER},
+			</if>
+			<if test="safeQty != null">
+				#{safeQty,jdbcType=BIGINT},
+			</if>
+			<if test="totalQty != null">
+				#{totalQty,jdbcType=BIGINT},
+			</if>
+			<if test="locked != null">
+				#{locked,jdbcType=BIT},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="orderQty != null">
+				#{orderQty,jdbcType=INTEGER},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		update dh_wms_locstock
+		<set>
+			<if test="stockId != null">
+				STOCK_ID = #{stockId,jdbcType=BIGINT},
+			</if>
+			<if test="locId != null">
+				LOC_ID = #{locId,jdbcType=BIGINT},
+			</if>
+			<if test="gdsId != null">
+				GDS_ID = #{gdsId,jdbcType=BIGINT},
+			</if>
+			<if test="maxQty != null">
+				MAX_QTY = #{maxQty,jdbcType=INTEGER},
+			</if>
+			<if test="minQty != null">
+				MIN_QTY = #{minQty,jdbcType=INTEGER},
+			</if>
+			<if test="safeQty != null">
+				SAFE_QTY = #{safeQty,jdbcType=BIGINT},
+			</if>
+			<if test="totalQty != null">
+				TOTAL_QTY = #{totalQty,jdbcType=BIGINT},
+			</if>
+			<if test="locked != null">
+				LOCKED = #{locked,jdbcType=BIT},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="orderQty != null">
+				ORDER_QTY = #{orderQty,jdbcType=BIGINT},
+			</if>
+			<if test="timestamp != null">
+				TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inAmount != null">
+				IN_AMOUNT = #{inAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="outAmount != null">
+				OUT_AMOUNT = #{outAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="initialAmount != null">
+				INITIAL_AMOUNT = #{initialAmount,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateByKeySelective" parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		UPDATE
+		DH_WMS_LOCSTOCK
+		SET
+		TOTAL_QTY = #{totalQty,jdbcType=BIGINT}
+		WHERE ID =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateBySelective" parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		update dh_wms_locstock
+		<set>
+			TOTAL_QTY = #{totalQty,jdbcType=BIGINT},
+		</set>
+		where
+		STOCK_ID = #{stockId,jdbcType=BIGINT} and
+		LOC_ID =
+		#{locId,jdbcType=BIGINT} and
+		GDS_ID = #{gdsId,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectMastuseQtyByParam" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select
+		ID,
+		STOCK_ID,
+		LOC_ID,
+		GDS_ID,
+		TOTAL_QTY,
+		ORDER_QTY,
+		(TOTAL_QTY - if(ISNULL(ORDER_QTY)=1 ,0 ,ORDER_QTY)) as useQty
+		from
+		dh_wms_locstock
+		where STOCK_ID = #{stockId,jdbcType=BIGINT} and GDS_ID
+		=
+		#{gdsId,jdbcType=BIGINT}
+		ORDER BY useQty DESC LIMIT 1
+	</select>
+
+	<select id="selectLocStockByParam" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.locstock.LocStockVo">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_locstock locstock
+		<include refid="whereFields" />
+	</select>
+
+</mapper>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.goods.DownGoodsDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.goods.DownGoods" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="plat_type" property="platType" jdbcType="VARCHAR" />
+    <result column="num_iid" property="numIid" jdbcType="VARCHAR" />
+    <result column="outer_id" property="outerId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="shop_title" property="shopTitle" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="down_notice" property="downNotice" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="detail_url" property="detailUrl" jdbcType="VARCHAR" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="spec_num" property="specNum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="art_no" property="artNo" jdbcType="VARCHAR" />
+    <result column="shop_nick" property="shopNick" jdbcType="VARCHAR" />
+    <result column="down_time" property="downTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, plat_type, num_iid, outer_id, title, price, shop_title, shop_id, down_notice, 
+    pic_url, detail_url, barcode, spec_num, status, art_no, shop_nick, down_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_down_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_down_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsVo" >
+    insert into dh_down_goods (id, plat_type, num_iid, 
+      outer_id, title, price, 
+      shop_title, shop_id, down_notice, 
+      pic_url, detail_url, barcode, 
+      spec_num, status, art_no, 
+      shop_nick, down_time)
+    values (#{id,jdbcType=BIGINT}, #{platType,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR}, 
+      #{outerId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{shopTitle,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{downNotice,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{detailUrl,jdbcType=VARCHAR}, #{barcode,jdbcType=VARCHAR}, 
+      #{specNum,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{artNo,jdbcType=VARCHAR}, 
+      #{shopNick,jdbcType=VARCHAR}, #{downTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsVo" >
+    insert into dh_down_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platType != null" >
+        plat_type,
+      </if>
+      <if test="numIid != null" >
+        num_iid,
+      </if>
+      <if test="outerId != null" >
+        outer_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="shopTitle != null" >
+        shop_title,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="downNotice != null" >
+        down_notice,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="detailUrl != null" >
+        detail_url,
+      </if>
+      <if test="barcode != null" >
+        barcode,
+      </if>
+      <if test="specNum != null" >
+        spec_num,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="artNo != null" >
+        art_no,
+      </if>
+      <if test="shopNick != null" >
+        shop_nick,
+      </if>
+      <if test="downTime != null" >
+        down_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="platType != null" >
+        #{platType,jdbcType=VARCHAR},
+      </if>
+      <if test="numIid != null" >
+        #{numIid,jdbcType=VARCHAR},
+      </if>
+      <if test="outerId != null" >
+        #{outerId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="shopTitle != null" >
+        #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="downNotice != null" >
+        #{downNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailUrl != null" >
+        #{detailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="specNum != null" >
+        #{specNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="artNo != null" >
+        #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNick != null" >
+        #{shopNick,jdbcType=VARCHAR},
+      </if>
+      <if test="downTime != null" >
+        #{downTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsVo" >
+    update dh_down_goods
+    <set >
+      <if test="platType != null" >
+        plat_type = #{platType,jdbcType=VARCHAR},
+      </if>
+      <if test="numIid != null" >
+        num_iid = #{numIid,jdbcType=VARCHAR},
+      </if>
+      <if test="outerId != null" >
+        outer_id = #{outerId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="shopTitle != null" >
+        shop_title = #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="downNotice != null" >
+        down_notice = #{downNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detailUrl != null" >
+        detail_url = #{detailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="specNum != null" >
+        spec_num = #{specNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="artNo != null" >
+        art_no = #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNick != null" >
+        shop_nick = #{shopNick,jdbcType=VARCHAR},
+      </if>
+      <if test="downTime != null" >
+        down_time = #{downTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsVo" >
+    update dh_down_goods
+    set plat_type = #{platType,jdbcType=VARCHAR},
+      num_iid = #{numIid,jdbcType=VARCHAR},
+      outer_id = #{outerId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      shop_title = #{shopTitle,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      down_notice = #{downNotice,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      detail_url = #{detailUrl,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      spec_num = #{specNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      art_no = #{artNo,jdbcType=VARCHAR},
+      shop_nick = #{shopNick,jdbcType=VARCHAR},
+      down_time = #{downTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="numIid != null" >
+	        	and num_iid = #{numIid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerId != null" >
+	       	 	and outer_id = #{outerId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="title != null" >
+	        	and title = #{title,jdbcType=VARCHAR}
+	      </if>
+	      <if test="price != null" >
+	        	and price = #{price,jdbcType=DECIMAL}
+	      </if>
+	      <if test="shopTitle != null" >
+	        	and shop_title = #{shopTitle,jdbcType=VARCHAR}
+	      </if>
+	      <if test="shopId != null" >
+	        	and shop_id = #{shopId,jdbcType=BIGINT}
+	      </if>
+	      <if test="downNotice != null" >
+	        	and down_notice = #{downNotice,jdbcType=VARCHAR}
+	      </if>
+	      <if test="picUrl != null" >
+	        	and pic_url = #{picUrl,jdbcType=VARCHAR}
+	      </if>
+	      <if test="detailUrl != null" >
+	        	and detail_url = #{detailUrl,jdbcType=VARCHAR}
+	      </if>
+	      <if test="barcode != null" >
+	        	and barcode = #{barcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="specNum != null" >
+	        	and spec_num = #{specNum,jdbcType=INTEGER}
+	      </if>
+	      <if test="status != null" >
+	        	and status = #{status,jdbcType=CHAR}
+	      </if>
+	      <if test="artNo != null" >
+	        	and art_no = #{artNo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="shopNick != null" >
+	        	and shop_nick = #{shopNick,jdbcType=VARCHAR}
+	      </if>
+	      <if test="downTime != null" >
+	        	and down_time = #{downTime,jdbcType=VARCHAR}
+	      </if>
+	  </where>
+	</sql>
+	
+	<select id="selectByParam" parameterType="com.dinghao.entity.vo.template.business.goods.GdsInfoVo" resultMap="BaseResultMap">
+	    	select
+			<include refid="Base_Column_List" />
+			from dh_down_goods
+			<include refid="whereFields"></include>
+	 </select>
+</mapper>

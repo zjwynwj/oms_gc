@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>dialog</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="../js/dialog.js"></script>
+<script>
+$(function(){
+	$('#button1').artDialog({
+		title:'消息',
+		content:'消息内容可以带html代码',
+		width: 600,
+		height: 400
+	})
+	$('#button2').artDialog({
+		title:'消息',
+		content:'消息内容可以带html代码',
+		cancel:function(){
+			alert(0);
+			return false;
+		},
+		ok:function(){
+			alert('成功回调函数');
+			return false;
+		}
+	})
+})
+</script>
+</head>
+
+<body>
+<div class="demo-con">
+	<h2>dialog 配置参数演示</h2>
+    <h4>1. 调用方法</h4>
+    <p><span class="blue">title</span>：弹出提示的title参数<br><span class="blue">content</span>：弹出提示的内容参数</p>
+    <p class="buttons">
+      <button id="button1">运行»</button>
+    </p>
+    <pre class="brush: js;">
+        $.artDialog({
+            title:'消息',
+            content:'消息内容可以带html代码'
+        })
+    </pre>
+    
+    <h4>2. 回调函数</h4>
+    <p><span class="blue">cancel</span>关闭<br><span class="blue">ok</span>：确认<br>默认参数均为false</p>
+    <p class="buttons">
+      <button id="button2">运行»</button>
+    </p>
+    <pre class="brush: js;">
+        $('#button2').artDialog({
+            title:'消息',
+            content:'消息内容可以带html代码',
+            cancel:function(){
+                alert(0);
+                return false;
+            },
+            ok:function(){
+                alert('成功回调函数');
+                return false;
+            }
+        })
+    </pre>
+    <h4>3. 其他</h4>
+    <p>tip:
+        <span class="red">
+			后期会继续扩展，包括提示框的宽高，按钮的动态传入，弹出提示的自动关闭，可拖拉弹出层位置等等        
+        </span>
+    </p>
+</div>
+<!--代码高亮显示-->
+<script src="../js/elem/lh/scripts/shCore.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushJScript.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushXml.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushCss.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../js/elem/lh/styles/shCoreDjango.css">
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<!--end-->	
+</body>
+</html>

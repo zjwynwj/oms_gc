@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jqGrid</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../js/elem/jqueryui/css/jquery-ui-1.10.4.custom.css">
+<link rel="stylesheet" type="text/css" href="../js/elem/jqGrid/css/ui.jqgrid.css">
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="../js/elem/jqGrid/js/jquery.jqGrid.src.js"></script>
+<script src="../js/elem/jqGrid/js/i18n/grid.locale-cn.js"></script>
+</head>
+
+<body>
+<div class="wrap-table" style="width:1000px; margin:50px auto;"> 
+    <table id="blackId"></table>
+    <div id="gridPager"></div>
+</div>
+<script>
+$(function(){
+  pageInit();
+});
+function pageInit(){
+var mydata = [
+			{id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"2",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"3",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"4",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"7",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"10",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"11",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"12",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"13",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"14",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"15",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"16",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"17",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"18",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
+		];
+
+  jQuery("#blackId").jqGrid({
+		datatype: "local",
+		height: 300,
+		autowidth: true,
+		//shrinkToFit:true,
+		forceFit:true,
+		colNames:['Inv No','操作','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colModel:[
+			{name:'id',index:'id', sorttype:"int"},
+			{name:'act',index:'act',sortable:false,width:"200px"},
+			{name:'invdate',index:'invdate', sorttype:"date"},
+			{name:'name',index:'name',editable:true},
+			{name:'amount',index:'amount', align:"right",sorttype:"float",editable:true},
+			{name:'tax',index:'tax', align:"right",sorttype:"float",editable:true},		
+			{name:'total',index:'total',align:"right",sorttype:"float"},		
+			{name:'note',index:'note', sortable:false}		
+		],
+		rowNum:10,
+		rowList:[10,20,30],
+		viewrecords: true,
+		multiselect: true,
+		//toolbarfilter : true,
+		loadonce : false,
+		pager: '#gridPager',
+		pagerpos:'center',	//指定分页栏的位置
+		pgbuttons:true, //是否显示翻页按钮
+		pginput: true,	//是否显示跳转页面的输入框
+		//pgtext: "sd",	//当前页信息
+		//caption: "Manipulating Array Data",
+		//scrollOffset: 30, //设置垂直滚动条宽度
+		loadComplete:function(){
+		   //jQuery("#blackId").setGridWidth('100%',true);
+		},
+		gridComplete : function() {
+			var ids = jQuery("#blackId").jqGrid('getDataIDs');
+			for (var i = 0; i < ids.length; i++) {
+				var rowId = ids[i];
+				//设置可以编辑
+				//jQuery('#blackId').editRow(rowId);
+				addBtn = "<div class='operating'><a href='javascript:' class='operating-plus' title='新增行'></a><a href='javascript:' onclick=\"jQuery('#blackId').editRow('" + rowId + "');\" class='operating-pencil' title='修改'></a>";
+				addBtn += "<a href='javascript:' class='operating-trash' title='删除'></a><a href='javascript:' class='operating-comment' title='详细'></a><a href='javascript:' onclick=\"jQuery('#blackId').saveRow('" + rowId + "');\" class='operating-check' title='保存'></a></div>";
+				jQuery("#blackId").jqGrid('setRowData', ids[i], {
+					act : addBtn
+				});
+			}
+			//初始化计算jqgrid宽度
+			$("#blackId").setGridWidth($('.wrap-table').width());
+		}
+	})
+	for(var i=0;i<=mydata.length;i++){
+		jQuery("#blackId").jqGrid('addRowData',i+1,mydata[i]);
+	}
+}
+$(window).resize(function(){
+	$("#blackId").setGridWidth($('.wrap-table').width());
+});
+
+</script>
+</body>
+</html>

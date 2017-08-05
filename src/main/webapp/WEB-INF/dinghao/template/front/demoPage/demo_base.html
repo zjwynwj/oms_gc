@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<!--jqUi-->
+<link rel="stylesheet" type="text/css" href="../js/elem/jqueryui/css/jquery-ui-1.10.4.custom.css">
+<link rel="stylesheet" type="text/css" href="../js/elem/jqGrid/css/ui.jqgrid.css">
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="../js/oms_common.js"></script>
+<script src="../js/elem/jqueryui/js/jquery-ui-1.10.3.custom.js"></script>
+<script src="../js/elem/jqueryui/js/jquery.ui.datepicker-zh-CN.min.js"></script>
+<script src="../js/elem/jqGrid/src/i18n/grid.locale-cn.js"></script>
+<script src="../js/elem/jqGrid/js/jquery.jqGrid.src.js"></script>
+<script src="../js/tabcut.js"></script>
+<script src="../js/artTabs.js"></script>
+<script>
+$(function(){
+
+	//弹出层调用
+	oms.s_addPop('标题','test3.html','popId',820,500);
+	
+	$('#searchBtn').click(function(){
+		oms.showAdvClose($(this));
+	})
+	
+	$('#testBtn').click(function(){
+		oms.showAdvClose($(this));
+	})
+	
+	
+	//alert(0);
+	//http://www.cnblogs.com/rabbit2012/archive/2013/02/22/2922607.html  使用方法
+	$("#datepicker").datepicker({
+		showOn: "button", 
+		buttonImage: "../js/elem/jqueryui/css/images/calendar.gif",
+		buttonImageOnly: true  
+	});
+	$("#datepicker2").datepicker({
+		showOn: "button", 
+		buttonImage: "../js/elem/jqueryui/css/images/calendar.gif",
+		buttonImageOnly: true  
+	});
+	jQuery("#blackId").jqGrid({
+		datatype: "local",
+		height: 250,
+		autowidth: true,
+		//shrinkToFit:true,
+		forceFit:true,
+		colNames:['Inv No','操作','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colModel:[
+			{name:'id',index:'id', sorttype:"int"},
+			{name:'act',index:'act',sortable:false,width:"200px"},
+			{name:'invdate',index:'invdate', sorttype:"date"},
+			{name:'name',index:'name',editable:true},
+			{name:'amount',index:'amount', align:"right",sorttype:"float",editable:true},
+			{name:'tax',index:'tax', align:"right",sorttype:"float",editable:true},		
+			{name:'total',index:'total',align:"right",sorttype:"float"},		
+			{name:'note',index:'note', sortable:false}		
+		],
+		rowNum:10,
+		rowList:[10,20,30],
+		viewrecords: true,
+		multiselect: true,
+		//toolbarfilter : true,
+		loadonce : false,
+		pager: '#gridPager',
+		pagerpos:'center',	//指定分页栏的位置
+		pgbuttons:true, //是否显示翻页按钮
+		pginput: true,	//是否显示跳转页面的输入框
+		//pgtext: "sd",	//当前页信息
+		//caption: "Manipulating Array Data",
+		//scrollOffset: 30, //设置垂直滚动条宽度
+		loadComplete:function(){
+		   //jQuery("#blackId").setGridWidth('100%',true);
+		},
+		gridComplete : function() {
+			var ids = jQuery("#blackId").jqGrid('getDataIDs');
+			for (var i = 0; i < ids.length; i++) {
+				var rowId = ids[i];
+				//设置可以编辑
+				//jQuery('#blackId').editRow(rowId);
+				addBtn = "<div class='operating'><a href='javascript:' class='operating-pand' title='盘点'></a><a href='javascript:addLine()' class='operating-plus' title='新增行'></a><a href='javascript:' onclick=\"jQuery('#blackId').editRow('" + rowId + "');\" class='operating-pencil' title='修改'></a>";
+				addBtn += "<a href='javascript:' class='operating-trash' title='删除'></a><a href='javascript:' class='operating-comment' title='详细'></a><a href='javascript:' onclick=\"jQuery('#blackId').saveRow('" + rowId + "');\" class='operating-check' title='保存'></a></div>";
+				jQuery("#blackId").jqGrid('setRowData', ids[i], {
+					act : addBtn
+				});
+			}
+			//初始化计算jqgrid宽度
+			$("#blackId").setGridWidth($('.wrap-table').width());
+		}
+	})
+	var mydata = [
+			{id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"2",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"3",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"4",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"7",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"2",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"3",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"4",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"7",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
+		];
+	for(var i=0;i<=mydata.length;i++){
+		jQuery("#blackId").jqGrid('addRowData',i+1,mydata[i]);
+	}
+});
+	
+function childAdd(myself){
+	var title = '新增窗口';
+	var id = 'testASSOnly';
+	var url = 'http://www.baidu.com';
+	$.artTabs({
+	    addTab: {
+	            items: {
+	                    id: id,
+	                    title: '新增窗口',
+	                    url: url
+	            }
+	    }
+	    //isRefresh : true,
+	    //closeTab : true
+	})	
+}
+
+function addLine(){
+	var defaultData = [{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}];
+	//新增一行
+	jQuery("#blackId").jqGrid('addRowData','',defaultData);
+}
+
+</script>
+</head>
+
+<body>
+<div class="m-detail-con f-clearfix">
+	<div class="m-toolbar f-mb15 f-clearfix">
+    	<ul class="search-con f-fl">
+        	<li><a onClick="childAdd(this);" href="javascript:" class="u-btn u-btn-auto u-btn-bg-blue u-bd-color-blue f-pl40">新增窗口<i class="ico-add"></i></a></li>
+        	<li><a id="popId" href="javascript:" class="u-btn u-btn-auto u-btn-bg-blue u-bd-color-blue">新增弹出层</a></li>
+        	<li>
+            	<div class="u-btn-group"><a href="javascript:" id="selAll" class="u-btn u-btn-auto u-btn-bg-gray u-bd-color-gray f-pr30">批量操作<i class="ico-sel"></i></a>
+                    <ul class="u-btn-sel-con">
+                        <li><a href="#">链接一</a></li>
+                        <li><a href="#">链接二</a></li>
+                        <li><a href="#">链接三</a></li>
+                        <li><a href="#">链接四</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    	<ul class="search-con f-fr">
+            <li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="输入内容"/></li>
+        	<li>
+            	<label>销售日期:</label><div class="date"><input type="text" class="u-ipt u-ipt-sm" id="datepicker"/></div><span class="to">至</span><div class="date"><input type="text" class="u-ipt u-ipt-sm" id="datepicker2"/></div>
+            </li>
+            <li><a href="#" id="testBtn" class="u-btn u-btn-auto u-btn-bg-gray u-bd-color-gray">搜 索</a></li>
+            <li class="f-mr0"><a id="adv" href="javascript:" onClick="oms.showAdv(this.id)" class="u-btn u-btn-auto u-btn-bg-gray u-bd-color-gray">展开高级搜索</a></li>
+        </ul>
+        <div class="m-toolbar-adv" id="advCon">
+        	<ul class="search-con f-fl">
+            	<li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="单据号、备注"/></li>
+                <li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="单据号、备注"/></li>
+                <li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="单据号、备注"/></li>
+                <li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="单据号、备注"/></li>
+                <li><label>商品编号:</label><input type="text" class="u-ipt u-ipt-nm" placeholder="单据号、备注"/></li>
+            </ul>
+            <ul class="search-con f-w-auto f-fr">
+            	<li><a href="javascript:" id="searchBtn" class="u-btn u-btn-auto u-btn-bg-blue u-bd-color-gray">搜 索</a></li>
+            	<li><a href="#" class="u-btn u-btn-auto u-btn-bg-blue u-bd-color-gray">清空条件</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="m-content">
+    	<div class="m-grid-wrap">
+            <table id="blackId"></table>
+            <!-- jqGrid 分页 div gridPager -->
+            <div id="gridPager"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

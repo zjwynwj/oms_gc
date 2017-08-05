@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.purchase.PurOrderDetailDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.purchase.PurOrderDetail" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PUR_ORDER_ID" property="purOrderId" jdbcType="BIGINT" />
+    <result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+    <result column="PUR_PRICE" property="purPrice" jdbcType="DECIMAL" />
+    <result column="PUR_AMOUNT" property="purAmount" jdbcType="DECIMAL" />
+    <result column="PUR_MONEY" property="purMoney" jdbcType="DECIMAL" />
+    <result column="PUR_IN_AMOUNT" property="purInAmount" jdbcType="DECIMAL" />
+    <result column="PUR_IN_MONEY" property="purInMoney" jdbcType="DECIMAL" />
+    <result column="PUR_OUT_AMOUNT" property="purOutAmount" jdbcType="DECIMAL" />
+    <result column="PUR_OUT_MONEY" property="purOutMoney" jdbcType="DECIMAL" />
+    <result column="PUR_REAL_AMOUNT" property="purRealAmount" jdbcType="DECIMAL" />
+    <result column="PUR_REAL_MONEY" property="purRealMoney" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+    <result column="GDS_FORMAT" property="gdsFormat" jdbcType="VARCHAR" />
+    <result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+    <result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+    <result column="CAL" property="cal" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PUR_ORDER_ID, GDS_ID, PUR_PRICE, PUR_AMOUNT, PUR_MONEY, PUR_IN_AMOUNT, PUR_IN_MONEY, 
+    PUR_OUT_AMOUNT, PUR_OUT_MONEY, PUR_REAL_AMOUNT, PUR_REAL_MONEY, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_pur_order_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_pur_order_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderDetailVo" >
+    insert into dh_pur_order_detail (ID, PUR_ORDER_ID, GDS_ID, 
+      PUR_PRICE, PUR_AMOUNT, PUR_MONEY, 
+      PUR_IN_AMOUNT, PUR_IN_MONEY, PUR_OUT_AMOUNT, 
+      PUR_OUT_MONEY, PUR_REAL_AMOUNT, PUR_REAL_MONEY, 
+      REMARK)
+    values (#{id,jdbcType=BIGINT}, #{purOrderId,jdbcType=BIGINT}, #{gdsId,jdbcType=BIGINT}, 
+      #{purPrice,jdbcType=DECIMAL}, #{purAmount,jdbcType=DECIMAL}, #{purMoney,jdbcType=DECIMAL}, 
+      #{purInAmount,jdbcType=DECIMAL}, #{purInMoney,jdbcType=DECIMAL}, #{purOutAmount,jdbcType=DECIMAL}, 
+      #{purOutMoney,jdbcType=DECIMAL}, #{purRealAmount,jdbcType=DECIMAL}, #{purRealMoney,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderDetailVo" >
+    insert into dh_pur_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="purOrderId != null" >
+        PUR_ORDER_ID,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="purPrice != null" >
+        PUR_PRICE,
+      </if>
+      <if test="purAmount != null" >
+        PUR_AMOUNT,
+      </if>
+      <if test="purMoney != null" >
+        PUR_MONEY,
+      </if>
+      <if test="purInAmount != null" >
+        PUR_IN_AMOUNT,
+      </if>
+      <if test="purInMoney != null" >
+        PUR_IN_MONEY,
+      </if>
+      <if test="purOutAmount != null" >
+        PUR_OUT_AMOUNT,
+      </if>
+      <if test="purOutMoney != null" >
+        PUR_OUT_MONEY,
+      </if>
+      <if test="purRealAmount != null" >
+        PUR_REAL_AMOUNT,
+      </if>
+      <if test="purRealMoney != null" >
+        PUR_REAL_MONEY,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purOrderId != null" >
+        #{purOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="purPrice != null" >
+        #{purPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="purAmount != null" >
+        #{purAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purMoney != null" >
+        #{purMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purInAmount != null" >
+        #{purInAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purInMoney != null" >
+        #{purInMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purOutAmount != null" >
+        #{purOutAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purOutMoney != null" >
+        #{purOutMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purRealAmount != null" >
+        #{purRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purRealMoney != null" >
+        #{purRealMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderDetailVo" >
+    update dh_pur_order_detail
+    <set >
+      <if test="purOrderId != null" >
+        PUR_ORDER_ID = #{purOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID = #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="purPrice != null" >
+        PUR_PRICE = #{purPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="purAmount != null" >
+        PUR_AMOUNT = #{purAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purMoney != null" >
+        PUR_MONEY = #{purMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purInAmount != null" >
+        PUR_IN_AMOUNT = #{purInAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purInMoney != null" >
+        PUR_IN_MONEY = #{purInMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purOutAmount != null" >
+        PUR_OUT_AMOUNT = #{purOutAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purOutMoney != null" >
+        PUR_OUT_MONEY = #{purOutMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="purRealAmount != null" >
+        PUR_REAL_AMOUNT = #{purRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purRealMoney != null" >
+        PUR_REAL_MONEY = #{purRealMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.purchase.PurOrderDetailVo" >
+    update dh_pur_order_detail
+    set PUR_ORDER_ID = #{purOrderId,jdbcType=BIGINT},
+      GDS_ID = #{gdsId,jdbcType=BIGINT},
+      PUR_PRICE = #{purPrice,jdbcType=DECIMAL},
+      PUR_AMOUNT = #{purAmount,jdbcType=DECIMAL},
+      PUR_MONEY = #{purMoney,jdbcType=DECIMAL},
+      PUR_IN_AMOUNT = #{purInAmount,jdbcType=DECIMAL},
+      PUR_IN_MONEY = #{purInMoney,jdbcType=DECIMAL},
+      PUR_OUT_AMOUNT = #{purOutAmount,jdbcType=DECIMAL},
+      PUR_OUT_MONEY = #{purOutMoney,jdbcType=DECIMAL},
+      PUR_REAL_AMOUNT = #{purRealAmount,jdbcType=DECIMAL},
+      PUR_REAL_MONEY = #{purRealMoney,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="deleteByPrimaryByPurOrderId" parameterType="java.lang.Long" >
+    delete from dh_pur_order_detail
+    where PUR_ORDER_ID = #{purOrderId,jdbcType=BIGINT}
+  </delete>
+  
+  <select id="findPurOrderDetailListByPurOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   	select
+	 a.ID, a.PUR_ORDER_ID,
+	  CONCAT(b.GDS_NO) as gdsShowInfo,
+	 b.cal , b.ATTBS, b.SKU_OUTER_ID ,a.GDS_ID, a.PUR_PRICE, a.PUR_AMOUNT, a.PUR_MONEY, a.PUR_IN_AMOUNT, a.PUR_IN_MONEY, 
+   	 a.PUR_OUT_AMOUNT, a.PUR_OUT_MONEY, a.PUR_REAL_AMOUNT, a.PUR_REAL_MONEY, a.REMARK,b.ATTBS,b.GDS_FORMAT,b.GDS_NAME
+	from dh_pur_order_detail a LEFT JOIN dh_gds_info b on a.GDS_ID=b.ID
+	where PUR_ORDER_ID = #{purOrderId,jdbcType=BIGINT}
+  </select>
+</mapper>

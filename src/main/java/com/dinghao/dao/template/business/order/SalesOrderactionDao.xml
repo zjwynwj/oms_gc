@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.order.SalesOrderactionDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.order.SalesOrderaction" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="ACTION_TYPE" property="actionType" jdbcType="VARCHAR" />
+    <result column="ACTION_MEMO" property="actionMemo" jdbcType="VARCHAR" />
+    <result column="ACTION_BY" property="actionBy" jdbcType="VARCHAR" />
+    <result column="ACTION_TIME" property="actionTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDER_ID, ACTION_TYPE, ACTION_MEMO, ACTION_BY, ACTION_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_sales_orderaction
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_sales_orderaction
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderactionVo" >
+    insert into dh_sales_orderaction (ID, ORDER_ID, ACTION_TYPE, 
+      ACTION_MEMO, ACTION_BY, ACTION_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{actionType,jdbcType=VARCHAR}, 
+      #{actionMemo,jdbcType=VARCHAR}, #{actionBy,jdbcType=VARCHAR}, #{actionTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderactionVo" >
+    insert into dh_sales_orderaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="actionType != null" >
+        ACTION_TYPE,
+      </if>
+      <if test="actionMemo != null" >
+        ACTION_MEMO,
+      </if>
+      <if test="actionBy != null" >
+        ACTION_BY,
+      </if>
+      <if test="actionTime != null" >
+        ACTION_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="actionType != null" >
+        #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="actionMemo != null" >
+        #{actionMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="actionBy != null" >
+        #{actionBy,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderactionVo" >
+    update dh_sales_orderaction
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="actionType != null" >
+        ACTION_TYPE = #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="actionMemo != null" >
+        ACTION_MEMO = #{actionMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="actionBy != null" >
+        ACTION_BY = #{actionBy,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        ACTION_TIME = #{actionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderactionVo" >
+    update dh_sales_orderaction
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      ACTION_TYPE = #{actionType,jdbcType=VARCHAR},
+      ACTION_MEMO = #{actionMemo,jdbcType=VARCHAR},
+      ACTION_BY = #{actionBy,jdbcType=VARCHAR},
+      ACTION_TIME = #{actionTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

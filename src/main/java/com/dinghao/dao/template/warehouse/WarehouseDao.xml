@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.warehouse.WarehouseDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.warehouse.Warehouse">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_Date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_By" property="modifyBy" jdbcType="BIGINT" />
+		<result column="Create_By" property="createBy" jdbcType="BIGINT" />
+		<result column="Warehouse_code" property="warehouseCode"
+			jdbcType="VARCHAR" />
+		<result column="Warehouse_name" property="warehouseName"
+			jdbcType="VARCHAR" />
+		<result column="Manager_name" property="managerName" jdbcType="VARCHAR" />
+		<result column="manager_id" property="managerId" jdbcType="BIGINT" />
+		<result column="Is_delete" property="isDelete" jdbcType="BIT" />
+		<result column="Address" property="address" jdbcType="VARCHAR" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+		<result column="Remarks2" property="remarks2" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		Id, Create_Date, Modify_Date, Modify_By, Create_By,
+		Warehouse_code,
+		Warehouse_name,
+		Manager_name, manager_id, Is_delete,
+		Address, Remarks1, Remarks2
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from dh_warehouse
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_warehouse
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.dinghao.entity.template.warehouse.Warehouse">
+		insert into dh_warehouse (Id,
+		Create_Date, Modify_Date,
+		Modify_By, Create_By, Warehouse_code,
+		Warehouse_name, Manager_name, manager_id,
+		Is_delete, Address, Remarks1,
+		Remarks2)
+		values (#{id,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{modifyDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT},
+		#{warehouseCode,jdbcType=VARCHAR},
+		#{warehouseName,jdbcType=VARCHAR},
+		#{managerName,jdbcType=VARCHAR},
+		#{managerId,jdbcType=BIGINT},
+		#{isDelete,jdbcType=BIT}, #{address,jdbcType=VARCHAR},
+		#{remarks1,jdbcType=VARCHAR},
+		#{remarks2,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 新增仓库信息 -->
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.warehouse.WarehouseVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_warehouse
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="createDate != null">
+				Create_Date,
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date,
+			</if>
+			<if test="modifyBy != null and modifyBy>0 ">
+				Modify_By,
+			</if>
+			<if test="createBy != null and  createBy>0">
+				Create_By,
+			</if>
+			<if test="warehouseCode != null">
+				Warehouse_code,
+			</if>
+			<if test="warehouseName != null">
+				Warehouse_name,
+			</if>
+			<if test="managerName != null">
+				Manager_name,
+			</if>
+			<if test="managerId != null and managerId>0">
+				manager_id,
+			</if>
+			<if test="isDelete != null">
+				Is_delete,
+			</if>
+			<if test="address != null">
+				Address,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+			<if test="remarks2 != null">
+				Remarks2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null and modifyBy>0">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null and createBy>0">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="warehouseCode != null">
+				#{warehouseCode,jdbcType=VARCHAR},
+			</if>
+			<if test="warehouseName != null">
+				#{warehouseName,jdbcType=VARCHAR},
+			</if>
+			<if test="managerName != null">
+				#{managerName,jdbcType=VARCHAR},
+			</if>
+			<if test="managerId != null and  managerId>0">
+				#{managerId,jdbcType=BIGINT},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=BIT},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				#{remarks2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateRemarks1ToNull">
+		update dh_warehouse SET Remarks1='0'
+	</update>
+
+	<!-- 修改仓库信息 -->
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.warehouse.WarehouseVo">
+		update dh_warehouse
+		<set>
+			<if test="createDate != null">
+				Create_Date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null and modifyBy>0">
+				Modify_By = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null and createBy>0">
+				Create_By = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="warehouseCode != null">
+				Warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+			</if>
+			<if test="warehouseName != null">
+				Warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+			</if>
+			<if test="managerName != null">
+				Manager_name = #{managerName,jdbcType=VARCHAR},
+			</if>
+			<if test="managerId != null and managerId>0 ">
+				manager_id = #{managerId,jdbcType=BIGINT},
+			</if>
+			<if test="isDelete != null">
+				Is_delete = #{isDelete,jdbcType=BIT},
+			</if>
+			<if test="address != null">
+				Address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dinghao.entity.template.warehouse.Warehouse">
+		update
+		dh_warehouse
+		set Create_Date = #{createDate,jdbcType=TIMESTAMP},
+		Modify_Date = #{modifyDate,jdbcType=TIMESTAMP},
+		Modify_By =
+		#{modifyBy,jdbcType=BIGINT},
+		Create_By = #{createBy,jdbcType=BIGINT},
+		Warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+		Warehouse_name =
+		#{warehouseName,jdbcType=VARCHAR},
+		Manager_name =
+		#{managerName,jdbcType=VARCHAR},
+		manager_id =
+		#{managerId,jdbcType=BIGINT},
+		Is_delete = #{isDelete,jdbcType=BIT},
+		Address = #{address,jdbcType=VARCHAR},
+		Remarks1 =
+		#{remarks1,jdbcType=VARCHAR},
+		Remarks2 = #{remarks2,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getWarehouse"
+		parameterType="com.dinghao.entity.vo.template.warehouse.WarehouseVo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dh_warehouse
+		<include refid="whereFields"></include>
+		limit
+		#{offset},#{rows}
+	</select>
+
+	<select id="getWarehouseCount"
+		parameterType="com.dinghao.entity.vo.template.warehouse.WarehouseVo"
+		resultType="int">
+		select
+		count(1)
+		from dh_warehouse
+		<include refid="whereFields"></include>
+	</select>
+	<sql id="whereFields">
+		<where>
+			<if test="createDate != null">
+				and Create_Date = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyDate != null">
+				and Modify_Date = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null and modifyBy>0">
+				and Modify_By = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="createBy != null and createBy>0">
+				and Create_By = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="warehouseCode != null">
+				and Warehouse_code = #{warehouseCode,jdbcType=VARCHAR}
+			</if>
+			<if test="warehouseName != null">
+				and Warehouse_name like '%${warehouseName}%'
+			</if>
+			<if test="managerName != null">
+				and Manager_name = #{managerName,jdbcType=VARCHAR}
+			</if>
+			<if test="managerId != null">
+				and manager_id = #{managerId,jdbcType=BIGINT}
+			</if>
+			<if test="isDelete != null">
+				and Is_delete = #{isDelete,jdbcType=BIT}
+			</if>
+			<if test="address != null">
+				Address = #{address,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks1 != null">
+				and Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks2 != null">
+				and Remarks2 = #{remarks2,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryDefaultWareHouse"	resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dh_warehouse
+		where remarks1='1'
+	</select>
+</mapper>

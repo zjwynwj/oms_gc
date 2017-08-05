@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.receipt.ReceiptDetailDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.receipt.ReceiptDetail">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_Date" property="modifyDate" jdbcType="VARCHAR" />
+		<result column="Modify_By" property="modifyBy" jdbcType="BIGINT" />
+		<result column="Create_By" property="createBy" jdbcType="BIGINT" />
+		<result column="Receipt_id" property="receiptId" jdbcType="INTEGER" />
+		<result column="Gds_info_id" property="gdsInfoId" jdbcType="BIGINT" />
+		<result column="gdsName" property="gdsName" jdbcType="VARCHAR" />
+		<result column="skuOuterId" property="skuOuterId" jdbcType="VARCHAR" />
+		<result column="Gds_info_detail" property="gdsInfoDetail" jdbcType="VARCHAR" />
+		<result column="GDS_FORMAT" property="gdsFormat" jdbcType="VARCHAR" />
+		<result column="Gds_info_FORMAT" property="gdsInfoFormat" jdbcType="VARCHAR" />
+		<result column="Gds_info_CAL" property="gdsInfoCal" jdbcType="VARCHAR" />
+		<result column="Amount" property="amount" jdbcType="INTEGER" />
+		<result column="PRICE" property="price" jdbcType="DECIMAL" />
+		<result column="TAX_PRICE" property="taxPrice" jdbcType="DECIMAL" />
+		<result column="warehouse_positions_id" property="warehousePositionsId"
+			jdbcType="INTEGER" />
+		<result column="warehouse_positions_name" property="warehousePositionsName"
+			jdbcType="VARCHAR" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+		<result column="Remarks2" property="remarks2" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.dinghao.entity.template.receipt.ReceiptDetail" extends="BaseResultMap">
+		<result column="Gds_info_snapshot" property="gdsInfoSnapshot"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		a.Id, a.Create_Date, a.Modify_Date, a.Modify_By,a.Create_By,
+		a.Receipt_id,
+		gds.id Gds_info_id, CONCAT(gds.gds_no)  Gds_info_detail,
+		gds.GDS_FORMAT,gds.attbs Gds_info_FORMAT, gds.cal Gds_info_CAL,gds.gds_name gdsName,gds.sku_Outer_Id skuOuterId,
+		a.Amount,a.PRICE, a.TAX_PRICE,  a.warehouse_positions_id,
+		ifnull(pos.Warehouse_positions_code,'') warehouse_positions_name,
+		a.Remarks,a.Remarks1,a.Remarks2
+	</sql>
+	<sql id="Blob_Column_List">
+		a.Gds_info_snapshot
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from dh_receipt_detail a
+		inner join dh_gds_info gds  on a.gds_info_id = gds.id
+		left join dh_warehouse_positions pos on a.warehouse_positions_id = pos.id
+		where a.Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_receipt_detail
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByReceiptId" parameterType="map">
+		delete from
+		dh_receipt_detail
+		where receipt_Id = #{id} and create_By=#{adminId}
+	</delete>
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.receipt.ReceiptDetailVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_receipt_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="createDate != null">
+				Create_Date,
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date,
+			</if>
+			<if test="modifyBy != null">
+				Modify_By,
+			</if>
+			<if test="createBy != null">
+				Create_By,
+			</if>
+			<if test="receiptId != null">
+				Receipt_id,
+			</if>
+			<if test="gdsInfoId != null">
+				Gds_info_id,
+			</if>
+			<if test="gdsInfoDetail != null">
+				Gds_info_detail,
+			</if>
+			<if test="gdsInfoFormat != null">
+				Gds_info_FORMAT,
+			</if>
+			<if test="gdsInfoCal != null">
+				Gds_info_CAL,
+			</if>
+			<if test="amount != null">
+				Amount,
+			</if>
+		    <if test="price != null">
+					PRICE,
+			</if>
+		    <if test="taxPrice != null">
+				TAX_PRICE,
+			</if>
+			<if test="warehousePositionsId != null">
+				warehouse_positions_id,
+			</if>
+			<if test="warehousePositionsName != null">
+				warehouse_positions_name,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+			<if test="remarks2 != null">
+				Remarks2,
+			</if>
+			<if test="gdsInfoSnapshot != null">
+				Gds_info_snapshot,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="receiptId != null">
+				#{receiptId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsInfoId != null">
+				#{gdsInfoId,jdbcType=BIGINT},
+			</if>
+			<if test="gdsInfoDetail != null">
+				#{gdsInfoDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoFormat != null">
+				#{gdsInfoFormat,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoCal != null">
+				#{gdsInfoCal,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="taxPrice != null">
+				#{taxPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="warehousePositionsId != null">
+				#{warehousePositionsId,jdbcType=INTEGER},
+			</if>
+			<if test="warehousePositionsName != null">
+				#{warehousePositionsName,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				#{remarks2,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoSnapshot != null">
+				#{gdsInfoSnapshot,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.receipt.ReceiptDetailVo">
+		update dh_receipt_detail
+		<set>
+			<if test="createDate != null">
+				Create_Date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date = #{modifyDate,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyBy != null">
+				Modify_By = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				Create_By = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="receiptId != null">
+				Receipt_id = #{receiptId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsInfoId != null">
+				Gds_info_id = #{gdsInfoId,jdbcType=BIGINT},
+			</if>
+			<if test="gdsInfoDetail != null">
+				Gds_info_detail = #{gdsInfoDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoFormat != null">
+				Gds_info_FORMAT = #{gdsInfoFormat,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoCal != null">
+				Gds_info_CAL = #{gdsInfoCal,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				Amount = #{amount,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				PRICE = #{price,jdbcType=INTEGER},
+			</if>
+			<if test="taxPrice != null">
+				TAX_PRICE = #{taxPrice,jdbcType=INTEGER},
+			</if>
+			<if test="warehousePositionsId != null">
+				warehouse_positions_id =
+				#{warehousePositionsId,jdbcType=INTEGER},
+			</if>
+			<if test="warehousePositionsName != null">
+				warehouse_positions_name =
+				#{warehousePositionsName,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+			<if test="gdsInfoSnapshot != null">
+				Gds_info_snapshot =
+				#{gdsInfoSnapshot,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getReceiptDetails" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.receipt.ReceiptDetailVo">
+		select
+		<include refid="Base_Column_List" />
+		from dh_receipt_detail a
+		inner join dh_gds_info gds on a.gds_info_id = gds.id
+		left join dh_warehouse_positions pos on a.warehouse_positions_id = pos.id
+		<include refid="whereFields"></include>
+		limit
+		#{offset},#{rows}
+	</select>
+	<select id="getReceiptDetailsCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.receipt.ReceiptDetailVo">
+		select count(1) from dh_receipt_detail a
+		<include refid="whereFields"></include>
+	</select>
+	<sql id="whereFields">
+		<where>
+			<if test="createDate != null">
+				and a.Create_Date = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyDate != null">
+				and a.Modify_Date = #{modifyDate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifyBy != null">
+				and a.Modify_By = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="createBy != null">
+				and a.Create_By = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="receiptId != null">
+				and a.Receipt_id = #{receiptId,jdbcType=INTEGER}
+			</if>
+			<if test="gdsInfoId != null">
+				and a.Gds_info_id = #{gdsInfoId,jdbcType=BIGINT}
+			</if>
+			<if test="gdsInfoDetail != null">
+				and a.Gds_info_detail = #{gdsInfoDetail,jdbcType=VARCHAR}
+			</if>
+			<if test="gdsInfoFormat != null">
+				and a.Gds_info_FORMAT = #{gdsInfoFormat,jdbcType=VARCHAR}
+			</if>
+			<if test="gdsInfoCal != null">
+				and a.Gds_info_CAL = #{gdsInfoCal,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				and a.Amount = #{amount,jdbcType=INTEGER}
+			</if>
+			<if test="warehousePositionsId != null">
+				and a.warehouse_positions_id =
+				#{warehousePositionsId,jdbcType=INTEGER}
+			</if>
+			<if test="warehousePositionsName != null">
+				and a.warehouse_positions_name =
+				#{warehousePositionsName,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks != null">
+				and a.Remarks = #{remarks,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks1 != null">
+				and Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks2 != null">
+				and a.Remarks2 = #{remarks2,jdbcType=VARCHAR}
+			</if>
+			<if test="gdsInfoSnapshot != null">
+				and a.Gds_info_snapshot =
+				#{gdsInfoSnapshot,jdbcType=LONGVARCHAR}
+			</if>
+		</where>
+	</sql>
+
+</mapper>

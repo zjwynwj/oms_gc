@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.salesrtnorder.SalesRtnOrderDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.salesrtnorder.SalesRtnOrder">
+		<id column="RTN_ID" property="rtnId" jdbcType="BIGINT" />
+		<result column="RTN_NO" property="rtnNo" jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+		<result column="STOCK_ID" property="stockId" jdbcType="INTEGER" />
+		<result column="SHOP_ID" property="shopId" jdbcType="INTEGER" />
+		<result column="CUST_NICK" property="custNick" jdbcType="VARCHAR" />
+		<result column="GOODS_MONEY" property="goodsMoney" jdbcType="DECIMAL" />
+		<result column="RTNCASH" property="rtncash" jdbcType="DECIMAL" />
+		<result column="EXP_ID" property="expId" jdbcType="INTEGER" />
+		<result column="RECV_NAME" property="recvName" jdbcType="VARCHAR" />
+		<result column="RECV_MOBILE" property="recvMobile" jdbcType="VARCHAR" />
+		<result column="RECV_PHONE" property="recvPhone" jdbcType="VARCHAR" />
+		<result column="PROV_ID" property="provId" jdbcType="VARCHAR" />
+		<result column="CITY_ID" property="cityId" jdbcType="VARCHAR" />
+		<result column="COUNTY_id" property="countyId" jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+		<result column="EXPCODE" property="expcode" jdbcType="VARCHAR" />
+		<result column="RTNREASON" property="rtnreason" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="DELIVERYFEEee" property="deliveryfeeee"
+			jdbcType="DECIMAL" />
+		<result column="ISDELETED" property="isdeleted" jdbcType="BIT" />
+		<result column="RECEIVED" property="received" jdbcType="BIT" />
+		<result column="HasScaned" property="hasscaned" jdbcType="BIT" />
+		<result column="Timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+		<result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="plat_Type" property="platType" jdbcType="VARCHAR" />
+		<result column="order_Num" property="orderNum" jdbcType="VARCHAR" />
+		<result column="shop_Name" property="shopName" jdbcType="VARCHAR" />
+		<result column="expid" property="expid" jdbcType="BIGINT" />
+		<result column="carriage" property="carriage" jdbcType="DECIMAL" />
+		<result column="dmsExpressName" property="dmsExpressName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.dinghao.entity.template.salesrtnorder.SalesRtnOrder"
+		extends="BaseResultMap">
+		<result column="InteriorMemo" property="interiormemo" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		zihan.RTN_ID, zihan.RTN_NO, zihan.ORDER_ID, zihan.STOCK_ID,
+		zihan.SHOP_ID,
+		zihan.CUST_NICK,
+		zihan.GOODS_MONEY, zihan.RTNCASH,
+		zihan.EXP_ID, zihan.RECV_NAME, zihan.RECV_MOBILE,
+		zihan.RECV_PHONE,
+		zihan.PROV_ID, zihan.CITY_ID, zihan.COUNTY_id,
+		zihan.ADDRESS,
+		zihan.ZIPCODE,
+		zihan.EXPCODE, zihan.RTNREASON, zihan.STATUS,
+		zihan.DELIVERYFEEee, zihan.ISDELETED,
+		zihan.RECEIVED, zihan.HasScaned,
+		zihan.Timestamp, zihan.CREATE_BY,
+		zihan.CREATE_DATE,
+		zihan.MODIFY_BY,zihan.expid,
+		zihan.MODIFY_DATE,
+		zihan.plat_Type,zihan.carriage,dh_dms_express.name as dmsExpressName
+	</sql>
+
+	<sql id="Base_Column_List1">
+		zihan.RTN_ID, zihan.RTN_NO, zihan.ORDER_ID, zihan.STOCK_ID,
+		zihan.SHOP_ID,
+		zihan.CUST_NICK,
+		zihan.GOODS_MONEY, zihan.RTNCASH,
+		zihan.EXP_ID, zihan.RECV_NAME, zihan.RECV_MOBILE,
+		zihan.RECV_PHONE,
+		zihan.PROV_ID, zihan.CITY_ID, ifnull(zihan.COUNTY_id,'') COUNTY_id,
+		zihan.ADDRESS,
+		zihan.ZIPCODE,
+		zihan.EXPCODE, zihan.RTNREASON, zihan.STATUS,
+		zihan.DELIVERYFEEee, zihan.ISDELETED,
+		zihan.RECEIVED, zihan.HasScaned,
+		zihan.Timestamp, zihan.CREATE_BY,
+		zihan.CREATE_DATE,
+		zihan.MODIFY_BY,zihan.expid,
+		zihan.MODIFY_DATE,
+		zihan.plat_Type,dh_shop.name as shop_Name
+		,dh_sales_order.ORDER_NUM as
+		order_Num,zihan.carriage
+	</sql>
+
+	<sql id="whereFields">
+		<where>
+			<if test="rtnNo != null">
+				and zihan.RTN_NO like
+				concat(#{rtnNo,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="orderId != null">
+				and zihan.ORDER_ID = #{orderId,jdbcType=INTEGER}
+			</if>
+			<if test="stockId != null">
+				and zihan.STOCK_ID = #{stockId,jdbcType=INTEGER}
+			</if>
+			<if test="shopId != null">
+				and zihan.SHOP_ID = #{shopId,jdbcType=INTEGER}
+			</if>
+			<if test="custNick != null">
+				and zihan.CUST_NICK = #{custNick,jdbcType=VARCHAR}
+			</if>
+			<if test="goodsMoney != null">
+				and zihan.GOODS_MONEY = #{goodsMoney,jdbcType=DECIMAL}
+			</if>
+			<if test="rtncash != null">
+				and zihan.RTNCASH = #{rtncash,jdbcType=DECIMAL}
+			</if>
+			<if test="expId != null">
+				and zihan.EXP_ID = #{expId,jdbcType=INTEGER}
+			</if>
+			<if test="recvName != null">
+				and zihan.RECV_NAME = #{recvName,jdbcType=VARCHAR}
+			</if>
+			<if test="recvMobile != null">
+				and zihan.RECV_MOBILE = #{recvMobile,jdbcType=VARCHAR}
+			</if>
+			<if test="recvPhone != null">
+				and zihan.RECV_PHONE = #{recvPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="provId != null">
+				and zihan.PROV_ID = #{provId,jdbcType=VARCHAR}
+			</if>
+			<if test="cityId != null">
+				and zihan.CITY_ID = #{cityId,jdbcType=VARCHAR}
+			</if>
+			<if test="countyId != null">
+				and zihan.COUNTY_id = #{countyId,jdbcType=VARCHAR}
+			</if>
+			<if test="address != null">
+				and zihan.ADDRESS = #{address,jdbcType=VARCHAR}
+			</if>
+			<if test="zipcode != null">
+				and zihan.ZIPCODE = #{zipcode,jdbcType=VARCHAR}
+			</if>
+			<if test="expcode != null">
+				and zihan.EXPCODE = #{expcode,jdbcType=VARCHAR}
+			</if>
+			<if test="rtnreason != null">
+				and zihan.RTNREASON = #{rtnreason,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null">
+				and zihan.STATUS = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="deliveryfeeee != null">
+				and zihan.DELIVERYFEEee =
+				#{deliveryfeeee,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeleted != null">
+				and zihan.ISDELETED = #{isdeleted,jdbcType=BIT}
+			</if>
+			<if test="received != null">
+				and zihan.RECEIVED = #{received,jdbcType=BIT}
+			</if>
+			<if test="hasscaned != null">
+				and zihan.HasScaned = #{hasscaned,jdbcType=BIT}
+			</if>
+			<if test="timestamp != null">
+				and zihan.Timestamp = #{timestamp,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createBy != null">
+				and zihan.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="createDate != null">
+				and zihan.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and zihan.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and zihan.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="platType != null">
+				and zihan.plat_Type = #{platType,jdbcType=VARCHAR}
+			</if>
+			<if test="expid != null">
+				and zihan.expid = #{expid,jdbcType=BIGINT}
+			</if>
+			<if test="interiormemo != null">
+				and zihan.InteriorMemo =
+				#{interiormemo,jdbcType=LONGVARCHAR}
+			</if>
+			<if test="orderNum != null">
+				and dh_sales_order.ORDER_NUM like
+				concat(#{orderNum,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</sql>
+
+	<sql id="Blob_Column_List">
+		InteriorMemo
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List1" />
+		,
+		<include refid="Blob_Column_List" />
+		from dh_sales_rtnorder zihan
+		left join dh_dms_express on dh_dms_express.id=zihan.exp_Id
+		left join dh_sales_order on dh_sales_order.id=zihan.order_id
+		left join dh_shop on dh_shop.id=zihan.shop_Id
+		where RTN_ID = #{rtnId,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectByStatement" resultMap="ResultMapWithBLOBs"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo">
+		select
+		<include refid="Base_Column_List1" />
+		,
+		<include refid="Blob_Column_List" />
+		from dh_sales_rtnorder zihan left join dh_sales_order on
+		dh_sales_order.id=zihan.order_Id
+		left join dh_shop on dh_shop.id=zihan.shop_Id
+		<include refid="whereFields" />
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo">
+		select count(1) from dh_sales_rtnorder zihan
+		left join dh_sales_order
+		on
+		dh_sales_order.id=zihan.order_Id
+		left join dh_shop on
+		dh_shop.id=zihan.shop_Id
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		dh_sales_rtnorder
+		where RTN_ID = #{rtnId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo">
+		insert into dh_sales_rtnorder (RTN_ID, RTN_NO, ORDER_ID,
+		STOCK_ID, SHOP_ID, CUST_NICK,
+		GOODS_MONEY, RTNCASH, EXP_ID,
+		RECV_NAME,
+		RECV_MOBILE, RECV_PHONE,
+		PROV_ID, CITY_ID, COUNTY_id,
+		ADDRESS, ZIPCODE,
+		EXPCODE,
+		RTNREASON, STATUS, DELIVERYFEEee,
+		ISDELETED, RECEIVED,
+		HasScaned,
+		Timestamp, CREATE_BY, CREATE_DATE,
+		MODIFY_BY, MODIFY_DATE,
+		plat_Type,
+		InteriorMemo)
+		values (#{rtnId,jdbcType=BIGINT},
+		#{rtnNo,jdbcType=VARCHAR},
+		#{orderId,jdbcType=INTEGER},
+		#{stockId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER},
+		#{custNick,jdbcType=VARCHAR},
+		#{goodsMoney,jdbcType=DECIMAL},
+		#{rtncash,jdbcType=DECIMAL},
+		#{expId,jdbcType=INTEGER},
+		#{recvName,jdbcType=VARCHAR}, #{recvMobile,jdbcType=VARCHAR},
+		#{recvPhone,jdbcType=VARCHAR},
+		#{provId,jdbcType=INTEGER},
+		#{cityId,jdbcType=INTEGER},
+		#{countyId,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR},
+		#{expcode,jdbcType=VARCHAR},
+		#{rtnreason,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{deliveryfeeee,jdbcType=DECIMAL},
+		#{isdeleted,jdbcType=BIT}, #{received,jdbcType=BIT},
+		#{hasscaned,jdbcType=BIT},
+		#{timestamp,jdbcType=TIMESTAMP},
+		#{createBy,jdbcType=BIGINT},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP},
+		#{platType,jdbcType=VARCHAR},
+		#{interiormemo,jdbcType=LONGVARCHAR})
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo"
+		useGeneratedKeys="true" keyProperty="rtnId">
+		insert into dh_sales_rtnorder
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="rtnId != null">
+				RTN_ID,
+			</if>
+			<if test="rtnNo != null">
+				RTN_NO,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="stockId != null">
+				STOCK_ID,
+			</if>
+			<if test="shopId != null">
+				SHOP_ID,
+			</if>
+			<if test="custNick != null">
+				CUST_NICK,
+			</if>
+			<if test="goodsMoney != null">
+				GOODS_MONEY,
+			</if>
+			<if test="rtncash != null">
+				RTNCASH,
+			</if>
+			<if test="expId != null">
+				EXP_ID,
+			</if>
+			<if test="recvName != null">
+				RECV_NAME,
+			</if>
+			<if test="recvMobile != null">
+				RECV_MOBILE,
+			</if>
+			<if test="recvPhone != null">
+				RECV_PHONE,
+			</if>
+			<if test="provId != null">
+				PROV_ID,
+			</if>
+			<if test="cityId != null">
+				CITY_ID,
+			</if>
+			<if test="countyId != null">
+				COUNTY_id,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="zipcode != null">
+				ZIPCODE,
+			</if>
+			<if test="expcode != null">
+				EXPCODE,
+			</if>
+			<if test="rtnreason != null">
+				RTNREASON,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="deliveryfeeee != null">
+				DELIVERYFEEee,
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED,
+			</if>
+			<if test="received != null">
+				RECEIVED,
+			</if>
+			<if test="hasscaned != null">
+				HasScaned,
+			</if>
+			<if test="timestamp != null">
+				Timestamp,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+			<if test="platType != null">
+				plat_Type,
+			</if>
+			<if test="expid != null">
+				expid,
+			</if>
+			<if test="interiormemo != null">
+				InteriorMemo,
+			</if>
+			<if test="carriage != null">
+				carriage,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="rtnId != null">
+				#{rtnId,jdbcType=BIGINT},
+			</if>
+			<if test="rtnNo != null">
+				#{rtnNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="stockId != null">
+				#{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="shopId != null">
+				#{shopId,jdbcType=INTEGER},
+			</if>
+			<if test="custNick != null">
+				#{custNick,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsMoney != null">
+				#{goodsMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="rtncash != null">
+				#{rtncash,jdbcType=DECIMAL},
+			</if>
+			<if test="expId != null">
+				#{expId,jdbcType=INTEGER},
+			</if>
+			<if test="recvName != null">
+				#{recvName,jdbcType=VARCHAR},
+			</if>
+			<if test="recvMobile != null">
+				#{recvMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="recvPhone != null">
+				#{recvPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="provId != null">
+				#{provId,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="countyId != null">
+				#{countyId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				#{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="expcode != null">
+				#{expcode,jdbcType=VARCHAR},
+			</if>
+			<if test="rtnreason != null">
+				#{rtnreason,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="deliveryfeeee != null">
+				#{deliveryfeeee,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeleted != null">
+				#{isdeleted,jdbcType=BIT},
+			</if>
+			<if test="received != null">
+				#{received,jdbcType=BIT},
+			</if>
+			<if test="hasscaned != null">
+				#{hasscaned,jdbcType=BIT},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="platType != null">
+				#{platType,jdbcType=VARCHAR},
+			</if>
+			<if test="expid != null">
+				#{expid,jdbcType=BIGINT},
+			</if>
+			<if test="interiormemo != null">
+				#{interiormemo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="carriage != null">
+				#{carriage,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo">
+		update dh_sales_rtnorder
+		<set>
+			<if test="rtnNo != null">
+				RTN_NO = #{rtnNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="stockId != null">
+				STOCK_ID = #{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="shopId != null">
+				SHOP_ID = #{shopId,jdbcType=INTEGER},
+			</if>
+			<if test="custNick != null">
+				CUST_NICK = #{custNick,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsMoney != null">
+				GOODS_MONEY = #{goodsMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="rtncash != null">
+				RTNCASH = #{rtncash,jdbcType=DECIMAL},
+			</if>
+			<if test="expId != null">
+				EXP_ID = #{expId,jdbcType=INTEGER},
+			</if>
+			<if test="recvName != null">
+				RECV_NAME = #{recvName,jdbcType=VARCHAR},
+			</if>
+			<if test="recvMobile != null">
+				RECV_MOBILE = #{recvMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="recvPhone != null">
+				RECV_PHONE = #{recvPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="provId != null">
+				PROV_ID = #{provId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null">
+				CITY_ID = #{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="countyId != null">
+				COUNTY_id = #{countyId,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="expcode != null">
+				EXPCODE = #{expcode,jdbcType=VARCHAR},
+			</if>
+			<if test="rtnreason != null">
+				RTNREASON = #{rtnreason,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="deliveryfeeee != null">
+				DELIVERYFEEee = #{deliveryfeeee,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED = #{isdeleted,jdbcType=BIT},
+			</if>
+			<if test="received != null">
+				RECEIVED = #{received,jdbcType=BIT},
+			</if>
+			<if test="hasscaned != null">
+				HasScaned = #{hasscaned,jdbcType=BIT},
+			</if>
+			<if test="timestamp != null">
+				Timestamp = #{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="platType != null">
+				plat_Type = #{platType,jdbcType=VARCHAR},
+			</if>
+			<if test="expid != null">
+				expid = #{expid,jdbcType=BIGINT},
+			</if>
+			<if test="interiormemo != null">
+				InteriorMemo = #{interiormemo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="carriage != null">
+				carriage=#{carriage,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where RTN_ID = #{rtnId,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderVo">
+		update dh_sales_rtnorder
+		set RTN_NO =
+		#{rtnNo,jdbcType=VARCHAR},
+		ORDER_ID = #{orderId,jdbcType=INTEGER},
+		STOCK_ID = #{stockId,jdbcType=INTEGER},
+		SHOP_ID =
+		#{shopId,jdbcType=INTEGER},
+		CUST_NICK = #{custNick,jdbcType=VARCHAR},
+		GOODS_MONEY = #{goodsMoney,jdbcType=DECIMAL},
+		RTNCASH =
+		#{rtncash,jdbcType=DECIMAL},
+		EXP_ID = #{expId,jdbcType=INTEGER},
+		RECV_NAME = #{recvName,jdbcType=VARCHAR},
+		RECV_MOBILE =
+		#{recvMobile,jdbcType=VARCHAR},
+		RECV_PHONE =
+		#{recvPhone,jdbcType=VARCHAR},
+		PROV_ID = #{provId,jdbcType=VARCHAR},
+		CITY_ID = #{cityId,jdbcType=VARCHAR},
+		COUNTY_id =
+		#{countyId,jdbcType=VARCHAR},
+		ADDRESS = #{address,jdbcType=VARCHAR},
+		ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+		EXPCODE =
+		#{expcode,jdbcType=VARCHAR},
+		RTNREASON = #{rtnreason,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=INTEGER},
+		DELIVERYFEEee =
+		#{deliveryfeeee,jdbcType=DECIMAL},
+		ISDELETED =
+		#{isdeleted,jdbcType=BIT},
+		RECEIVED = #{received,jdbcType=BIT},
+		HasScaned = #{hasscaned,jdbcType=BIT},
+		Timestamp =
+		#{timestamp,jdbcType=TIMESTAMP},
+		CREATE_BY =
+		#{createBy,jdbcType=BIGINT},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		MODIFY_BY =
+		#{modifyBy,jdbcType=BIGINT},
+		MODIFY_DATE =
+		#{modifyDate,jdbcType=TIMESTAMP},
+		plat_Type =
+		#{platType,jdbcType=VARCHAR},
+		InteriorMemo =
+		#{interiormemo,jdbcType=LONGVARCHAR}
+		where RTN_ID =
+		#{rtnId,jdbcType=BIGINT}
+	</update>
+
+</mapper>

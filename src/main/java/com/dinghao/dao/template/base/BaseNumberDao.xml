@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dinghao.dao.template.base.BaseNumberDao">
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.base.BaseNumber">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="NU_TYPE" jdbcType="CHAR" property="nuType" />
+    <result column="NU_NAME" jdbcType="VARCHAR" property="nuName" />
+    <result column="NU_PREFIX" jdbcType="VARCHAR" property="nuPrefix" />
+    <result column="YEAR_RULE" jdbcType="BIT" property="yearRule" />
+    <result column="MONT_RULE" jdbcType="BIT" property="montRule" />
+    <result column="DAY_RULE" jdbcType="BIT" property="dayRule" />
+    <result column="IS_CHECK" jdbcType="BIT" property="isCheck" />
+    <result column="NU_DIGIT" jdbcType="BIGINT" property="nuDigit" />
+    <result column="NU_CURRENT" jdbcType="BIGINT" property="nuCurrent" />
+    <result column="NU_STEP" jdbcType="BIGINT" property="nuStep" />
+    <result column="NU_DEMO" jdbcType="VARCHAR" property="nuDemo" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_BY" jdbcType="BIGINT" property="modifyBy" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NU_TYPE, NU_NAME, NU_PREFIX, YEAR_RULE, MONT_RULE, DAY_RULE, IS_CHECK, NU_DIGIT, 
+    NU_CURRENT, NU_STEP, NU_DEMO, CREATE_BY, CREATE_DATE, MODIFY_BY, MODIFY_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_base_number
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dh_base_number
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo">
+    insert into dh_base_number (ID, NU_TYPE, NU_NAME, 
+      NU_PREFIX, YEAR_RULE, MONT_RULE, 
+      DAY_RULE, IS_CHECK, NU_DIGIT, NU_CURRENT, 
+      NU_STEP, NU_DEMO, CREATE_BY, 
+      CREATE_DATE, MODIFY_BY, MODIFY_DATE
+      )
+    values (#{id,jdbcType=BIGINT}, #{nuType,jdbcType=CHAR}, #{nuName,jdbcType=VARCHAR}, 
+      #{nuPrefix,jdbcType=VARCHAR}, #{yearRule,jdbcType=BIT}, #{montRule,jdbcType=BIT}, 
+      #{dayRule,jdbcType=BIT}, #{isCheck,jdbcType=BIT}, #{nuDigit,jdbcType=BIGINT}, #{nuCurrent,jdbcType=BIGINT}, 
+      #{nuStep,jdbcType=BIGINT}, #{nuDemo,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo">
+    insert into dh_base_number
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="nuType != null">
+        NU_TYPE,
+      </if>
+      <if test="nuName != null">
+        NU_NAME,
+      </if>
+      <if test="nuPrefix != null">
+        NU_PREFIX,
+      </if>
+      <if test="yearRule != null">
+        YEAR_RULE,
+      </if>
+      <if test="montRule != null">
+        MONT_RULE,
+      </if>
+      <if test="dayRule != null">
+        DAY_RULE,
+      </if>
+      <if test="isCheck != null">
+        IS_CHECK,
+      </if>
+      <if test="nuDigit != null">
+        NU_DIGIT,
+      </if>
+      <if test="nuCurrent != null">
+        NU_CURRENT,
+      </if>
+      <if test="nuStep != null">
+        NU_STEP,
+      </if>
+      <if test="nuDemo != null">
+        NU_DEMO,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nuType != null">
+        #{nuType,jdbcType=CHAR},
+      </if>
+      <if test="nuName != null">
+        #{nuName,jdbcType=VARCHAR},
+      </if>
+      <if test="nuPrefix != null">
+        #{nuPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="yearRule != null">
+        #{yearRule,jdbcType=BIT},
+      </if>
+      <if test="montRule != null">
+        #{montRule,jdbcType=BIT},
+      </if>
+      <if test="dayRule != null">
+        #{dayRule,jdbcType=BIT},
+      </if>
+      <if test="isCheck != null">
+        #{isCheck,jdbcType=BIT},
+      </if>
+      <if test="nuDigit != null">
+        #{nuDigit,jdbcType=BIGINT},
+      </if>
+      <if test="nuCurrent != null">
+        #{nuCurrent,jdbcType=BIGINT},
+      </if>
+      <if test="nuStep != null">
+        #{nuStep,jdbcType=BIGINT},
+      </if>
+      <if test="nuDemo != null">
+        #{nuDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo">
+    update dh_base_number
+    <set>
+      <if test="nuType != null">
+        NU_TYPE = #{nuType,jdbcType=CHAR},
+      </if>
+      <if test="nuName != null">
+        NU_NAME = #{nuName,jdbcType=VARCHAR},
+      </if>
+      <if test="nuPrefix != null">
+        NU_PREFIX = #{nuPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="yearRule != null">
+        YEAR_RULE = #{yearRule,jdbcType=BIT},
+      </if>
+      <if test="montRule != null">
+        MONT_RULE = #{montRule,jdbcType=BIT},
+      </if>
+      <if test="dayRule != null">
+        DAY_RULE = #{dayRule,jdbcType=BIT},
+      </if>
+      <if test="isCheck != null">
+        IS_CHECK = #{isCheck,jdbcType=BIT},
+      </if>
+      <if test="nuDigit != null">
+        NU_DIGIT = #{nuDigit,jdbcType=BIGINT},
+      </if>
+      <if test="nuCurrent != null">
+        NU_CURRENT = #{nuCurrent,jdbcType=BIGINT},
+      </if>
+      <if test="nuStep != null">
+        NU_STEP = #{nuStep,jdbcType=BIGINT},
+      </if>
+      <if test="nuDemo != null">
+        NU_DEMO = #{nuDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo">
+    update dh_base_number
+    set NU_TYPE = #{nuType,jdbcType=CHAR},
+      NU_NAME = #{nuName,jdbcType=VARCHAR},
+      NU_PREFIX = #{nuPrefix,jdbcType=VARCHAR},
+      YEAR_RULE = #{yearRule,jdbcType=BIT},
+      MONT_RULE = #{montRule,jdbcType=BIT},
+      DAY_RULE = #{dayRule,jdbcType=BIT},
+      IS_CHECK = #{isCheck,jdbcType=BIT},
+      NU_DIGIT = #{nuDigit,jdbcType=BIGINT},
+      NU_CURRENT = #{nuCurrent,jdbcType=BIGINT},
+      NU_STEP = #{nuStep,jdbcType=BIGINT},
+      NU_DEMO = #{nuDemo,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="nuType != null">
+	       		and NU_TYPE = #{nuType,jdbcType=CHAR}
+	      </if>
+	      <if test="nuName != null">
+	            and NU_NAME = #{nuName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="nuPrefix != null">
+	       		and NU_PREFIX = #{nuPrefix,jdbcType=VARCHAR}
+	      </if>
+	      <if test="yearRule != null">
+	        	and YEAR_RULE = #{yearRule,jdbcType=BIT}
+	      </if>
+	      <if test="montRule != null">
+	        	and MONT_RULE = #{montRule,jdbcType=BIT}
+	      </if>
+	      <if test="dayRule != null">
+	        	and DAY_RULE = #{dayRule,jdbcType=BIT}
+	      </if>
+	      <if test="isCheck != null">
+	        	and IS_CHECK = #{isCheck,jdbcType=BIT}
+	      </if>
+	      <if test="nuDigit != null">
+	        	and NU_DIGIT = #{nuDigit,jdbcType=BIGINT}
+	      </if>
+	      <if test="nuCurrent != null">
+	        	and NU_CURRENT = #{nuCurrent,jdbcType=BIGINT}
+	      </if>
+	      <if test="nuStep != null">
+	       		and  NU_STEP = #{nuStep,jdbcType=BIGINT}
+	      </if>
+	      <if test="nuDemo != null">
+	        	and NU_DEMO = #{nuDemo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="createBy != null">
+	        	and CREATE_BY = #{createBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="createDate != null">
+	        	and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="modifyBy != null">
+	        	and MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="modifyDate != null">
+	        	and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+	      </if>
+		</where>
+	</sql>
+	
+	<select id="selectBaseNuberList" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_base_number
+    <include refid="whereFields" />
+  </select>
+  
+  <select id="selectByPrimaryNuType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_base_number
+    where NU_TYPE = #{nuType,jdbcType=CHAR}
+  </select>
+  
+   <select id="selectBaseNuberListPage" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_base_number
+		<include refid="whereFields"></include>
+		limit #{offset},#{rows}
+  </select>
+  
+   <select id="selectBaseNuberListCount" parameterType="com.dinghao.entity.vo.template.base.BaseNumberVo" resultType="int">
+  		select
+		count(1)
+		from dh_base_number
+		<include refid="whereFields"></include>
+  </select>
+</mapper>

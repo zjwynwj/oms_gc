@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.goods.DownGoodsSkuDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.goods.DownGoodsSku" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sku_id" property="skuId" jdbcType="VARCHAR" />
+    <result column="spec" property="spec" jdbcType="VARCHAR" />
+    <result column="outer_sku_id" property="outerSkuId" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="plat_type" property="platType" jdbcType="VARCHAR" />
+    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    <result column="num_iid" property="numIid" jdbcType="VARCHAR" />
+    <result column="prop_url" property="propUrl" jdbcType="VARCHAR" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="down_time" property="downTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sku_id, spec, outer_sku_id, price, plat_type, cost_price, num_iid, prop_url, 
+    barcode, down_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_down_goods_sku
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_down_goods_sku
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsSkuVo" >
+    insert into dh_down_goods_sku (id, sku_id, spec, 
+      outer_sku_id, price, plat_type, 
+      cost_price, num_iid, prop_url, 
+      barcode, down_time)
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
+      #{outerSkuId,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{platType,jdbcType=VARCHAR}, 
+      #{costPrice,jdbcType=DECIMAL}, #{numIid,jdbcType=VARCHAR}, #{propUrl,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{downTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsSkuVo" >
+    insert into dh_down_goods_sku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="skuId != null" >
+        sku_id,
+      </if>
+      <if test="spec != null" >
+        spec,
+      </if>
+      <if test="outerSkuId != null" >
+        outer_sku_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="platType != null" >
+        plat_type,
+      </if>
+      <if test="costPrice != null" >
+        cost_price,
+      </if>
+      <if test="numIid != null" >
+        num_iid,
+      </if>
+      <if test="propUrl != null" >
+        prop_url,
+      </if>
+      <if test="barcode != null" >
+        barcode,
+      </if>
+      <if test="downTime != null" >
+        down_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null" >
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="outerSkuId != null" >
+        #{outerSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="platType != null" >
+        #{platType,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="numIid != null" >
+        #{numIid,jdbcType=VARCHAR},
+      </if>
+      <if test="propUrl != null" >
+        #{propUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="downTime != null" >
+        #{downTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsSkuVo" >
+    update dh_down_goods_sku
+    <set >
+      <if test="skuId != null" >
+        sku_id = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null" >
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="outerSkuId != null" >
+        outer_sku_id = #{outerSkuId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="platType != null" >
+        plat_type = #{platType,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="numIid != null" >
+        num_iid = #{numIid,jdbcType=VARCHAR},
+      </if>
+      <if test="propUrl != null" >
+        prop_url = #{propUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null" >
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="downTime != null" >
+        down_time = #{downTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsSkuVo" >
+    update dh_down_goods_sku
+    set sku_id = #{skuId,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      outer_sku_id = #{outerSkuId,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      plat_type = #{platType,jdbcType=VARCHAR},
+      cost_price = #{costPrice,jdbcType=DECIMAL},
+      num_iid = #{numIid,jdbcType=VARCHAR},
+      prop_url = #{propUrl,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      down_time = #{downTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="skuId != null" >
+	        	and sku_id = #{skuId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="spec != null" >
+	        	and spec = #{spec,jdbcType=VARCHAR}
+	      </if>
+	      <if test="outerSkuId != null" >
+	        	and outer_sku_id = #{outerSkuId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="price != null" >
+	        	and price = #{price,jdbcType=DECIMAL}
+	      </if>
+	      <if test="platType != null" >
+	        	and plat_type = #{platType,jdbcType=VARCHAR}
+	      </if>
+	      <if test="costPrice != null" >
+	        	and cost_price = #{costPrice,jdbcType=DECIMAL}
+	      </if>
+	      <if test="numIid != null" >
+	        	and num_iid = #{numIid,jdbcType=VARCHAR}
+	      </if>
+	      <if test="propUrl != null" >
+	        	and prop_url = #{propUrl,jdbcType=VARCHAR}
+	      </if>
+	      <if test="barcode != null" >
+	        	and barcode = #{barcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="downTime != null" >
+	        	and down_time = #{downTime,jdbcType=VARCHAR}
+	      </if>
+	  </where>
+  </sql>
+  
+  <select id="selectByParam" parameterType="com.dinghao.entity.vo.template.business.goods.DownGoodsSkuVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_down_goods_sku
+		<include refid="whereFields"></include>
+ </select>
+ 
+  <select id="selectBySkuId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_down_goods_sku
+		where num_iid = #{numIid,jdbcType=VARCHAR} and sku_id = #{skuId,jdbcType=VARCHAR}  
+ </select>
+
+</mapper>

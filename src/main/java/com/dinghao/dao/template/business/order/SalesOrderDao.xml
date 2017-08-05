@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.order.SalesOrderDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.vo.template.business.order.SalesOrderVo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="VARCHAR" />
+    <result column="SHOP_ID" property="shopId" jdbcType="BIGINT" />
+    <result column="SHOP_NICK" property="shopNick" jdbcType="VARCHAR" />
+    <result column="FROMCODES" property="fromcodes" jdbcType="VARCHAR" />
+    <result column="TOP_TIDS" property="topTids" jdbcType="VARCHAR" />
+    <result column="PLAT_TYPE" property="platType" jdbcType="CHAR" />
+    <result column="STOCK_ID" property="stockId" jdbcType="BIGINT" />
+    <result column="CUST_NICK" property="custNick" jdbcType="VARCHAR" />
+    <result column="IDENTITY_CARD" property="identityCard" jdbcType="VARCHAR" />
+    <result column="RECVNAME" property="recvname" jdbcType="VARCHAR" />
+    <result column="RECVMOBILE" property="recvmobile" jdbcType="VARCHAR" />
+    <result column="RECVPHONE" property="recvphone" jdbcType="VARCHAR" />
+    <result column="PROV" property="prov" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="COUNTY" property="county" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+    <result column="EXPID" property="expid" jdbcType="BIGINT" />
+    <result column="TAX_AMOUNT" property="taxAmount" jdbcType="DECIMAL" />
+    <result column="PAY_TIME" property="payTime" jdbcType="DATE" />
+    <result column="DELIVERYCOST" property="deliverycost" jdbcType="DECIMAL" />
+    <result column="DELIVERYFEE" property="deliveryfee" jdbcType="DECIMAL" />
+  
+    <result column="ADJUSTFEE" property="adjustfee" jdbcType="DECIMAL" />
+    <result column="DISCOUNTFEE" property="discountfee" jdbcType="DECIMAL" />
+    <result column="TOTAL_FEE" property="totalFee" jdbcType="DECIMAL" />
+    <result column="PAYED_MONEY" property="payedMoney" jdbcType="DECIMAL" />
+    <result column="STANDARD_WEIGHT" property="standardWeight" jdbcType="DECIMAL" />
+    <result column="REAL_WEIGHT" property="realWeight" jdbcType="DECIMAL" />
+    <result column="NEEDINVOICE" property="needinvoice" jdbcType="CHAR" />
+    <result column="INVOICEMEMO" property="invoicememo" jdbcType="VARCHAR" />
+    <result column="EXPCODE" property="expcode" jdbcType="VARCHAR" />
+    <result column="warehouseName" property="warehouseName" jdbcType="VARCHAR" />
+    <result column="expressNo" property="expressNo" jdbcType="VARCHAR" />
+    <result column="PLAT_STATUS" property="platStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_POINT" property="orderPoint" jdbcType="BIGINT" />
+    <result column="HASSEND" property="hassend" jdbcType="CHAR" />
+    <result column="HASMERGE" property="hasmerge" jdbcType="CHAR" />
+    <result column="SEND_BY" property="sendBy" jdbcType="VARCHAR" />
+    <result column="SEND_TIME" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="BUYER_FLAG" property="buyerFlag" jdbcType="CHAR" />
+    <result column="BUYER_MEMO" property="buyerMemo" jdbcType="VARCHAR" />
+    <result column="SELLER_FLAG" property="sellerFlag" jdbcType="CHAR" />
+    <result column="SELLER_MEMO" property="sellerMemo" jdbcType="VARCHAR" />
+    <result column="DOWN_NOTICE" property="downNotice" jdbcType="VARCHAR" />
+    <result column="MARK" property="mark" jdbcType="VARCHAR" />
+    <result column="PLANSEND_DATE" property="plansendDate" jdbcType="DATE" />
+    <result column="HasFAudit" property="hasfaudit" jdbcType="CHAR" />
+    <result column="DISABLED" property="disabled" jdbcType="CHAR" />
+    <result column="HASREFUND" property="hasrefund" jdbcType="CHAR" />
+    <result column="ECPRINTED" property="ecprinted" jdbcType="CHAR" />
+    <result column="SENDPRINTED" property="sendprinted" jdbcType="CHAR" />
+    <result column="HASSCANED" property="hasscaned" jdbcType="CHAR" />
+    <result column="WAVE_ID" property="waveId" jdbcType="INTEGER" />
+    <result column="WAVE_NO" property="waveNo" jdbcType="VARCHAR" />
+    <result column="BUY_TIME" property="buyTime" jdbcType="TIMESTAMP" />
+    <result column="HASPROM" property="hasprom" jdbcType="CHAR" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="VARCHAR" />
+    <result column="RTN_MONEY" property="rtnMoney" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="REMARK3" property="remark3" jdbcType="VARCHAR" />
+    <result column="REMARK4" property="remark4" jdbcType="VARCHAR" />
+    <result column="EXCEPTION_STATUS" property="exceptionStatus" jdbcType="VARCHAR" />
+    <result column="MODIFIED" property="modified" jdbcType="TIMESTAMP" />
+    <result column="SEND_STATUS" property="sendStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDER_NUM, SHOP_ID, FROMCODES, TOP_TIDS, PLAT_TYPE, STOCK_ID, CUST_NICK, IDENTITY_CARD,RECVNAME, 
+    RECVMOBILE, RECVPHONE, PROV, CITY, COUNTY, ADDRESS, ZIPCODE, EXPID,TAX_AMOUNT, PAY_TIME,
+    DELIVERYCOST,DELIVERYFEE, ADJUSTFEE, DISCOUNTFEE, TOTAL_FEE, PAYED_MONEY, STANDARD_WEIGHT, REAL_WEIGHT, 
+    NEEDINVOICE, INVOICEMEMO, EXPCODE, PLAT_STATUS, ORDER_POINT, HASSEND, HASMERGE, SEND_BY, 
+    SEND_TIME, BUYER_FLAG, BUYER_MEMO, SELLER_FLAG, SELLER_MEMO, DOWN_NOTICE, MARK, PLANSEND_DATE, 
+    HasFAudit, DISABLED, HASREFUND, ECPRINTED, SENDPRINTED, HASSCANED, WAVE_ID,WAVE_NO, BUY_TIME, 
+    HASPROM, TIMESTAMP, RTN_MONEY, CREATE_BY, CREATE_DATE, MODIFY_BY, MODIFY_DATE, REMARK1, 
+    REMARK2, REMARK3, REMARK4, EXCEPTION_STATUS, MODIFIED, SEND_STATUS
+  </sql>
+  <sql id="Base_Column_List1" >
+  	saleOrder.ID, saleOrder.ORDER_NUM, saleOrder.SHOP_ID, saleOrder.FROMCODES, saleOrder.TOP_TIDS, saleOrder.PLAT_TYPE, saleOrder.STOCK_ID, saleOrder.CUST_NICK, saleOrder.IDENTITY_CARD,saleOrder.RECVNAME, 
+    saleOrder.RECVMOBILE, saleOrder.RECVPHONE, saleOrder.PROV, saleOrder.CITY, saleOrder.COUNTY, saleOrder.ADDRESS, saleOrder.ZIPCODE, saleOrder.EXPID, saleOrder.DELIVERYCOST, 
+    saleOrder.TAX_AMOUNT, saleOrder.PAY_TIME,saleOrder.DELIVERYFEE, saleOrder.ADJUSTFEE, saleOrder.DISCOUNTFEE, saleOrder.TOTAL_FEE, saleOrder.PAYED_MONEY, saleOrder.STANDARD_WEIGHT, saleOrder.REAL_WEIGHT, 
+    saleOrder.NEEDINVOICE, saleOrder.INVOICEMEMO, saleOrder.EXPCODE, saleOrder.PLAT_STATUS, saleOrder.ORDER_POINT, saleOrder.HASSEND, saleOrder.HASMERGE, saleOrder.SEND_BY, 
+    saleOrder.SEND_TIME, saleOrder.BUYER_FLAG, saleOrder.BUYER_MEMO, saleOrder.SELLER_FLAG, saleOrder.SELLER_MEMO, saleOrder.DOWN_NOTICE, saleOrder.MARK, saleOrder.PLANSEND_DATE, 
+    saleOrder.HasFAudit, saleOrder.DISABLED, saleOrder.HASREFUND, saleOrder.ECPRINTED, saleOrder.SENDPRINTED, saleOrder.HASSCANED, saleOrder.WAVE_ID,saleOrder.WAVE_NO,saleOrder.BUY_TIME, 
+    saleOrder.HASPROM, saleOrder.TIMESTAMP, saleOrder.RTN_MONEY, saleOrder.CREATE_BY, saleOrder.CREATE_DATE, saleOrder.MODIFY_BY, saleOrder.MODIFY_DATE, saleOrder.REMARK1, 
+    saleOrder.REMARK2, saleOrder.REMARK3, saleOrder.REMARK4, saleOrder.EXCEPTION_STATUS, saleOrder.MODIFIED, saleOrder.SEND_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List1" />
+    ,shop.`NAME` as shopName,express.`NAME` as expressName ,warehouse.warehouse_name as warehouseName,express.code expressNo
+    from dh_sales_order saleOrder LEFT JOIN dh_shop shop on saleOrder.shop_id=shop.id
+    							  LEFT JOIN dh_dms_express express on saleOrder.expid=express.id
+    							  LEFT JOIN dh_warehouse warehouse on saleOrder.stock_id=warehouse.id
+    where saleOrder.ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_sales_order
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" >
+    insert into dh_sales_order (ID, ORDER_NUM, SHOP_ID, 
+      FROMCODES, TOP_TIDS, PLAT_TYPE, 
+      STOCK_ID, CUST_NICK,IDENTITY_CARD, RECVNAME, 
+      RECVMOBILE, RECVPHONE, PROV, 
+      CITY, COUNTY, ADDRESS, 
+      ZIPCODE, EXPID, DELIVERYCOST, 
+      DELIVERYFEE, ADJUSTFEE, DISCOUNTFEE, 
+      TOTAL_FEE, PAYED_MONEY, STANDARD_WEIGHT, 
+      REAL_WEIGHT, NEEDINVOICE, INVOICEMEMO, 
+      EXPCODE, PLAT_STATUS, ORDER_POINT, 
+      HASSEND, HASMERGE, SEND_BY, 
+      SEND_TIME, BUYER_FLAG, BUYER_MEMO, 
+      SELLER_FLAG, SELLER_MEMO, DOWN_NOTICE, 
+      MARK, PLANSEND_DATE, HasFAudit, 
+      DISABLED, HASREFUND, ECPRINTED, 
+      SENDPRINTED, HASSCANED, WAVE_ID, WAVE_NO,
+      BUY_TIME, HASPROM, TIMESTAMP, 
+      RTN_MONEY, CREATE_BY, CREATE_DATE, 
+      MODIFY_BY, MODIFY_DATE, REMARK1, 
+      REMARK2, REMARK3, REMARK4, 
+      EXCEPTION_STATUS, SEND_STATUS,TAX_AMOUNT, PAY_TIME)
+    values (#{id,jdbcType=BIGINT}, #{orderNum,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
+      #{fromcodes,jdbcType=VARCHAR}, #{topTids,jdbcType=VARCHAR}, #{platType,jdbcType=CHAR}, 
+      #{stockId,jdbcType=BIGINT}, #{custNick,jdbcType=VARCHAR},, #{identityCard,jdbcType=VARCHAR},
+       #{recvname,jdbcType=VARCHAR}, 
+      #{recvmobile,jdbcType=VARCHAR}, #{recvphone,jdbcType=VARCHAR}, #{prov,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=VARCHAR}, #{expid,jdbcType=BIGINT}, #{deliverycost,jdbcType=DECIMAL}, 
+      #{deliveryfee,jdbcType=DECIMAL}, #{adjustfee,jdbcType=DECIMAL}, #{discountfee,jdbcType=DECIMAL}, 
+      #{totalFee,jdbcType=DECIMAL}, #{payedMoney,jdbcType=DECIMAL}, #{standardWeight,jdbcType=DECIMAL}, 
+      #{realWeight,jdbcType=DECIMAL}, #{needinvoice,jdbcType=CHAR}, #{invoicememo,jdbcType=VARCHAR}, 
+      #{expcode,jdbcType=VARCHAR}, #{platStatus,jdbcType=VARCHAR}, #{orderPoint,jdbcType=BIGINT}, 
+      #{hassend,jdbcType=CHAR}, #{hasmerge,jdbcType=CHAR}, #{sendBy,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=TIMESTAMP}, #{buyerFlag,jdbcType=CHAR}, #{buyerMemo,jdbcType=VARCHAR}, 
+      #{sellerFlag,jdbcType=CHAR}, #{sellerMemo,jdbcType=VARCHAR}, #{downNotice,jdbcType=VARCHAR}, 
+      #{mark,jdbcType=VARCHAR}, #{plansendDate,jdbcType=DATE}, #{hasfaudit,jdbcType=CHAR}, 
+      #{disabled,jdbcType=CHAR}, #{hasrefund,jdbcType=CHAR}, #{ecprinted,jdbcType=CHAR}, 
+      #{sendprinted,jdbcType=CHAR}, #{hasscaned,jdbcType=CHAR}, #{waveId,jdbcType=INTEGER}, #{waveNo,jdbcType=VARCHAR}, 
+      #{buyTime,jdbcType=TIMESTAMP}, #{hasprom,jdbcType=CHAR}, #{timestamp,jdbcType=VARCHAR}, 
+      #{rtnMoney,jdbcType=DECIMAL}, #{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, 
+      #{exceptionStatus,jdbcType=VARCHAR},  #{modified,jdbcType=TIMESTAMP},  #{sendStatus,jdbcType=VARCHAR},  #{taxAmount,jdbcType=DECIMAL},  #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" useGeneratedKeys="true" keyProperty="id">
+    insert into dh_sales_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="fromcodes != null" >
+        FROMCODES,
+      </if>
+      <if test="topTids != null" >
+        TOP_TIDS,
+      </if>
+      <if test="platType != null" >
+        PLAT_TYPE,
+      </if>
+      <if test="stockId != null" >
+        STOCK_ID,
+      </if>
+      <if test="custNick != null" >
+        CUST_NICK,
+      </if>
+      <if test="identityCard != null" >
+        IDENTITY_CARD,
+      </if>
+      <if test="recvname != null" >
+        RECVNAME,
+      </if>
+      <if test="recvmobile != null" >
+        RECVMOBILE,
+      </if>
+      <if test="recvphone != null" >
+        RECVPHONE,
+      </if>
+      <if test="prov != null" >
+        PROV,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="county != null" >
+        COUNTY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE,
+      </if>
+      <if test="expid != null" >
+        EXPID,
+      </if>
+      <if test="deliverycost != null" >
+        DELIVERYCOST,
+      </if>
+      <if test="deliveryfee != null" >
+        DELIVERYFEE,
+      </if>
+      <if test="adjustfee != null" >
+        ADJUSTFEE,
+      </if>
+      <if test="discountfee != null" >
+        DISCOUNTFEE,
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE,
+      </if>
+      <if test="payedMoney != null" >
+        PAYED_MONEY,
+      </if>
+      <if test="standardWeight != null" >
+        STANDARD_WEIGHT,
+      </if>
+      <if test="realWeight != null" >
+        REAL_WEIGHT,
+      </if>
+      <if test="needinvoice != null" >
+        NEEDINVOICE,
+      </if>
+      <if test="invoicememo != null" >
+        INVOICEMEMO,
+      </if>
+      <if test="expcode != null" >
+        EXPCODE,
+      </if>
+      <if test="platStatus != null" >
+        PLAT_STATUS,
+      </if>
+      <if test="orderPoint != null" >
+        ORDER_POINT,
+      </if>
+      <if test="hassend != null" >
+        HASSEND,
+      </if>
+      <if test="hasmerge != null" >
+        HASMERGE,
+      </if>
+      <if test="sendBy != null" >
+        SEND_BY,
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME,
+      </if>
+      <if test="buyerFlag != null" >
+        BUYER_FLAG,
+      </if>
+      <if test="buyerMemo != null" >
+        BUYER_MEMO,
+      </if>
+      <if test="sellerFlag != null" >
+        SELLER_FLAG,
+      </if>
+      <if test="sellerMemo != null" >
+        SELLER_MEMO,
+      </if>
+      <if test="downNotice != null" >
+        DOWN_NOTICE,
+      </if>
+      <if test="mark != null" >
+        MARK,
+      </if>
+      <if test="plansendDate != null" >
+        PLANSEND_DATE,
+      </if>
+      <if test="hasfaudit != null" >
+        HasFAudit,
+      </if>
+      <if test="disabled != null" >
+        DISABLED,
+      </if>
+      <if test="hasrefund != null" >
+        HASREFUND,
+      </if>
+      <if test="ecprinted != null" >
+        ECPRINTED,
+      </if>
+      <if test="sendprinted != null" >
+        SENDPRINTED,
+      </if>
+      <if test="hasscaned != null" >
+        HASSCANED,
+      </if>
+      <if test="waveId != null" >
+        WAVE_ID,
+      </if>
+       <if test="waveNo != null" >
+        WAVE_NO,
+      </if>
+      <if test="buyTime != null" >
+        BUY_TIME,
+      </if>
+      <if test="hasprom != null" >
+        HASPROM,
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP,
+      </if>
+      <if test="rtnMoney != null" >
+        RTN_MONEY,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="remark3 != null" >
+        REMARK3,
+      </if>
+      <if test="remark4 != null" >
+        REMARK4,
+      </if>
+      <if test="exceptionStatus != null" >
+        EXCEPTION_STATUS,
+      </if>
+      <if test="modified != null" >
+        MODIFIED,
+      </if>
+      <if test="sendStatus != null" >
+        SEND_STATUS,
+      </if>
+     <if test="taxAmount != null" >
+        TAX_AMOUNT,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="fromcodes != null" >
+        #{fromcodes,jdbcType=VARCHAR},
+      </if>
+      <if test="topTids != null" >
+        #{topTids,jdbcType=VARCHAR},
+      </if>
+      <if test="platType != null" >
+        #{platType,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="custNick != null" >
+        #{custNick,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null" >
+        #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="recvname != null" >
+        #{recvname,jdbcType=VARCHAR},
+      </if>
+      <if test="recvmobile != null" >
+        #{recvmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="recvphone != null" >
+        #{recvphone,jdbcType=VARCHAR},
+      </if>
+      <if test="prov != null" >
+        #{prov,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="expid != null" >
+        #{expid,jdbcType=BIGINT},
+      </if>
+      <if test="deliverycost != null" >
+        #{deliverycost,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryfee != null" >
+        #{deliveryfee,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustfee != null" >
+        #{adjustfee,jdbcType=DECIMAL},
+      </if>
+      <if test="discountfee != null" >
+        #{discountfee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payedMoney != null" >
+        #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="standardWeight != null" >
+        #{standardWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="realWeight != null" >
+        #{realWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="needinvoice != null" >
+        #{needinvoice,jdbcType=CHAR},
+      </if>
+      <if test="invoicememo != null" >
+        #{invoicememo,jdbcType=VARCHAR},
+      </if>
+      <if test="expcode != null" >
+        #{expcode,jdbcType=VARCHAR},
+      </if>
+      <if test="platStatus != null" >
+        #{platStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPoint != null" >
+        #{orderPoint,jdbcType=BIGINT},
+      </if>
+      <if test="hassend != null" >
+        #{hassend,jdbcType=CHAR},
+      </if>
+      <if test="hasmerge != null" >
+        #{hasmerge,jdbcType=CHAR},
+      </if>
+      <if test="sendBy != null" >
+        #{sendBy,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerFlag != null" >
+        #{buyerFlag,jdbcType=CHAR},
+      </if>
+      <if test="buyerMemo != null" >
+        #{buyerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerFlag != null" >
+        #{sellerFlag,jdbcType=CHAR},
+      </if>
+      <if test="sellerMemo != null" >
+        #{sellerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="downNotice != null" >
+        #{downNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="plansendDate != null" >
+        #{plansendDate,jdbcType=DATE},
+      </if>
+      <if test="hasfaudit != null" >
+        #{hasfaudit,jdbcType=CHAR},
+      </if>
+      <if test="disabled != null" >
+        #{disabled,jdbcType=CHAR},
+      </if>
+      <if test="hasrefund != null" >
+        #{hasrefund,jdbcType=CHAR},
+      </if>
+      <if test="ecprinted != null" >
+        #{ecprinted,jdbcType=CHAR},
+      </if>
+      <if test="sendprinted != null" >
+        #{sendprinted,jdbcType=CHAR},
+      </if>
+      <if test="hasscaned != null" >
+        #{hasscaned,jdbcType=CHAR},
+      </if>
+      <if test="waveId != null" >
+        #{waveId,jdbcType=INTEGER},
+      </if>
+      <if test="waveNo != null" >
+        #{waveNo,jdbcType=INTEGER},
+      </if>
+      <if test="buyTime != null" >
+        #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasprom != null" >
+        #{hasprom,jdbcType=CHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnMoney != null" >
+        #{rtnMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionStatus != null" >
+        #{exceptionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendStatus != null" >
+        #{sendStatus,jdbcType=VARCHAR},
+      </if>
+       <if test="taxAmount != null" >
+        #{taxAmount,jdbcType=DECIMAL},
+      </if>
+       <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" >
+    update dh_sales_order
+    <set >
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="fromcodes != null" >
+        FROMCODES = #{fromcodes,jdbcType=VARCHAR},
+      </if>
+      <if test="topTids != null" >
+        TOP_TIDS = #{topTids,jdbcType=VARCHAR},
+      </if>
+      <if test="platType != null" >
+        PLAT_TYPE = #{platType,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        STOCK_ID = #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="custNick != null" >
+        CUST_NICK = #{custNick,jdbcType=VARCHAR},
+      </if>
+      <if test="custNick != null" >
+        IDENTITY_CARD = #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="recvname != null" >
+        RECVNAME = #{recvname,jdbcType=VARCHAR},
+      </if>
+      <if test="recvmobile != null" >
+        RECVMOBILE = #{recvmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="recvphone != null" >
+        RECVPHONE = #{recvphone,jdbcType=VARCHAR},
+      </if>
+      <if test="prov != null" >
+        PROV = #{prov,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="expid != null" >
+        EXPID = #{expid,jdbcType=BIGINT},
+      </if>
+      <if test="deliverycost != null" >
+        DELIVERYCOST = #{deliverycost,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryfee != null" >
+        DELIVERYFEE = #{deliveryfee,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustfee != null" >
+        ADJUSTFEE = #{adjustfee,jdbcType=DECIMAL},
+      </if>
+      <if test="discountfee != null" >
+        DISCOUNTFEE = #{discountfee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payedMoney != null" >
+        PAYED_MONEY = #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="standardWeight != null" >
+        STANDARD_WEIGHT = #{standardWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="realWeight != null" >
+        REAL_WEIGHT = #{realWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="needinvoice != null" >
+        NEEDINVOICE = #{needinvoice,jdbcType=CHAR},
+      </if>
+      <if test="invoicememo != null" >
+        INVOICEMEMO = #{invoicememo,jdbcType=VARCHAR},
+      </if>
+      <if test="expcode != null" >
+        EXPCODE = #{expcode,jdbcType=VARCHAR},
+      </if>
+      <if test="platStatus != null" >
+        PLAT_STATUS = #{platStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPoint != null" >
+        ORDER_POINT = #{orderPoint,jdbcType=BIGINT},
+      </if>
+      <if test="hassend != null" >
+        HASSEND = #{hassend,jdbcType=CHAR},
+      </if>
+      <if test="hasmerge != null" >
+        HASMERGE = #{hasmerge,jdbcType=CHAR},
+      </if>
+      <if test="sendBy != null" >
+        SEND_BY = #{sendBy,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerFlag != null" >
+        BUYER_FLAG = #{buyerFlag,jdbcType=CHAR},
+      </if>
+      <if test="buyerMemo != null" >
+        BUYER_MEMO = #{buyerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerFlag != null" >
+        SELLER_FLAG = #{sellerFlag,jdbcType=CHAR},
+      </if>
+      <if test="sellerMemo != null" >
+        SELLER_MEMO = #{sellerMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="downNotice != null" >
+        DOWN_NOTICE = #{downNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        MARK = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="plansendDate != null" >
+        PLANSEND_DATE = #{plansendDate,jdbcType=DATE},
+      </if>
+      <if test="hasfaudit != null" >
+        HasFAudit = #{hasfaudit,jdbcType=CHAR},
+      </if>
+      <if test="disabled != null" >
+        DISABLED = #{disabled,jdbcType=CHAR},
+      </if>
+      <if test="hasrefund != null" >
+        HASREFUND = #{hasrefund,jdbcType=CHAR},
+      </if>
+      <if test="ecprinted != null" >
+        ECPRINTED = #{ecprinted,jdbcType=CHAR},
+      </if>
+      <if test="sendprinted != null" >
+        SENDPRINTED = #{sendprinted,jdbcType=CHAR},
+      </if>
+      <if test="hasscaned != null" >
+        HASSCANED = #{hasscaned,jdbcType=CHAR},
+      </if>
+      <if test="waveId != null" >
+        WAVE_ID = #{waveId,jdbcType=INTEGER},
+      </if>
+      <if test="waveNo != null" >
+        WAVE_NO = #{waveNo,jdbcType=INTEGER},
+      </if>
+      <if test="buyTime != null" >
+        BUY_TIME = #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasprom != null" >
+        HASPROM = #{hasprom,jdbcType=CHAR},
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP = #{timestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnMoney != null" >
+        RTN_MONEY = #{rtnMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        REMARK1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        REMARK2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        REMARK3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        REMARK4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionStatus != null" >
+        EXCEPTION_STATUS = #{exceptionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="modified != null" >
+        MODIFIED = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendStatus != null" >
+        SEND_STATUS = #{sendStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="taxAmount != null" >
+        TAX_AMOUNT = #{taxAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" >
+    update dh_sales_order
+    set ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      SHOP_ID = #{shopId,jdbcType=BIGINT},
+      FROMCODES = #{fromcodes,jdbcType=VARCHAR},
+      TOP_TIDS = #{topTids,jdbcType=VARCHAR},
+      PLAT_TYPE = #{platType,jdbcType=CHAR},
+      STOCK_ID = #{stockId,jdbcType=BIGINT},
+      CUST_NICK = #{custNick,jdbcType=VARCHAR},
+      IDENTITY_CARD = #{identityCard,jdbcType=VARCHAR},
+      RECVNAME = #{recvname,jdbcType=VARCHAR},
+      RECVMOBILE = #{recvmobile,jdbcType=VARCHAR},
+      RECVPHONE = #{recvphone,jdbcType=VARCHAR},
+      PROV = #{prov,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      EXPID = #{expid,jdbcType=BIGINT},
+      DELIVERYCOST = #{deliverycost,jdbcType=DECIMAL},
+      DELIVERYFEE = #{deliveryfee,jdbcType=DECIMAL},
+      ADJUSTFEE = #{adjustfee,jdbcType=DECIMAL},
+      DISCOUNTFEE = #{discountfee,jdbcType=DECIMAL},
+      TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      PAYED_MONEY = #{payedMoney,jdbcType=DECIMAL},
+      STANDARD_WEIGHT = #{standardWeight,jdbcType=DECIMAL},
+      REAL_WEIGHT = #{realWeight,jdbcType=DECIMAL},
+      NEEDINVOICE = #{needinvoice,jdbcType=CHAR},
+      INVOICEMEMO = #{invoicememo,jdbcType=VARCHAR},
+      EXPCODE = #{expcode,jdbcType=VARCHAR},
+      PLAT_STATUS = #{platStatus,jdbcType=VARCHAR},
+      ORDER_POINT = #{orderPoint,jdbcType=BIGINT},
+      HASSEND = #{hassend,jdbcType=CHAR},
+      HASMERGE = #{hasmerge,jdbcType=CHAR},
+      SEND_BY = #{sendBy,jdbcType=VARCHAR},
+      SEND_TIME = #{sendTime,jdbcType=TIMESTAMP},
+      BUYER_FLAG = #{buyerFlag,jdbcType=CHAR},
+      BUYER_MEMO = #{buyerMemo,jdbcType=VARCHAR},
+      SELLER_FLAG = #{sellerFlag,jdbcType=CHAR},
+      SELLER_MEMO = #{sellerMemo,jdbcType=VARCHAR},
+      DOWN_NOTICE = #{downNotice,jdbcType=VARCHAR},
+      MARK = #{mark,jdbcType=VARCHAR},
+      PLANSEND_DATE = #{plansendDate,jdbcType=DATE},
+      HasFAudit = #{hasfaudit,jdbcType=CHAR},
+      DISABLED = #{disabled,jdbcType=CHAR},
+      HASREFUND = #{hasrefund,jdbcType=CHAR},
+      ECPRINTED = #{ecprinted,jdbcType=CHAR},
+      SENDPRINTED = #{sendprinted,jdbcType=CHAR},
+      HASSCANED = #{hasscaned,jdbcType=CHAR},
+      WAVE_ID = #{waveId,jdbcType=INTEGER},
+      WAVE_NO = #{waveNo,jdbcType=INTEGER},
+      BUY_TIME = #{buyTime,jdbcType=TIMESTAMP},
+      HASPROM = #{hasprom,jdbcType=CHAR},
+      TIMESTAMP = #{timestamp,jdbcType=VARCHAR},
+      RTN_MONEY = #{rtnMoney,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      REMARK1 = #{remark1,jdbcType=VARCHAR},
+      REMARK2 = #{remark2,jdbcType=VARCHAR},
+      REMARK3 = #{remark3,jdbcType=VARCHAR},
+      REMARK4 = #{remark4,jdbcType=VARCHAR},
+      EXCEPTION_STATUS = #{exceptionStatus,jdbcType=VARCHAR},
+      MODIFIED = #{modified,jdbcType=TIMESTAMP},
+      SEND_STATUS = #{sendStatus,jdbcType=VARCHAR}
+      TAX_AMOUNT = #{taxAmount,jdbcType=VARCHAR}
+      PAY_TIME = #{paytime,jdbcType=VARCHAR}
+      where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and saleOrder.ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="orderNum != null and orderNum!=''" >
+	        	and saleOrder.ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+	      </if>
+	      <if test="shopId != null" >
+	        	and saleOrder.SHOP_ID = #{shopId,jdbcType=BIGINT}
+	      </if>
+	      <if test="fromcodes != null and fromcodes!=''" >
+	        	and saleOrder.FROMCODES = #{fromcodes,jdbcType=VARCHAR}
+	      </if>
+	      <if test="topTids != null and topTids !=''" >
+	        	and saleOrder.TOP_TIDS = #{topTids,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platType != null and platType !=''" >
+	       	 	and saleOrder.PLAT_TYPE = #{platType,jdbcType=CHAR}
+	      </if>
+	      <if test="stockId != null" >
+	        	and saleOrder.STOCK_ID = #{stockId,jdbcType=BIGINT}
+	      </if>
+	      <if test="custNick != null and custNick !=''" >
+	        	and saleOrder.CUST_NICK = #{custNick,jdbcType=VARCHAR}
+	      </if>
+	       <if test="identityCard != null and custNick !=''" >
+	        	and saleOrder.IDENTITY_CARD = #{identityCard,jdbcType=VARCHAR}
+	      </if>
+	    
+	      <if test="recvname != null and recvname !=''" >
+	        	and saleOrder.RECVNAME = #{recvname,jdbcType=VARCHAR}
+	      </if>
+	      <if test="recvmobile != null and recvmobile !=''" >
+	        	and saleOrder.RECVMOBILE = #{recvmobile,jdbcType=VARCHAR}
+	      </if>
+	      <if test="recvphone != null and recvphone !=''" >
+	        	and saleOrder.RECVPHONE = #{recvphone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="prov != null and prov !=''" >
+	        	and saleOrder.PROV = #{prov,jdbcType=VARCHAR}
+	      </if>
+	      <if test="city != null and city !=''" >
+	        	and saleOrder.CITY = #{city,jdbcType=VARCHAR}
+	      </if>
+	      <if test="county != null and county !=''" >
+	        	and saleOrder.COUNTY = #{county,jdbcType=VARCHAR}
+	      </if>
+	      <if test="address != null and address !=''" >
+	        	and saleOrder.ADDRESS = #{address,jdbcType=VARCHAR}
+	      </if>
+	      <if test="zipcode != null and zipcode !=''" >
+	        	and saleOrder.ZIPCODE = #{zipcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="expid != null" >
+	        	and saleOrder.EXPID = #{expid,jdbcType=BIGINT}
+	      </if>
+	      <if test="deliverycost != null" >
+	        	and saleOrder.DELIVERYCOST = #{deliverycost,jdbcType=DECIMAL}
+	      </if>
+	      <if test="deliveryfee != null" >
+	        	and saleOrder.DELIVERYFEE = #{deliveryfee,jdbcType=DECIMAL}
+	      </if>
+	      <if test="adjustfee != null" >
+	        	and saleOrder.ADJUSTFEE = #{adjustfee,jdbcType=DECIMAL}
+	      </if>
+	      <if test="discountfee != null" >
+	        	and saleOrder.DISCOUNTFEE = #{discountfee,jdbcType=DECIMAL}
+	      </if>
+	      <if test="totalFee != null" >
+	        	and saleOrder.TOTAL_FEE = #{totalFee,jdbcType=DECIMAL}
+	      </if>
+	      <if test="payedMoney != null" >
+	        	and saleOrder.PAYED_MONEY = #{payedMoney,jdbcType=DECIMAL}
+	      </if>
+	      <if test="standardWeight != null" >
+	        	and saleOrder.STANDARD_WEIGHT = #{standardWeight,jdbcType=DECIMAL}
+	      </if>
+	      <if test="realWeight != null" >
+	        	and saleOrder.REAL_WEIGHT = #{realWeight,jdbcType=DECIMAL}
+	      </if>
+	      <if test="needinvoice != null and needinvoice !=''" >
+	        	and saleOrder.NEEDINVOICE = #{needinvoice,jdbcType=CHAR}
+	      </if>
+	      <if test="invoicememo != null and invoicememo !=''" >
+	        	and saleOrder.INVOICEMEMO = #{invoicememo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="expcode != null and expcode !=''" >
+	        	and saleOrder.EXPCODE = #{expcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="platStatus != null and platStatus !=''" >
+	        	and saleOrder.PLAT_STATUS = #{platStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="orderPoint != null" >
+	        	and saleOrder.ORDER_POINT = #{orderPoint,jdbcType=BIGINT}
+	      </if>
+	      <if test="hassend != null and hassend !=''" >
+	        	and saleOrder.HASSEND = #{hassend,jdbcType=CHAR}
+	      </if>
+	      <if test="hasmerge != null and hasmerge !=''" >
+	        	and saleOrder.HASMERGE = #{hasmerge,jdbcType=CHAR}
+	      </if>
+	      <if test="sendBy != null and sendBy !=''" >
+	        	and saleOrder.SEND_BY = #{sendBy,jdbcType=VARCHAR}
+	      </if>
+	      <if test="sendTime != null" >
+	        	and saleOrder.SEND_TIME = #{sendTime,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="buyerFlag != null" >
+	        	and saleOrder.BUYER_FLAG = #{buyerFlag,jdbcType=CHAR}
+	      </if>
+	      <if test="buyerMemo != null" >
+	        	and saleOrder.BUYER_MEMO = #{buyerMemo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="sellerFlag != null" >
+	        	and saleOrder.SELLER_FLAG = #{sellerFlag,jdbcType=CHAR}
+	      </if>
+	      <if test="sellerMemo != null and sellerMemo !=''"  >
+	        	and  (NOT saleOrder.SELLER_MEMO is null)
+	       
+	      </if>
+	      <if test="downNotice != null" >
+	        	and saleOrder.DOWN_NOTICE = #{downNotice,jdbcType=VARCHAR}
+	      </if>
+	      <if test="mark != null" >
+	        	and saleOrder.MARK = #{mark,jdbcType=VARCHAR}
+	      </if>
+	      <if test="plansendDate != null" >
+	        	and saleOrder.PLANSEND_DATE = #{plansendDate,jdbcType=DATE}
+	      </if>
+	      <if test="hasfaudit != null and hasfaudit !=''" >
+	        	and saleOrder.HasFAudit = #{hasfaudit,jdbcType=CHAR}
+	      </if>
+	      <if test="disabled != null and disabled !=''" >
+	        	and saleOrder.DISABLED = #{disabled,jdbcType=CHAR}
+	      </if>
+	      <if test="hasrefund != null and hasrefund !=''" >
+	        	and saleOrder.HASREFUND = #{hasrefund,jdbcType=CHAR}
+	      </if>
+	      <if test="ecprinted != null and ecprinted !=''" >
+	        	and saleOrder.ECPRINTED = #{ecprinted,jdbcType=CHAR}
+	      </if>
+	      <if test="sendprinted != null and sendprinted !=''" >
+	        	and saleOrder.SENDPRINTED = #{sendprinted,jdbcType=CHAR}
+	      </if>
+	      <if test="hasscaned != null and hasscaned !=''" >
+	        	and saleOrder.HASSCANED = #{hasscaned,jdbcType=CHAR}
+	      </if>
+	      <if test="waveId != null" >
+	        	and saleOrder.WAVE_ID = #{waveId,jdbcType=INTEGER}
+	      </if>
+	      <if test="waveNo != null" >
+	        	and saleOrder.WAVE_NO = #{waveNo,jdbcType=INTEGER}
+	      </if>
+	      <if test="buyTime != null" >
+	        	and saleOrder.BUY_TIME = #{buyTime,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="hasprom != null and hasprom !=''" >
+	        	and saleOrder.HASPROM = #{hasprom,jdbcType=CHAR}
+	      </if>
+	      <if test="timestamp != null and timestamp !=''" >
+	        	and saleOrder.TIMESTAMP = #{timestamp,jdbcType=VARCHAR}
+	      </if>
+	      <if test="rtnMoney != null" >
+	        	and saleOrder.RTN_MONEY = #{rtnMoney,jdbcType=DECIMAL}
+	      </if>
+	      <if test="createBy != null" >
+	        	and saleOrder.CREATE_BY = #{createBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="createDate != null" >
+	        	and saleOrder.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="modifyBy != null" >
+	        	and saleOrder.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+	      </if>
+	      <if test="modifyDate != null" >
+	        	and saleOrder.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="remark1 != null and remark1 !=''" >
+	        	and saleOrder.REMARK1 = #{remark1,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark2 != null and remark2 !=''" >
+	        	and saleOrder.REMARK2 = #{remark2,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark3 != null and remark3 !=''" >
+	        	and saleOrder.REMARK3 = #{remark3,jdbcType=VARCHAR}
+	      </if>
+	      <if test="remark4 != null and remark4 !=''" >
+	        	and saleOrder.REMARK4 = #{remark4,jdbcType=VARCHAR}
+	      </if>
+	      <if test="exceptionStatus != null and exceptionStatus !=''" >
+	      		and saleOrder.EXCEPTION_STATUS = #{exceptionStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="modified != null and modified !=''" >
+	        	and saleOrder.MODIFIED = #{modified,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="sendStatus != null and sendStatus !=''" >
+	        	and saleOrder.SEND_STATUS = #{sendStatus,jdbcType=VARCHAR}
+	      </if>
+	      <if test="startTime != null ">
+				and saleOrder.BUY_TIME &gt;= #{startTime,jdbcType=TIMESTAMP}
+			</if>
+	      <if test="endTime != null ">
+				and saleOrder.BUY_TIME &lt;= #{endTime,jdbcType=TIMESTAMP}
+			</if>
+	       <if test="exceptionStatusArr != null  and exceptionStatusArr.length!=0" >
+	        	and saleOrder.EXCEPTION_STATUS in
+                <foreach collection="exceptionStatusArr" item="exceptionStatus"
+                    index="index" open="(" close=")" separator=",">
+                    #{exceptionStatus}
+                </foreach>
+	      </if>
+	  </where>
+	</sql>
+  
+    <select id="selectOrderListCount" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" resultType="int">
+  		select
+		count(1)
+		from dh_sales_order saleOrder
+		<include refid="whereFields"></include>
+    </select>
+  
+    <select id="selectOrderListGrid" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List1" />
+		,shop.`NAME` as shopName,shop.`NICKNAME` as sellerNick,express.`NAME` as expressName,print.name as printTemplateName
+		from dh_sales_order saleOrder LEFT JOIN dh_shop shop on saleOrder.shop_id=shop.id
+									  LEFT JOIN dh_dms_express express on saleOrder.EXPID = express.ID
+									  LEFT JOIN dh_print_template print on saleOrder.remark1 = print.ID
+		<include refid="whereFields"></include>
+	     order by saleOrder.id desc
+		limit #{offset},#{rows}
+    </select>
+    
+    <select id="selectOrderListByTid" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List1" />
+		from dh_sales_order saleOrder
+		where saleOrder.TOP_TIDS = #{topTids,jdbcType=VARCHAR}
+		 
+    </select>
+    
+     <select id="selectByOrderNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List1" />
+		from dh_sales_order saleOrder
+		where saleOrder.ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="selectByParam" parameterType="com.dinghao.entity.vo.template.business.order.SalesOrderVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List1" />
+		,shop.`NAME` as shopName,express.`NAME` as expressName ,warehouse.Warehouse_name as warehouseName,
+		warehouse.Warehouse_code as stockNo
+		from dh_sales_order saleOrder LEFT JOIN dh_shop shop on saleOrder.shop_id=shop.id
+									  LEFT JOIN dh_dms_express express on saleOrder.EXPID = express.ID
+									  LEFT JOIN dh_warehouse warehouse on saleOrder.STOCK_ID=warehouse.Id
+		<where>
+	        <if test="expcodeArr != null  and expcodeArr!= ''" >
+	        	and saleOrder.EXPCODE in
+                <foreach collection="expcodeArr" item="expcode"
+                    index="index" open="(" close=")" separator=",">
+                    #{expcode}
+                </foreach>
+	        </if>
+	        <if test="ids != null and ids != ''" >
+	        	and saleOrder.ID in
+                <foreach collection="ids" item="id"
+                    index="index" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
+	        </if>
+	        <if test="waveNo != null and waveNo != ''" >
+	        	and saleOrder.WAVE_NO = #{waveNo,jdbcType=INTEGER}
+	        </if>
+            <if test="expcode != null and expcode !=''" >
+	        	and saleOrder.EXPCODE = #{expcode,jdbcType=VARCHAR}
+	        </if>
+	    </where>
+    </select>
+</mapper>
