@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.financereceipt.FinanceTransferDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.financereceipt.FinanceTransfer">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="REC_NO" property="recNo" jdbcType="VARCHAR" />
+		<result column="BUSI_DATE" property="busiDate" jdbcType="TIMESTAMP" />
+		<result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+		<result column="REC_ACCOUNT" property="recAccount" jdbcType="VARCHAR" />
+		<result column="PAY_ACCOUNT" property="payAccount" jdbcType="VARCHAR" />
+		<result column="FINAL_TYPE" property="finalType" jdbcType="VARCHAR" />
+		<result column="pay_TYPE" property="payType" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+		<result column="poundage" property="poundage" jdbcType="DECIMAL" />
+		<result column="BUSI_PERSON" property="busiPerson" jdbcType="VARCHAR" />
+		<result column="PURPOSE" property="purpose" jdbcType="VARCHAR" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="Remarks" property="remarks" jdbcType="INTEGER" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+		<result column="Remarks2" property="remarks2" jdbcType="VARCHAR" />
+		<result column="rec_Account_BankNO" property="recAccountBankNO"
+			jdbcType="VARCHAR" />
+		<result column="pay_Account_BankNO" property="payAccountBankNO"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		zihan.ID, zihan.REC_NO, zihan.BUSI_DATE, zihan.CUST_ID,
+		zihan.REC_ACCOUNT,
+		zihan.PAY_ACCOUNT,
+		zihan.FINAL_TYPE, zihan.pay_TYPE,
+		zihan.AMOUNT, zihan.poundage, zihan.BUSI_PERSON,
+		zihan.PURPOSE,
+		zihan.MEMO, zihan.STATUS, zihan.CREATE_BY,
+		zihan.CREATE_DATE,
+		zihan.MODIFY_BY,
+		zihan.MODIFY_DATE, zihan.Remarks, zihan.Remarks1,
+		zihan.Remarks2,a.Bank_NO as
+		pay_Account_BankNO,
+		b.Bank_NO as
+		rec_Account_BankNO
+	</sql>
+	<sql id="Base_Column_List1">
+		zihan.ID, zihan.REC_NO, zihan.BUSI_DATE, zihan.CUST_ID,
+		zihan.REC_ACCOUNT,
+		zihan.PAY_ACCOUNT,
+		zihan.FINAL_TYPE, zihan.pay_TYPE,
+		zihan.AMOUNT, zihan.poundage, zihan.BUSI_PERSON,
+		zihan.PURPOSE,
+		zihan.MEMO, zihan.STATUS, zihan.CREATE_BY,
+		zihan.CREATE_DATE,
+		zihan.MODIFY_BY,
+		zihan.MODIFY_DATE, zihan.Remarks, zihan.Remarks1,
+		zihan.Remarks2
+	</sql>
+	<sql id="whereFields">
+		<where>
+			<if test="recNo != null">
+				and zihan.REC_NO = #{recNo,jdbcType=VARCHAR}
+			</if>
+			<if test="busiDate != null">
+				and zihan.BUSI_DATE = #{busiDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="custId != null">
+				and zihan.CUST_ID = #{custId,jdbcType=BIGINT}
+			</if>
+			<if test="recAccount != null">
+				and zihan.REC_ACCOUNT = #{recAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="payAccount != null">
+				and zihan.PAY_ACCOUNT = #{payAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="finalType != null">
+				and zihan.FINAL_TYPE = #{finalType,jdbcType=VARCHAR}
+			</if>
+			<if test="payType != null">
+				and zihan.pay_TYPE = #{payType,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				and zihan.AMOUNT = #{amount,jdbcType=DECIMAL}
+			</if>
+			<if test="poundage != null">
+				and zihan.poundage = #{poundage,jdbcType=DECIMAL}
+			</if>
+			<if test="busiPerson != null">
+				and zihan.BUSI_PERSON = #{busiPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="purpose != null">
+				and zihan.PURPOSE = #{purpose,jdbcType=VARCHAR}
+			</if>
+			<if test="memo != null">
+				and zihan.MEMO = #{memo,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null">
+				<![CDATA[ and zihan.CREATE_DATE >=
+				#{beginDate,jdbcType=BIGINT}]]>
+			</if>
+			<if test="endDate != null">
+				<![CDATA[ and zihan.CREATE_DATE <=
+				#{endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="status != null">
+				and zihan.STATUS = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="createBy != null">
+				and zihan.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="createDate != null">
+				and zihan.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and zihan.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and zihan.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remarks != null">
+				and zihan.Remarks = #{remarks,jdbcType=INTEGER}
+			</if>
+			<if test="remarks1 != null">
+				and zihan.Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks2 != null">
+				and zihan.Remarks2 = #{remarks2,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List1" />
+		from dh_finance_transfer zihan
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.financereceipt.FinanceTransferVo">
+		select
+		<include refid="Base_Column_List" />
+		FROM DH_FINANCE_TRANSFER ZIHAN
+		LEFT JOIN DH_FINANCE_ACCOUNT A ON
+		A.ID=ZIHAN.PAY_ACCOUNT
+		LEFT JOIN DH_FINANCE_ACCOUNT B ON
+		B.ID=ZIHAN.REC_ACCOUNT
+		<include refid="whereFields" />
+		ORDER BY ID DESC
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.financereceipt.FinanceTransferVo">
+		select count(1) from dh_finance_transfer zihan
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		dh_finance_transfer
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.dinghao.entity.vo.template.financereceipt.FinanceTransferVo">
+		insert into dh_finance_transfer (ID, REC_NO, BUSI_DATE,
+		CUST_ID, REC_ACCOUNT, PAY_ACCOUNT,
+		FINAL_TYPE, pay_TYPE, AMOUNT,
+		poundage, BUSI_PERSON, PURPOSE,
+		MEMO, STATUS, CREATE_BY,
+		CREATE_DATE,
+		MODIFY_BY, MODIFY_DATE,
+		Remarks, Remarks1, Remarks2
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{recNo,jdbcType=VARCHAR},
+		#{busiDate,jdbcType=TIMESTAMP},
+		#{custId,jdbcType=BIGINT},
+		#{recAccount,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR},
+		#{finalType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL},
+		#{poundage,jdbcType=DECIMAL},
+		#{busiPerson,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR},
+		#{memo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+		#{createBy,jdbcType=BIGINT},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP},
+		#{remarks,jdbcType=INTEGER}, #{remarks1,jdbcType=VARCHAR},
+		#{remarks2,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.financereceipt.FinanceTransferVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_finance_transfer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="recNo != null">
+				REC_NO,
+			</if>
+			<if test="busiDate != null">
+				BUSI_DATE,
+			</if>
+			<if test="custId != null">
+				CUST_ID,
+			</if>
+			<if test="recAccount != null">
+				REC_ACCOUNT,
+			</if>
+			<if test="payAccount != null">
+				PAY_ACCOUNT,
+			</if>
+			<if test="finalType != null">
+				FINAL_TYPE,
+			</if>
+			<if test="payType != null">
+				pay_TYPE,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="poundage != null">
+				poundage,
+			</if>
+			<if test="busiPerson != null">
+				BUSI_PERSON,
+			</if>
+			<if test="purpose != null">
+				PURPOSE,
+			</if>
+			<if test="memo != null">
+				MEMO,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+			<if test="remarks2 != null">
+				Remarks2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="recNo != null">
+				#{recNo,jdbcType=VARCHAR},
+			</if>
+			<if test="busiDate != null">
+				#{busiDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="custId != null">
+				#{custId,jdbcType=BIGINT},
+			</if>
+			<if test="recAccount != null">
+				#{recAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="payAccount != null">
+				#{payAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="finalType != null">
+				#{finalType,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="poundage != null">
+				#{poundage,jdbcType=DECIMAL},
+			</if>
+			<if test="busiPerson != null">
+				#{busiPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="purpose != null">
+				#{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=INTEGER},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				#{remarks2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.financereceipt.FinanceTransferVo">
+		update dh_finance_transfer
+		<set>
+			<if test="recNo != null">
+				REC_NO = #{recNo,jdbcType=VARCHAR},
+			</if>
+			<if test="busiDate != null">
+				BUSI_DATE = #{busiDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=BIGINT},
+			</if>
+			<if test="recAccount != null">
+				REC_ACCOUNT = #{recAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="payAccount != null">
+				PAY_ACCOUNT = #{payAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="finalType != null">
+				FINAL_TYPE = #{finalType,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				pay_TYPE = #{payType,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="poundage != null">
+				poundage = #{poundage,jdbcType=DECIMAL},
+			</if>
+			<if test="busiPerson != null">
+				BUSI_PERSON = #{busiPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="purpose != null">
+				PURPOSE = #{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=INTEGER},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+
+</mapper>

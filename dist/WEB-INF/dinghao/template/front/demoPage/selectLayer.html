@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>basic styles</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<link rel="stylesheet" type="text/css" href="../js/elem/select2-master/dist/css/select2.min.css">
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="../js/elem/select2-master/dist/js/select2.min.js"></script>
+<script src="../js/elem/layer-v2.1/layer/layer.js"></script>
+</head>
+<body>
+<div class="demo-con">
+    <h2>搜索控件</h2>
+    <p><a href="https://select2.github.io/" target="_blank">https://select2.github.io/</a></p>
+    <select class="js-example-basic-multiple2 u-ipt u-ipt-lg"></select>
+    <select class="js-example-basic-multiple u-ipt u-ipt-lg" multiple="multiple"></select>
+    <p>
+    <input id="warehouseName" width="200px">
+    <input id="warehouseId" type="hidden">
+    </p>
+    <p><br/></p>
+    <p><br/></p>
+    <h2>弹出层控件</h2>
+    <p><a href="http://layer.layui.com/" target="_blank">http://layer.layui.com/</a></p>
+    <p><button id="test1">小小提示层</button> 
+    	<button id="test2">弹出一个页面层</button> 
+         <button id="parentIframe">弹出一个iframe层</button>
+          <button id="test4">弹出一个loading层</button>
+          	<button id="test5">弹出一个tips层</button>
+     </p>
+    
+</div>
+<script type="text/javascript">
+	var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+	$(".js-example-basic-multiple").select2({
+		data:data	
+	});
+	$(".js-example-basic-multiple2").select2({
+		data:data	
+	});
+	
+	
+	//弹出一个提示层
+	$('#test1').on('click', function(){
+		layer.msg('Hello layer');
+	});
+	//弹出一个页面层
+	$('#test2').on('click', function(){
+		layer.open({
+			type: 1,
+			area: ['600px', '360px'],
+			shadeClose: true, //点击遮罩关闭
+			content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+		});
+	});
+	//弹出一个iframe层
+	$('#parentIframe').on('click', function(){
+		layer.open({
+			type: 2,
+			title: 'iframe父子操作',
+			maxmin: true,
+			shadeClose: true, //点击遮罩关闭层
+			area : ['800px' , '520px'],
+			content: 'http://www.baidu.com'
+		});
+	});
+	//弹出一个loading层
+	$('#test4').on('click', function(){
+		var ii = layer.load();
+		//此处用setTimeout演示ajax的回调
+		setTimeout(function(){
+			layer.close(ii);
+		}, 1000);
+	});
+	//弹出一个tips层
+	$('#test5').on('click', function(){
+		layer.tips('Hello tips!', '#test5');
+	});
+	
+	// 智能提示
+	$(function() {
+		$('#warehouseName').select2({
+			placeholder : "请输入仓库名",
+			minimumInputLength : 1,
+			multiple : false,
+			width: '200',
+			formatResult : function(result, container, query, escapeMarkup) { // 下拉框显示的值(待选区)
+				return result.warehouseName+"/"+result.address;
+			},
+			formatSelection : function(item) {// 选中后显示在文本框中的值
+				$('#warehouseId').val(item.id);
+				return item.warehouseName;
+			},
+			dropdownCssClass : "bigdrop", // apply css that makes the dropdown
+			// taller
+			escapeMarkup : function(m) {
+				return m;
+			},
+			ajax : {
+				url : "/custInfo/findCustInfoForGrid.jhtml",
+				delay: 250,
+				dataType : 'json',
+				data : function(term, page) {
+					return {
+						warehouseName : encodeURI(decodeURIComponent(term, true)),// 汉字处理方式
+						pageNum:1,//页码
+						rows:15,//数量
+						t: (new Date()).valueOf()
+					};
+				},
+				results : function(data, page) {
+					return {
+						results : data
+					};
+				}
+			},
+			allowClear: true//单选
+		});
+	});
+</script>
+</body>
+</html>

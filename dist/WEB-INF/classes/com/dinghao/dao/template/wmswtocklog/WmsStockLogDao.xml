@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.wmswtocklog.WmsStockLogDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.wmswtocklog.WmsStockLog">
+		<id column="Id" property="id" jdbcType="INTEGER" />
+		<result column="STOCK_ID" property="stockId" jdbcType="INTEGER" />
+		<result column="LOC_ID" property="locId" jdbcType="INTEGER" />
+		<result column="GDS_ID" property="gdsId" jdbcType="INTEGER" />
+		<result column="OldQty" property="oldqty" jdbcType="BIGINT" />
+		<result column="AddQty" property="addqty" jdbcType="BIGINT" />
+		<result column="NewQty" property="newqty" jdbcType="BIGINT" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="FROM_NO" property="fromNo" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		zihan.Id, zihan.STOCK_ID, zihan.LOC_ID, zihan.GDS_ID,
+		zihan.OldQty,
+		zihan.AddQty,
+		zihan.NewQty, zihan.TYPE, zihan.FROM_NO,
+		zihan.CREATE_BY, zihan.CREATE_DATE,
+		zihan.MODIFY_BY,
+		zihan.MODIFY_DATE
+	</sql>
+
+	<sql id="whereFields">
+		<where>
+			<if test="stockId != null">
+				and zihan.STOCK_ID = #{stockId,jdbcType=INTEGER}
+			</if>
+			<if test="locId != null">
+				and zihan.LOC_ID = #{locId,jdbcType=INTEGER}
+			</if>
+			<if test="gdsId != null">
+				and zihan.GDS_ID = #{gdsId,jdbcType=INTEGER}
+			</if>
+			<if test="oldqty != null">
+				and zihan.OldQty = #{oldqty,jdbcType=BIGINT}
+			</if>
+			<if test="addqty != null">
+				and zihan.AddQty = #{addqty,jdbcType=BIGINT}
+			</if>
+			<if test="newqty != null">
+				and zihan.NewQty = #{newqty,jdbcType=BIGINT}
+			</if>
+			<if test="type != null">
+				and zihan.TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="fromNo != null">
+				and zihan.FROM_NO = #{fromNo,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null">
+				and zihan.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="createDate != null">
+				and zihan.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and zihan.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and zihan.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_stocklog zihan
+		where Id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_stocklog zihan
+		<include refid="whereFields" />
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectByStatementByParam" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		select
+		<include refid="Base_Column_List" />
+		FROM DH_WMS_STOCKLOG ZIHAN
+		WHERE
+		ZIHAN.STOCK_ID
+		=#{stockId,jdbcType=INTEGER}
+		AND ZIHAN.LOC_ID
+		=#{locId,jdbcType=INTEGER}
+		AND ZIHAN.GDS_ID = #{gdsId,jdbcType=INTEGER}
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		select count(1) from dh_wms_stocklog zihan
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_wms_stocklog
+		where Id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		insert into dh_wms_stocklog (Id, STOCK_ID, LOC_ID,
+		GDS_ID, OldQty, AddQty,
+		NewQty, TYPE, FROM_NO,
+		CREATE_BY, CREATE_DATE,
+		MODIFY_BY,
+		MODIFY_DATE)
+		values (#{id,jdbcType=INTEGER},
+		#{stockId,jdbcType=INTEGER},
+		#{locId,jdbcType=INTEGER},
+		#{gdsId,jdbcType=INTEGER}, #{oldqty,jdbcType=BIGINT},
+		#{addqty,jdbcType=BIGINT},
+		#{newqty,jdbcType=BIGINT},
+		#{type,jdbcType=VARCHAR},
+		#{fromNo,jdbcType=VARCHAR},
+		#{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT},
+		#{modifyDate,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_wms_stocklog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="stockId != null">
+				STOCK_ID,
+			</if>
+			<if test="locId != null">
+				LOC_ID,
+			</if>
+			<if test="gdsId != null">
+				GDS_ID,
+			</if>
+			<if test="oldqty != null">
+				OldQty,
+			</if>
+			<if test="addqty != null">
+				AddQty,
+			</if>
+			<if test="newqty != null">
+				NewQty,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="fromNo != null">
+				FROM_NO,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="stockId != null">
+				#{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="locId != null">
+				#{locId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsId != null">
+				#{gdsId,jdbcType=INTEGER},
+			</if>
+			<if test="oldqty != null">
+				#{oldqty,jdbcType=BIGINT},
+			</if>
+			<if test="addqty != null">
+				#{addqty,jdbcType=BIGINT},
+			</if>
+			<if test="newqty != null">
+				#{newqty,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="fromNo != null">
+				#{fromNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		update dh_wms_stocklog
+		<set>
+			<if test="stockId != null">
+				STOCK_ID = #{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="locId != null">
+				LOC_ID = #{locId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsId != null">
+				GDS_ID = #{gdsId,jdbcType=INTEGER},
+			</if>
+			<if test="oldqty != null">
+				OldQty = #{oldqty,jdbcType=BIGINT},
+			</if>
+			<if test="addqty != null">
+				AddQty = #{addqty,jdbcType=BIGINT},
+			</if>
+			<if test="newqty != null">
+				NewQty = #{newqty,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="fromNo != null">
+				FROM_NO = #{fromNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateBySelective"
+		parameterType="com.dinghao.entity.vo.template.wmswtocklog.WmsStockLogVo">
+		update dh_wms_stocklog
+		<set>
+
+			<if test="oldqty != null">
+				OldQty = #{oldqty,jdbcType=BIGINT},
+			</if>
+			<if test="addqty != null">
+				AddQty = #{addqty,jdbcType=BIGINT},
+			</if>
+			<if test="newqty != null">
+				NewQty = #{newqty,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where STOCK_ID = #{stockId,jdbcType=BIGINT} and
+		LOC_ID =
+		#{locId,jdbcType=BIGINT} and
+		GDS_ID = #{gdsId,jdbcType=BIGINT}
+	</update>
+</mapper>

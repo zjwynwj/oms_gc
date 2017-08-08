@@ -13,7 +13,7 @@ CREATE TABLE `admin` (
   `adminId` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
   `name` varchar(50) DEFAULT NULL COMMENT '管理员名称',
   `password` varchar(32) DEFAULT NULL COMMENT '密码 MD5加密',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',·
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';

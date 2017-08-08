@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.base.ShopDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.base.Shop" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PLAN_TYPE" property="planType" jdbcType="VARCHAR" />
+    <result column="CID" property="cid" jdbcType="BIGINT" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="SELLER_ACCOUNT" property="sellerAccount" jdbcType="VARCHAR" />
+    <result column="SELLER_PWD" property="sellerPwd" jdbcType="VARCHAR" />
+    <result column="SELLER_NAME" property="sellerName" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="PROV_NAME" property="provName" jdbcType="VARCHAR" />
+    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+    <result column="COUNTY_NAME" property="countyName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+    <result column="BEACTIVE" property="beactive" jdbcType="BIT" />
+    <result column="EXPID" property="expid" jdbcType="INTEGER" />
+    <result column="PRINT_ID" property="printId" jdbcType="INTEGER" />
+    <result column="expName" property="expName" jdbcType="VARCHAR" />
+    
+    
+   <result column="WAREHOUSE_ID" property="warehouseId" jdbcType="INTEGER" />
+    <result column="APPKEY" property="appkey" jdbcType="VARCHAR" />
+    <result column="APPSECRET" property="appsecret" jdbcType="VARCHAR" />
+    <result column="SESSIONKEY" property="sessionkey" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+   <resultMap id="GridResultMap" type="com.dinghao.entity.template.base.Shop" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PLAN_TYPE" property="planType" jdbcType="VARCHAR" />
+    <result column="CID" property="cid" jdbcType="BIGINT" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="SELLER_ACCOUNT" property="sellerAccount" jdbcType="VARCHAR" />
+    <result column="SELLER_PWD" property="sellerPwd" jdbcType="VARCHAR" />
+    <result column="SELLER_NAME" property="sellerName" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+     <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+    <result column="BEACTIVE" property="beactive" jdbcType="BIT" />
+    <result column="EXPID" property="expid" jdbcType="INTEGER" />
+   <result column="WAREHOUSE_ID" property="warehouseId" jdbcType="INTEGER" />
+    <result column="APPKEY" property="appkey" jdbcType="VARCHAR" />
+    <result column="APPSECRET" property="appsecret" jdbcType="VARCHAR" />
+    <result column="SESSIONKEY" property="sessionkey" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CODE, NAME, PLAN_TYPE, CID, NICKNAME, SELLER_ACCOUNT, SELLER_PWD, SELLER_NAME, PHONE, 
+    MOBILE, PROV_NAME, CITY_NAME, COUNTY_NAME, ADDRESS, ZIPCODE, BEACTIVE, EXPID,PRINT_ID,WAREHOUSE_ID, APPKEY, 
+    APPSECRET, SESSIONKEY, MEMO, TIMESTAMP, create_by, create_date, modify_by, modify_date
+  </sql>
+  <sql id="Grid_Column_List" >
+    a.ID, a.CODE,a. NAME, a.PLAN_TYPE, a.CID, a.NICKNAME, a.SELLER_ACCOUNT, a.SELLER_PWD, a.SELLER_NAME, a.PHONE, 
+    a.MOBILE, concat_ws('-',a.PROV_NAME,a.CITY_NAME,a.COUNTY_NAME) AREA_NAME, a.ADDRESS, a.ZIPCODE,
+    a.BEACTIVE, a.EXPID,a.PRINT_ID, a.WAREHOUSE_ID,a.APPKEY, 
+    a.APPSECRET, a.SESSIONKEY, a.MEMO, a.TIMESTAMP, a.create_by, a.create_date, a.modify_by, a.modify_date,
+    b.name expName
+  </sql>
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and a.ID = #{id,jdbcType=BIGINT}
+		  </if>
+		 <if test="name != null ">
+				
+				and a.NAME like CONCAT('%',#{name},'%') 
+		  </if>
+		 <if test="planType != null ">
+				
+				and a.PLAN_TYPE =  #{planType,jdbcType=VARCHAR}
+		  </if>
+		  </where>
+</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_shop
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_shop
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.base.ShopVo" >
+    insert into dh_shop (ID, CODE, NAME, 
+      PLAN_TYPE, CID, NICKNAME, 
+      SELLER_ACCOUNT, SELLER_PWD, SELLER_NAME, 
+      PHONE, MOBILE, PROV_NAME, 
+      CITY_NAME, COUNTY_NAME, ADDRESS, 
+      ZIPCODE, BEACTIVE, EXPID,PRINT_ID, WAREHOUSE_ID,
+      APPKEY, APPSECRET, SESSIONKEY, 
+      MEMO, TIMESTAMP, create_by, 
+      create_date, modify_by, modify_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{planType,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, 
+      #{sellerAccount,jdbcType=VARCHAR}, #{sellerPwd,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{provName,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR}, #{countyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=VARCHAR}, #{beactive,jdbcType=BIT}, #{expid,jdbcType=INTEGER}, #{printId,jdbcType=INTEGER} , #{warehouseId,jdbcType=INTEGER}, 
+      #{appkey,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, #{sessionkey,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.base.ShopVo" >
+    insert into dh_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="planType != null" >
+        PLAN_TYPE,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="sellerAccount != null" >
+        SELLER_ACCOUNT,
+      </if>
+      <if test="sellerPwd != null" >
+        SELLER_PWD,
+      </if>
+      <if test="sellerName != null" >
+        SELLER_NAME,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="provName != null" >
+        PROV_NAME,
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME,
+      </if>
+      <if test="countyName != null" >
+        COUNTY_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE,
+      </if>
+      <if test="beactive != null" >
+        BEACTIVE,
+      </if>
+      <if test="expid != null" >
+        EXPID,
+      </if>
+    <if test="printId != null" >
+        PRINT_ID,
+      </if>
+      <if test="appkey != null" >
+        APPKEY,
+      </if>
+      <if test="appsecret != null" >
+        APPSECRET,
+      </if>
+      <if test="sessionkey != null" >
+        SESSIONKEY,
+      </if>
+      <if test="memo != null" >
+        MEMO,
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerAccount != null" >
+        #{sellerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPwd != null" >
+        #{sellerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="provName != null" >
+        #{provName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null" >
+        #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="beactive != null" >
+        #{beactive,jdbcType=BIT},
+      </if>
+      <if test="expid != null" >
+        #{expid,jdbcType=INTEGER},
+      </if>
+      <if test="appkey != null" >
+        #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionkey != null" >
+        #{sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.base.ShopVo" >
+    update dh_shop
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        PLAN_TYPE = #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerAccount != null" >
+        SELLER_ACCOUNT = #{sellerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPwd != null" >
+        SELLER_PWD = #{sellerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        SELLER_NAME = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="provName != null" >
+        PROV_NAME = #{provName,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME = #{cityName,jdbcType=INTEGER},
+      </if>
+      <if test="countyName != null" >
+        COUNTY_NAME = #{countyName,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="beactive != null" >
+        BEACTIVE = #{beactive,jdbcType=BIT},
+      </if>
+      <if test="expid != null" >
+        EXPID = #{expid,jdbcType=INTEGER},
+      </if>
+    <if test="printId != null" >
+        PRINT_ID = #{printId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null" >
+        WAREHOUSE_ID = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="appkey != null" >
+        APPKEY = #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        APPSECRET = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionkey != null" >
+        SESSIONKEY = #{sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        modify_by = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.base.ShopVo" >
+    update dh_shop
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      PLAN_TYPE = #{planType,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=BIGINT},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      SELLER_ACCOUNT = #{sellerAccount,jdbcType=VARCHAR},
+      SELLER_PWD = #{sellerPwd,jdbcType=VARCHAR},
+      SELLER_NAME = #{sellerName,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      PROV_NAME = #{provName,jdbcType=VARCHAR},
+      CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      COUNTY_NAME = #{countyName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      BEACTIVE = #{beactive,jdbcType=BIT},
+      EXPID = #{expid,jdbcType=INTEGER},
+     PRINT_ID = #{printId,jdbcType=INTEGER},
+      WAREHOUSE_ID = #{warehouseId,jdbcType=INTEGER},
+      APPKEY = #{appkey,jdbcType=VARCHAR},
+      APPSECRET = #{appsecret,jdbcType=VARCHAR},
+      SESSIONKEY = #{sessionkey,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=BIGINT},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+    
+   <select id="selectListPage" parameterType="com.dinghao.entity.vo.template.base.ShopVo" resultMap="GridResultMap">
+    	select
+		<include refid="Grid_Column_List" />
+		from dh_shop a
+		left join dh_dms_express b on a.expid = b.id 
+		<include refid="whereFields"></include>
+		limit #{offset},#{rows}
+  </select>
+</mapper>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.salesrtnorder.SalesRtnOrderItemDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.salesrtnorder.SalesRtnOrderItem">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="RTN_ID" property="rtnId" jdbcType="INTEGER" />
+		<result column="GDS_ID" property="gdsId" jdbcType="INTEGER" />
+		<result column="PRICE" property="price" jdbcType="DECIMAL" />
+		<result column="RTN_QTY" property="rtnQty" jdbcType="BIGINT" />
+		<result column="Point" property="point" jdbcType="BIGINT" />
+		<result column="ORIGINAL_PRICE" property="originalPrice"
+			jdbcType="DECIMAL" />
+		<result column="ISGIFT" property="isgift" jdbcType="BIT" />
+		<result column="RTN_TYPE" property="rtnType" jdbcType="INTEGER" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="ISDELETED" property="isdeleted" jdbcType="BIT" />
+		<result column="locid" property="locid" jdbcType="BIGINT" />
+		<result column="Warehouse_positions_code" property="warehousePositionsName"
+			jdbcType="VARCHAR" />
+		<result column="gdsShowInfo" property="gdsShowInfo" jdbcType="VARCHAR" />
+		<result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+		<result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+		<result column="GDS_FORMAT" property="gdsFormat" jdbcType="VARCHAR" />
+		<result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		zihan.ID, zihan.RTN_ID, zihan.GDS_ID, zihan.PRICE,
+		zihan.RTN_QTY, zihan.Point,
+		zihan.ORIGINAL_PRICE,
+		zihan.ISGIFT,
+		zihan.RTN_TYPE, zihan.MEMO, zihan.ISDELETED,zihan.locid
+	</sql>
+
+	<sql id="Base_Column_List1">
+		zihan.ID, zihan.RTN_ID, zihan.GDS_ID, zihan.PRICE,
+		zihan.RTN_QTY, zihan.Point,
+		zihan.ORIGINAL_PRICE,
+		zihan.ISGIFT,
+		zihan.RTN_TYPE, zihan.MEMO, zihan.ISDELETED,zihan.locid,
+		dh_warehouse_positions.Warehouse_positions_code ,
+		CONCAT(b.GDS_NO) as gdsShowInfo,
+		b.ATTBS,b.GDS_NAME,b.GDS_FORMAT,b.SKU_OUTER_ID
+	</sql>
+
+	<sql id="whereFields">
+		<where>
+			<if test="rtnId != null">
+				and zihan.RTN_ID = #{rtnId,jdbcType=INTEGER}
+			</if>
+			<if test="gdsId != null">
+				and zihan.GDS_ID = #{gdsId,jdbcType=INTEGER}
+			</if>
+			<if test="price != null">
+				and zihan.PRICE = #{price,jdbcType=DECIMAL}
+			</if>
+			<if test="rtnQty != null">
+				and zihan.RTN_QTY = #{rtnQty,jdbcType=BIGINT}
+			</if>
+			<if test="point != null">
+				and zihan.Point = #{point,jdbcType=BIGINT}
+			</if>
+			<if test="originalPrice != null">
+				and zihan.ORIGINAL_PRICE =
+				#{originalPrice,jdbcType=DECIMAL}
+			</if>
+			<if test="isgift != null">
+				and zihan.ISGIFT = #{isgift,jdbcType=BIT}
+			</if>
+			<if test="rtnType != null">
+				and zihan.RTN_TYPE = #{rtnType,jdbcType=INTEGER}
+			</if>
+			<if test="memo != null">
+				and zihan.MEMO = #{memo,jdbcType=VARCHAR}
+			</if>
+			<if test="isdeleted != null">
+				and zihan.ISDELETED = #{isdeleted,jdbcType=BIT}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from dh_sales_rtnorderitem zihan
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderItemVo">
+		select
+		<include refid="Base_Column_List1" />
+		from dh_sales_rtnorderitem zihan left join dh_warehouse_positions on
+		dh_warehouse_positions.id=zihan.locid
+		left join dh_gds_info b on b.id= zihan.gds_Id
+		<include refid="whereFields" />
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderItemVo">
+		select count(1) from dh_sales_rtnorderitem zihan
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_sales_rtnorderitem
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByRtnId" parameterType="java.lang.Long">
+		delete from
+		dh_sales_rtnorderitem
+		where RTN_ID = #{rtnId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderItemVo">
+		insert into dh_sales_rtnorderitem (ID, RTN_ID, GDS_ID,
+		PRICE, RTN_QTY, Point,
+		ORIGINAL_PRICE, ISGIFT, RTN_TYPE,
+		MEMO,
+		ISDELETED)
+		values (#{id,jdbcType=INTEGER}, #{rtnId,jdbcType=INTEGER},
+		#{gdsId,jdbcType=INTEGER},
+		#{price,jdbcType=DECIMAL},
+		#{rtnQty,jdbcType=BIGINT}, #{point,jdbcType=BIGINT},
+		#{originalPrice,jdbcType=DECIMAL}, #{isgift,jdbcType=BIT},
+		#{rtnType,jdbcType=INTEGER},
+		#{memo,jdbcType=VARCHAR},
+		#{isdeleted,jdbcType=BIT})
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderItemVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_sales_rtnorderitem
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="rtnId != null">
+				RTN_ID,
+			</if>
+			<if test="gdsId != null">
+				GDS_ID,
+			</if>
+			<if test="price != null">
+				PRICE,
+			</if>
+			<if test="rtnQty != null">
+				RTN_QTY,
+			</if>
+			<if test="point != null">
+				Point,
+			</if>
+			<if test="originalPrice != null">
+				ORIGINAL_PRICE,
+			</if>
+			<if test="isgift != null">
+				ISGIFT,
+			</if>
+			<if test="rtnType != null">
+				RTN_TYPE,
+			</if>
+			<if test="memo != null">
+				MEMO,
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED,
+			</if>
+			<if test="locid != null">
+				LOCID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="rtnId != null">
+				#{rtnId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsId != null">
+				#{gdsId,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="rtnQty != null">
+				#{rtnQty,jdbcType=BIGINT},
+			</if>
+			<if test="point != null">
+				#{point,jdbcType=BIGINT},
+			</if>
+			<if test="originalPrice != null">
+				#{originalPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="isgift != null">
+				#{isgift,jdbcType=BIT},
+			</if>
+			<if test="rtnType != null">
+				#{rtnType,jdbcType=INTEGER},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isdeleted != null">
+				#{isdeleted,jdbcType=BIT},
+			</if>
+			<if test="locid != null">
+				#{locid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.salesrtnorder.SalesRtnOrderItemVo">
+		update dh_sales_rtnorderitem
+		<set>
+			<if test="rtnId != null">
+				RTN_ID = #{rtnId,jdbcType=INTEGER},
+			</if>
+			<if test="gdsId != null">
+				GDS_ID = #{gdsId,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				PRICE = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="rtnQty != null">
+				RTN_QTY = #{rtnQty,jdbcType=BIGINT},
+			</if>
+			<if test="point != null">
+				Point = #{point,jdbcType=BIGINT},
+			</if>
+			<if test="originalPrice != null">
+				ORIGINAL_PRICE = #{originalPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="isgift != null">
+				ISGIFT = #{isgift,jdbcType=BIT},
+			</if>
+			<if test="rtnType != null">
+				RTN_TYPE = #{rtnType,jdbcType=INTEGER},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED = #{isdeleted,jdbcType=BIT},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

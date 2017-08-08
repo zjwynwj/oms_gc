@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.express.PrintTemplateDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.express.PrintTemplate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="logis_id" property="logisId" jdbcType="BIGINT" />
+    <result column="template_pic" property="templatePic" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="template_div_w" property="templateDivW" jdbcType="INTEGER" />
+    <result column="template_div_h" property="templateDivH" jdbcType="INTEGER" />
+    <result column="div_w" property="divW" jdbcType="INTEGER" />
+    <result column="div_h" property="divH" jdbcType="INTEGER" />
+    <result column="item_vals" property="itemVals" jdbcType="VARCHAR" />
+    <result column="prop_vals" property="propVals" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="default_flag" property="defaultFlag" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="logis_name" property="logisName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, logis_id, template_pic, NAME, template_div_w, template_div_h, div_w, div_h, item_vals, 
+    prop_vals, update_time, status, default_flag, type, logis_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_print_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_print_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" >
+    insert into dh_print_template (id, logis_id, template_pic, 
+      NAME, template_div_w, template_div_h, 
+      div_w, div_h, item_vals, 
+      prop_vals, update_time, status, 
+      default_flag, type, logis_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{logisId,jdbcType=BIGINT}, #{templatePic,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{templateDivW,jdbcType=INTEGER}, #{templateDivH,jdbcType=INTEGER}, 
+      #{divW,jdbcType=INTEGER}, #{divH,jdbcType=INTEGER}, #{itemVals,jdbcType=VARCHAR}, 
+      #{propVals,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, 
+      #{defaultFlag,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{logisName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" >
+    insert into dh_print_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logisId != null" >
+        logis_id,
+      </if>
+      <if test="templatePic != null" >
+        template_pic,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="templateDivW != null" >
+        template_div_w,
+      </if>
+      <if test="templateDivH != null" >
+        template_div_h,
+      </if>
+      <if test="divW != null" >
+        div_w,
+      </if>
+      <if test="divH != null" >
+        div_h,
+      </if>
+      <if test="itemVals != null" >
+        item_vals,
+      </if>
+      <if test="propVals != null" >
+        prop_vals,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="defaultFlag != null" >
+        default_flag,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="logisName != null" >
+        logis_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="logisId != null" >
+        #{logisId,jdbcType=BIGINT},
+      </if>
+      <if test="templatePic != null" >
+        #{templatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="templateDivW != null" >
+        #{templateDivW,jdbcType=INTEGER},
+      </if>
+      <if test="templateDivH != null" >
+        #{templateDivH,jdbcType=INTEGER},
+      </if>
+      <if test="divW != null" >
+        #{divW,jdbcType=INTEGER},
+      </if>
+      <if test="divH != null" >
+        #{divH,jdbcType=INTEGER},
+      </if>
+      <if test="itemVals != null" >
+        #{itemVals,jdbcType=VARCHAR},
+      </if>
+      <if test="propVals != null" >
+        #{propVals,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="defaultFlag != null" >
+        #{defaultFlag,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="logisName != null" >
+        #{logisName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" >
+    update dh_print_template
+    <set >
+      <if test="logisId != null" >
+        logis_id = #{logisId,jdbcType=BIGINT},
+      </if>
+      <if test="templatePic != null" >
+        template_pic = #{templatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="templateDivW != null" >
+        template_div_w = #{templateDivW,jdbcType=INTEGER},
+      </if>
+      <if test="templateDivH != null" >
+        template_div_h = #{templateDivH,jdbcType=INTEGER},
+      </if>
+      <if test="divW != null" >
+        div_w = #{divW,jdbcType=INTEGER},
+      </if>
+      <if test="divH != null" >
+        div_h = #{divH,jdbcType=INTEGER},
+      </if>
+      <if test="itemVals != null" >
+        item_vals = #{itemVals,jdbcType=VARCHAR},
+      </if>
+      <if test="propVals != null" >
+        prop_vals = #{propVals,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="defaultFlag != null" >
+        default_flag = #{defaultFlag,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="logisName != null" >
+        logis_name = #{logisName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" >
+    update dh_print_template
+    set logis_id = #{logisId,jdbcType=BIGINT},
+      template_pic = #{templatePic,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      template_div_w = #{templateDivW,jdbcType=INTEGER},
+      template_div_h = #{templateDivH,jdbcType=INTEGER},
+      div_w = #{divW,jdbcType=INTEGER},
+      div_h = #{divH,jdbcType=INTEGER},
+      item_vals = #{itemVals,jdbcType=VARCHAR},
+      prop_vals = #{propVals,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      default_flag = #{defaultFlag,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      logis_name = #{logisName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+			and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="logisId != null" >
+	        and logis_id = #{logisId,jdbcType=BIGINT}
+	      </if>
+	      <if test="templatePic != null" >
+	        and template_pic = #{templatePic,jdbcType=VARCHAR}
+	      </if>
+	      <if test="name != null" >
+	        and NAME = #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templateDivW != null" >
+	        and template_div_w = #{templateDivW,jdbcType=INTEGER}
+	      </if>
+	      <if test="templateDivH != null" >
+	        and template_div_h = #{templateDivH,jdbcType=INTEGER}
+	      </if>
+	      <if test="divW != null" >
+	        and div_w = #{divW,jdbcType=INTEGER}
+	      </if>
+	      <if test="divH != null" >
+	        and div_h = #{divH,jdbcType=INTEGER}
+	      </if>
+	      <if test="itemVals != null" >
+	        and item_vals = #{itemVals,jdbcType=VARCHAR}
+	      </if>
+	      <if test="propVals != null" >
+	        and prop_vals = #{propVals,jdbcType=VARCHAR}
+	      </if>
+	      <if test="updateTime != null" >
+	        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	      </if>
+	      <if test="status != null" >
+	        and status = #{status,jdbcType=CHAR}
+	      </if>
+	      <if test="defaultFlag != null" >
+	        and default_flag = #{defaultFlag,jdbcType=CHAR}
+	      </if>
+	      <if test="type != null" >
+	        and and type = #{type,jdbcType=CHAR}
+	      </if>
+	      <if test="logisName != null" >
+	        and logis_name = #{logisName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="keyWord != null" >
+	        and logis_name like CONCAT(CONCAT('%', #{keyWord}), '%')
+	      </if>
+	  </where>
+  </sql>
+  
+   <select id="selectPrintTemplateGridListCount" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" resultType="int">
+  		select
+		count(1)
+		from dh_print_template
+		<include refid="whereFields"></include>
+  </select>
+  
+   <select id="selectPrintTemplateGridListPage" parameterType="com.dinghao.entity.vo.template.business.express.PrintTemplateVo" resultMap="BaseResultMap">
+   	  select
+	  <include refid="Base_Column_List" />
+	  from dh_print_template
+	  <include refid="whereFields"></include>
+	  limit #{offset},#{rows}
+   </select>
+</mapper>

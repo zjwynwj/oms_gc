@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.base.BaseAreaDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.base.BaseArea" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PARENT_ID" property="parentId" jdbcType="BIGINT" />
+    <result column="TMALL_AREAID" property="tmallAreaid" jdbcType="BIGINT" />
+    <result column="TMALL_PARENTID" property="tmallParentid" jdbcType="BIGINT" />
+    <result column="REGION_NAME" property="regionName" jdbcType="VARCHAR" />
+    <result column="REGION_TYPE" property="regionType" jdbcType="INTEGER" />
+    <result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+    <result column="QUHAO" property="quhao" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, TMALL_AREAID, TMALL_PARENTID, REGION_NAME, REGION_TYPE, ZIPCODE, QUHAO, 
+    Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_base_area
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_base_area
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.base.BaseAreaVo" >
+    insert into dh_base_area (ID, PARENT_ID, TMALL_AREAID, 
+      TMALL_PARENTID, REGION_NAME, REGION_TYPE, 
+      ZIPCODE, QUHAO, Status)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{tmallAreaid,jdbcType=BIGINT}, 
+      #{tmallParentid,jdbcType=BIGINT}, #{regionName,jdbcType=VARCHAR}, #{regionType,jdbcType=INTEGER}, 
+      #{zipcode,jdbcType=VARCHAR}, #{quhao,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.base.BaseAreaVo" >
+    insert into dh_base_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="tmallAreaid != null" >
+        TMALL_AREAID,
+      </if>
+      <if test="tmallParentid != null" >
+        TMALL_PARENTID,
+      </if>
+      <if test="regionName != null" >
+        REGION_NAME,
+      </if>
+      <if test="regionType != null" >
+        REGION_TYPE,
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE,
+      </if>
+      <if test="quhao != null" >
+        QUHAO,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="tmallAreaid != null" >
+        #{tmallAreaid,jdbcType=BIGINT},
+      </if>
+      <if test="tmallParentid != null" >
+        #{tmallParentid,jdbcType=BIGINT},
+      </if>
+      <if test="regionName != null" >
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionType != null" >
+        #{regionType,jdbcType=INTEGER},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="quhao != null" >
+        #{quhao,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.base.BaseAreaVo" >
+    update dh_base_area
+    <set >
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="tmallAreaid != null" >
+        TMALL_AREAID = #{tmallAreaid,jdbcType=BIGINT},
+      </if>
+      <if test="tmallParentid != null" >
+        TMALL_PARENTID = #{tmallParentid,jdbcType=BIGINT},
+      </if>
+      <if test="regionName != null" >
+        REGION_NAME = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionType != null" >
+        REGION_TYPE = #{regionType,jdbcType=INTEGER},
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="quhao != null" >
+        QUHAO = #{quhao,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.base.BaseAreaVo" >
+    update dh_base_area
+    set PARENT_ID = #{parentId,jdbcType=BIGINT},
+      TMALL_AREAID = #{tmallAreaid,jdbcType=BIGINT},
+      TMALL_PARENTID = #{tmallParentid,jdbcType=BIGINT},
+      REGION_NAME = #{regionName,jdbcType=VARCHAR},
+      REGION_TYPE = #{regionType,jdbcType=INTEGER},
+      ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      QUHAO = #{quhao,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=BIT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		   <if test="parentId != null" >
+	        	and PARENT_ID = #{parentId,jdbcType=BIGINT}
+	      </if>
+	      <if test="tmallAreaid != null" >
+	        	and TMALL_AREAID = #{tmallAreaid,jdbcType=BIGINT}
+	      </if>
+	      <if test="tmallParentid != null" >
+	        	and TMALL_PARENTID = #{tmallParentid,jdbcType=BIGINT}
+	      </if>
+	      <if test="regionName != null" >
+	        	and REGION_NAME = #{regionName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="regionType != null" >
+	        	and REGION_TYPE = #{regionType,jdbcType=INTEGER}
+	      </if>
+	      <if test="zipcode != null" >
+	        	and ZIPCODE = #{zipcode,jdbcType=VARCHAR}
+	      </if>
+	      <if test="quhao != null" >
+	        	and QUHAO = #{quhao,jdbcType=VARCHAR}
+	      </if>
+	      <if test="status != null" >
+	        	and Status = #{status,jdbcType=BIT}
+	      </if>
+		</where>
+	</sql>
+	
+	<select id="selectAreaIdByParam" parameterType="com.dinghao.entity.vo.template.base.BaseAreaVo" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from dh_base_area
+	    <include refid="whereFields"></include>
+	</select>
+</mapper>

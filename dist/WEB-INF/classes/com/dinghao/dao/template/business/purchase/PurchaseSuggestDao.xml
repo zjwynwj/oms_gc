@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.purchase.PurchaseSuggestDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.purchase.PurchaseSuggest" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="SUGGEST_NO" property="suggestNo" jdbcType="VARCHAR" />
+    <result column="BUSI_DATE" property="busiDate" jdbcType="TIMESTAMP" />
+    <result column="PLAN_DATE" property="planDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="BUSI_PERSON" property="busiPerson" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dinghao.entity.template.business.purchase.PurchaseSuggest" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+   <resultMap id="ResultMapWithGRID" type="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" extends="BaseResultMap" >
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SUGGEST_NO, BUSI_DATE, PLAN_DATE, STATUS, BUSI_PERSON, AMOUNT, CREATE_BY, CREATE_DATE, 
+    MODIFY_BY, MODIFY_DATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dh_pur_suggest
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+ 
+  <select id="getPurSuggestByNo" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dh_pur_suggest
+    where SUGGEST_NO = #{SUGGEST_NO,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_pur_suggest
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" >
+    insert into dh_pur_suggest (ID, SUGGEST_NO, BUSI_DATE, 
+      PLAN_DATE, STATUS, BUSI_PERSON, 
+      AMOUNT, CREATE_BY, CREATE_DATE, 
+      MODIFY_BY, MODIFY_DATE, REMARK
+      )
+    values (#{id,jdbcType=BIGINT}, #{suggestNo,jdbcType=VARCHAR}, #{busiDate,jdbcType=TIMESTAMP}, 
+      #{planDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{busiPerson,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" 
+  keyProperty="id">
+     insert into dh_pur_suggest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="suggestNo != null and suggestNo != '' " >
+        SUGGEST_NO,
+      </if>
+      <if test="busiDate != null" >
+        BUSI_DATE,
+      </if>
+      <if test="planDate != null" >
+        PLAN_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="busiPerson != null" >
+        BUSI_PERSON,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="suggestNo != null" >
+        #{suggestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="busiDate != null" >
+        #{busiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planDate != null" >
+        #{planDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="busiPerson != null" >
+        #{busiPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" >
+    update dh_pur_suggest
+    <set >
+      <if test="suggestNo != null" >
+        SUGGEST_NO = #{suggestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="busiDate != null" >
+        BUSI_DATE = #{busiDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planDate != null" >
+        PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="busiPerson != null" >
+        BUSI_PERSON = #{busiPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" >
+      update dh_pur_suggest
+    set SUGGEST_NO = #{suggestNo,jdbcType=VARCHAR},
+      BUSI_DATE = #{busiDate,jdbcType=TIMESTAMP},
+      PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      BUSI_PERSON = #{busiPerson,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" >
+   update dh_pur_suggest
+    set SUGGEST_NO = #{suggestNo,jdbcType=VARCHAR},
+      BUSI_DATE = #{busiDate,jdbcType=TIMESTAMP},
+      PLAN_DATE = #{planDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      BUSI_PERSON = #{busiPerson,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+		<where>
+			<if test="id != null and id >0">
+				and a.ID = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="suggestNo != null and suggestNo != ''">
+				and a.SUGGEST_NO = #{suggestNo,jdbcType=VARCHAR}
+			</if>
+			<if test="busiDate1 != null ">
+				and a.BUSI_DATE &gt;= #{busiDate1,jdbcType=VARCHAR}
+			</if>
+			<if test="busiDate2 != null ">
+				and a.BUSI_DATE &lt;= #{busiDate2,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="createDate != null">
+				and a.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createBy != null">
+				and a.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and a.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and a.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			  
+		</where>
+	</sql>
+	
+	
+   <select id="selectList" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" resultMap="ResultMapWithGRID">
+    select 
+    a.ID, a.SUGGEST_NO, a.BUSI_DATE, a.PLAN_DATE, a.STATUS, a.BUSI_PERSON, a.AMOUNT, 
+    a.CREATE_BY, a.CREATE_DATE,      a.MODIFY_BY, a.MODIFY_DATE   ,
+    b.username AS USER_NAME 
+    from dh_pur_suggest a 
+     left join dh_admin b on a.BUSI_PERSON = b.id
+    <include refid="whereFields" />
+    
+     order by a.id desc
+    limit #{offset},#{rows}
+  </select>
+   
+  <select id="findMaxNo" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo" resultType="java.lang.String">
+    select   MAX(SUGGEST_NO) as SUGGEST_NO   from dh_pur_suggest 	where SUGGEST_NO = #{suggestNo,jdbcType=VARCHAR}
+  </select>
+   
+   
+   <select id="selectCountBySuggestNo" parameterType="java.lang.String" resultType="int">
+	  	select
+		count(1)
+		from dh_pur_suggest
+		where SUGGEST_NO = #{suggestNo}
+	 </select>
+	 
+	 
+	  <select id="selectListCount" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestVo"  resultType="int">
+       select 
+        count(1)
+      from dh_pur_suggest  a
+        <include refid="whereFields" />
+    
+  
+       </select>
+</mapper>

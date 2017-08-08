@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.purchase.PurSuggestGoodsDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.purchase.PurSuggestGoods" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="SUGGEST_ID" property="suggestId" jdbcType="BIGINT" />
+    <result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+    <result column="NUM" property="num" jdbcType="DECIMAL" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="BIGINT" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="ATTBS" property="attbs" jdbcType="VARCHAR" />
+   <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+   <result column="GDS_FORMAT" property="gdsFormat" jdbcType="VARCHAR" />
+   <result column="GDS_NO" property="gdsNo" jdbcType="VARCHAR" />
+   <result column="SKU_OUTER_ID" property="skuOuterId" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SUGGEST_ID, GDS_ID, NUM, PRICE, SUPPLIER_ID, STATUS, CREATE_BY, CREATE_DATE, 
+    MODIFY_BY, MODIFY_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+     select 
+     a.ID, a.SUGGEST_ID, a.GDS_ID, a.NUM, a.PRICE, a.SUPPLIER_ID, a.STATUS,
+      a.CREATE_BY, a.CREATE_DATE,  a.MODIFY_BY, a.MODIFY_DATE,
+      CONCAT(b.GDS_NO,' ',IFNULL(b.GDS_NAME,''),' ',IFNULL(b.GDS_FORMAT,'')) as gdsShowInfo, b.ATTBS,
+      c.CUST_NAME supplierName
+    from dh_pur_suggest_goods a
+      LEFT JOIN dh_gds_info b on a.GDS_ID=b.ID
+       LEFT JOIN dh_custinfo c on a.SUPPLIER_ID= c.ID   
+    where a.ID = #{id,jdbcType=BIGINT}
+ 
+  </select>
+  
+   <select id="selectBySuggestId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+     a.ID, a.SUGGEST_ID, a.GDS_ID, a.NUM, a.PRICE, a.SUPPLIER_ID, a.STATUS,
+      a.CREATE_BY, a.CREATE_DATE,  a.MODIFY_BY, a.MODIFY_DATE,
+      CONCAT(b.GDS_NO) as gdsShowInfo,
+       b.ATTBS,b.SKU_OUTER_ID,b.GDS_NO,b.GDS_NAME,b.GDS_FORMAT,
+      c.CUST_NAME supplierName
+    from dh_pur_suggest_goods a
+      LEFT JOIN dh_gds_info b on a.GDS_ID=b.ID
+       LEFT JOIN dh_custinfo c on a.SUPPLIER_ID= c.ID   
+    where SUGGEST_ID = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_pur_suggest_goods
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestGoodsVo" >
+    insert into dh_pur_suggest_goods (ID, SUGGEST_ID, GDS_ID, 
+      NUM, PRICE, SUPPLIER_ID, 
+      STATUS, CREATE_BY, CREATE_DATE, 
+      MODIFY_BY, MODIFY_DATE)
+    values (#{id,jdbcType=BIGINT}, #{suggestId,jdbcType=BIGINT}, #{gdsId,jdbcType=BIGINT}, 
+      #{num,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{supplierId,jdbcType=BIGINT}, 
+      #{status,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestGoodsVo" >
+    insert into dh_pur_suggest_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="suggestId != null" >
+        SUGGEST_ID,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="suggestId != null" >
+        #{suggestId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestGoodsVo" >
+    update dh_pur_suggest_goods
+    <set >
+      <if test="suggestId != null" >
+        SUGGEST_ID = #{suggestId,jdbcType=BIGINT},
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID = #{gdsId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.purchase.PurSuggestGoodsVo" >
+    update dh_pur_suggest_goods
+    set SUGGEST_ID = #{suggestId,jdbcType=BIGINT},
+      GDS_ID = #{gdsId,jdbcType=BIGINT},
+      NUM = #{num,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      SUPPLIER_ID = #{supplierId,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

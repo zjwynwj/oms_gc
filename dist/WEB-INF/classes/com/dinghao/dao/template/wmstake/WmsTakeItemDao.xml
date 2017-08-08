@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.wmstake.WmsTakeItemDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.wmstake.WmsTakeItem">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="GDS_ID" property="gdsId" jdbcType="BIGINT" />
+		<result column="LOC_ID" property="locId" jdbcType="BIGINT" />
+		<result column="STOCK_ID" property="stockId" jdbcType="INTEGER" />
+		<result column="TAKE_ID" property="takeId" jdbcType="BIGINT" />
+		<result column="SYS_QTY" property="sysQty" jdbcType="INTEGER" />
+		<result column="COUNT_QTY" property="countQty" jdbcType="INTEGER" />
+		<result column="DIFF_QTY" property="diffQty" jdbcType="INTEGER" />
+		<result column="SCAN_QTY" property="scanQty" jdbcType="INTEGER" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="BIT" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+		<result column="Remarks2" property="remarks2" jdbcType="VARCHAR" />
+		<result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_Date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="Modify_By" property="modifyBy" jdbcType="BIGINT" />
+		<result column="Create_By" property="createBy" jdbcType="BIGINT" />
+		<result column="gds_No" property="gdsNo" jdbcType="VARCHAR" />
+		<result column="gds_Name" property="gdsName" jdbcType="VARCHAR" />
+		<result column="gds_Format" property="gdsFormat" jdbcType="VARCHAR" />
+		<result column="gds_Pact" property="gdsPact" jdbcType="VARCHAR" />
+		<result column="attbs" property="attbs" jdbcType="VARCHAR" />
+		<result column="cal" property="cal" jdbcType="VARCHAR" />
+		<result column="Warehouse_positions_code" property="warehousePositionsName"
+			jdbcType="VARCHAR" />
+		<result column="is_locked" property="isLocked" jdbcType="BIT" />
+		<result column="locked_people" property="lockedPeople"
+			jdbcType="BIGINT" />
+		<result column="Locked_date" property="lockedDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		dh_wms_takeitem.id, dh_wms_takeitem.GDS_ID,
+		dh_wms_takeitem.LOC_ID,
+		dh_wms_takeitem.TAKE_ID,dh_wms_takeitem.SYS_QTY,
+		dh_wms_takeitem.COUNT_QTY,
+		dh_wms_takeitem.DIFF_QTY,dh_wms_takeitem.SCAN_QTY,
+		dh_wms_takeitem.MEMO,dh_wms_takeitem.IS_DELETED,dh_wms_takeitem.Remarks,
+		dh_wms_takeitem.Remarks1, dh_wms_takeitem.Remarks2,
+		dh_wms_takeitem.Create_Date, dh_wms_takeitem.Modify_Date,
+		dh_wms_takeitem.Modify_By,
+		dh_wms_takeitem.Create_By,dh_gds_info.GDS_NO ,dh_gds_info.gds_Name
+		,dh_gds_info.gds_Name ,dh_gds_info.gds_Format ,
+		dh_gds_info.attbs
+		,dh_gds_info.cal,dh_warehouse_positions.Warehouse_positions_code,
+		dh_wms_takeitem.is_locked, dh_wms_takeitem.locked_people,
+		dh_wms_takeitem.Locked_date,dh_admin.name
+	</sql>
+	<sql id="Base_Column_List1">
+		dh_wms_takeitem.id, dh_wms_takeitem.GDS_ID,
+		dh_wms_takeitem.LOC_ID,
+		dh_wms_takeitem.TAKE_ID,dh_wms_takeitem.SYS_QTY,
+		dh_wms_takeitem.COUNT_QTY,
+		dh_wms_takeitem.DIFF_QTY,dh_wms_takeitem.SCAN_QTY,
+		dh_wms_takeitem.MEMO,dh_wms_takeitem.IS_DELETED,dh_wms_takeitem.Remarks,
+		dh_wms_takeitem.Remarks1, dh_wms_takeitem.Remarks2,
+		dh_wms_takeitem.Create_Date, dh_wms_takeitem.Modify_Date,
+		dh_wms_takeitem.Modify_By,
+		dh_wms_takeitem.Create_By,dh_gds_info.GDS_NO ,dh_gds_info.gds_Name
+		,dh_gds_info.gds_Name ,dh_gds_info.gds_Format ,
+		dh_gds_info.attbs
+		,dh_gds_info.cal,dh_warehouse_positions.Warehouse_positions_code,
+		dh_wms_takeitem.is_locked, dh_wms_takeitem.locked_people,
+		dh_wms_takeitem.Locked_date,dh_admin.name,dh_wms_take.STOCK_ID
+	</sql>
+	<sql id="whereFields">
+		<where>
+			<if test="gdsPact != null">
+				and ( dh_gds_info.GDS_PACT = #{gdsPact,jdbcType=VARCHAR}
+				or dh_gds_info.GDS_NO = #{gdsPact,jdbcType=VARCHAR} )
+			</if>
+			<if test="gdsId != null">
+				and GDS_ID = #{gdsId,jdbcType=BIGINT}
+			</if>
+			<if test="locId != null">
+				and LOC_ID = #{locId,jdbcType=BIGINT}
+			</if>
+			<if test="takeId != null">
+				and TAKE_ID = #{takeId,jdbcType=BIGINT}
+			</if>
+			<if test="sysQty != null">
+				and SYS_QTY = #{sysQty,jdbcType=INTEGER}
+			</if>
+			<if test="countQty != null">
+				and COUNT_QTY = #{countQty,jdbcType=INTEGER}
+			</if>
+			<if test="diffQty != null">
+				and DIFF_QTY = #{diffQty,jdbcType=INTEGER}
+			</if>
+			<if test="memo != null">
+				and MEMO = #{memo,jdbcType=VARCHAR}
+			</if>
+			<if test="isDeleted != null">
+				and IS_DELETED = #{isDeleted,jdbcType=BIT}
+			</if>
+			<if test="remarks != null">
+				and Remarks = #{remarks,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks1 != null">
+				and Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks2 != null">
+				and Remarks2 = #{remarks2,jdbcType=VARCHAR}
+			</if>
+			<if test="createDate != null">
+				and Create_Date = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyDate != null">
+				and Modify_Date = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and Modify_By = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="createBy != null">
+				and Create_By = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="isLocked != null">
+				and is_locked = #{isLocked,jdbcType=BIT}
+			</if>
+			<if test="lockedPeople != null">
+				and locked_people = #{lockedPeople,jdbcType=BIGINT}
+			</if>
+			<if test="lockedDate != null">
+				and Locked_date = #{lockedDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_takeitem
+		left join dh_gds_info on
+		dh_gds_info.id=dh_wms_takeitem.gds_Id
+		left join dh_warehouse_positions on
+		dh_warehouse_positions.id=dh_wms_takeitem.loc_Id
+		left join dh_admin on
+		dh_admin.id=dh_wms_takeitem.locked_People
+		where dh_wms_takeitem.id =
+		#{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getDiffItemlistByTakeid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List1" />
+		FROM DH_WMS_TAKEITEM
+		LEFT JOIN DH_GDS_INFO ON
+		DH_GDS_INFO.ID=DH_WMS_TAKEITEM.GDS_ID
+		LEFT JOIN DH_WAREHOUSE_POSITIONS ON
+		DH_WAREHOUSE_POSITIONS.ID=DH_WMS_TAKEITEM.LOC_ID
+		LEFT JOIN DH_ADMIN ON
+		DH_ADMIN.ID=DH_WMS_TAKEITEM.LOCKED_PEOPLE
+		LEFT JOIN DH_WMS_TAKE ON
+		DH_WMS_TAKE.ID=DH_WMS_TAKEITEM.TAKE_ID
+		WHERE DH_WMS_TAKEITEM.TAKE_ID =
+		#{takeId,jdbcType=BIGINT}
+		AND DIFF_QTY != 0
+	</select>
+
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_takeitem left join dh_gds_info on
+		dh_gds_info.id=dh_wms_takeitem.gds_Id
+		left join dh_warehouse_positions
+		on dh_warehouse_positions.id=dh_wms_takeitem.loc_Id
+		left join dh_admin
+		on dh_admin.id=dh_wms_takeitem.locked_People
+		<include refid="whereFields" />
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo">
+		select count(1) from dh_wms_takeitem
+		inner join dh_gds_info on dh_gds_info.id=dh_wms_takeitem.gds_Id
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		dh_wms_takeitem
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<delete id="delteWmsTakeItemByTag" parameterType="java.lang.Long">
+		update
+		dh_wms_takeitem set is_Deleted=b'0'
+		where take_Id =
+		#{wmsTakeId,jdbcType=BIGINT}
+	</delete>
+	<delete id="delteWmsTakeItemById" parameterType="java.lang.Long">
+		update
+		dh_wms_takeitem set is_Deleted=b'0'
+		where id =
+		#{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo">
+		insert into dh_wms_takeitem (id, GDS_ID, LOC_ID,
+		TAKE_ID, SYS_QTY, COUNT_QTY,
+		DIFF_QTY,SCAN_QTY,
+		MEMO, IS_DELETED,
+		Remarks,
+		Remarks1, Remarks2,
+		Create_Date, Modify_Date,
+		Modify_By,
+		Create_By)
+		values (#{id,jdbcType=BIGINT},
+		#{gdsId,jdbcType=BIGINT},
+		#{locId,jdbcType=BIGINT},
+		#{takeId,jdbcType=BIGINT},
+		#{sysQty,jdbcType=INTEGER},
+		#{countQty,jdbcType=INTEGER},
+		#{diffQty,jdbcType=INTEGER},
+		#{scanQty,jdbcType=INTEGER},
+		#{memo,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=BIT},
+		#{remarks,jdbcType=VARCHAR},
+		#{remarks1,jdbcType=VARCHAR}, #{remarks2,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT},
+		#{createBy,jdbcType=BIGINT},#{isLocked,jdbcType=BIT},
+		#{lockedPeople,jdbcType=BIGINT},
+		#{lockedDate,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_wms_takeitem
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gdsId != null">
+				GDS_ID,
+			</if>
+			<if test="locId != null">
+				LOC_ID,
+			</if>
+			<if test="takeId != null">
+				TAKE_ID,
+			</if>
+			<if test="sysQty != null">
+				SYS_QTY,
+			</if>
+			<if test="countQty != null">
+				COUNT_QTY,
+			</if>
+			<if test="diffQty != null">
+				DIFF_QTY,
+			</if>
+			<if test="scanQty != null">
+				SCAN_QTY,
+			</if>
+			<if test="memo != null">
+				MEMO,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+			<if test="remarks2 != null">
+				Remarks2,
+			</if>
+			<if test="createDate != null">
+				Create_Date,
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date,
+			</if>
+			<if test="modifyBy != null">
+				Modify_By,
+			</if>
+			<if test="createBy != null">
+				Create_By,
+			</if>
+			<if test="isLocked != null">
+				is_locked,
+			</if>
+			<if test="lockedPeople != null">
+				locked_people,
+			</if>
+			<if test="lockedDate != null">
+				Locked_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gdsId != null">
+				#{gdsId,jdbcType=BIGINT},
+			</if>
+			<if test="locId != null">
+				#{locId,jdbcType=BIGINT},
+			</if>
+			<if test="takeId != null">
+				#{takeId,jdbcType=BIGINT},
+			</if>
+			<if test="sysQty != null">
+				#{sysQty,jdbcType=INTEGER},
+			</if>
+			<if test="countQty != null">
+				#{countQty,jdbcType=INTEGER},
+			</if>
+			<if test="diffQty != null">
+				#{diffQty,jdbcType=INTEGER},
+			</if>
+			<if test="scanQty != null">
+				#{scanQty,jdbcType=INTEGER},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				#{remarks2,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="isLocked != null">
+				#{isLocked,jdbcType=BIT},
+			</if>
+			<if test="lockedPeople != null">
+				#{lockedPeople,jdbcType=BIGINT},
+			</if>
+			<if test="lockedDate != null">
+				#{lockedDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo">
+		update dh_wms_takeitem
+		<set>
+			<if test="gdsId != null">
+				GDS_ID = #{gdsId,jdbcType=BIGINT},
+			</if>
+			<if test="locId != null">
+				LOC_ID = #{locId,jdbcType=BIGINT},
+			</if>
+			<if test="takeId != null">
+				TAKE_ID = #{takeId,jdbcType=BIGINT},
+			</if>
+			<if test="sysQty != null">
+				SYS_QTY = #{sysQty,jdbcType=INTEGER},
+			</if>
+			<if test="countQty != null">
+				COUNT_QTY = #{countQty,jdbcType=INTEGER},
+			</if>
+			<if test="diffQty != null">
+				DIFF_QTY = #{diffQty,jdbcType=INTEGER},
+			</if>
+			<if test="scanQty != null">
+				SCAN_QTY = #{scanQty,jdbcType=INTEGER},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				Create_Date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				Modify_By = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				Create_By = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="isLocked != null">
+				is_locked = #{isLocked,jdbcType=BIT},
+			</if>
+			<if test="lockedPeople != null">
+				locked_people = #{lockedPeople,jdbcType=BIGINT},
+			</if>
+			<if test="lockedDate != null">
+				Locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 锁定明细表 -->
+	<update id="updateBySelective"
+		parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeItemVo">
+		update dh_wms_takeitem
+		<set>
+			<if test="gdsId != null">
+				GDS_ID = #{gdsId,jdbcType=BIGINT},
+			</if>
+			<if test="locId != null">
+				LOC_ID = #{locId,jdbcType=BIGINT},
+			</if>
+			<if test="takeId != null">
+				TAKE_ID = #{takeId,jdbcType=BIGINT},
+			</if>
+			<if test="sysQty != null">
+				SYS_QTY = #{sysQty,jdbcType=INTEGER},
+			</if>
+			<if test="countQty != null">
+				COUNT_QTY = #{countQty,jdbcType=INTEGER},
+			</if>
+			<if test="diffQty != null">
+				DIFF_QTY = #{diffQty,jdbcType=INTEGER},
+			</if>
+			<if test="scanQty != null">
+				SCAN_QTY = #{scanQty,jdbcType=INTEGER},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				Create_Date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				Modify_Date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				Modify_By = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="createBy != null">
+				Create_By = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="isLocked != null">
+				is_locked = #{isLocked,jdbcType=BIT},
+			</if>
+			<if test="lockedPeople != null">
+				locked_people = #{lockedPeople,jdbcType=BIGINT},
+			</if>
+			<if test="lockedDate != null">
+				Locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where TAKE_ID = #{takeId,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateSysQty" parameterType="java.lang.Long">
+		UPDATE dh_wms_takeitem
+		INNER JOIN dh_wms_locstock
+		ON dh_wms_takeitem.GDS_ID = dh_wms_locstock.GDS_ID AND
+		dh_wms_takeitem.LOC_ID = dh_wms_locstock.LOC_ID
+		SET dh_wms_takeitem.SYS_QTY = dh_wms_locstock.TOTAL_QTY
+		WHERE dh_wms_takeitem.TAKE_ID = #{wmsTakeId,jdbcType=BIGINT}
+
+
+	</update>
+
+</mapper>

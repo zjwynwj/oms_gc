@@ -8,13 +8,13 @@ import java.util.Locale;
 
 public class DateUtil {
 	/**
-	 * ¸ñÊ½»¯ÈÕÆÚ
+	 * æ ¼å¼åŒ–æ—¥æœŸ
 	 * 
 	 * @param dateStr
-	 *            ×Ö·ûĞÍÈÕÆÚ
+	 *            å­—ç¬¦å‹æ—¥æœŸ
 	 * @param format
-	 *            ¸ñÊ½
-	 * @return ·µ»ØÈÕÆÚ
+	 *            æ ¼å¼
+	 * @return è¿”å›æ—¥æœŸ
 	 */
 
 	public static java.util.Date parseDate(java.sql.Date date) {
@@ -28,19 +28,19 @@ public class DateUtil {
 			return null;
 	}
 	/**
-	 * µÃµ½µ±ÌìµÄÊ±¼ä¡£Áè³¿¿ªÊ¼
+	 * å¾—åˆ°å½“å¤©çš„æ—¶é—´ã€‚å‡Œæ™¨å¼€å§‹
 	 */
 	public static String getToday(){
 		return format(new Date(), "yyyy-MM-dd")+" 00:00:00";
 	}
 	/**
-	 * ¸ñÊ½»¯Êä³öÈÕÆÚ
+	 * æ ¼å¼åŒ–è¾“å‡ºæ—¥æœŸ
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
+	 *            æ—¥æœŸ
 	 * @param format
-	 *            ¸ñÊ½
-	 * @return ·µ»Ø×Ö·ûĞÍÈÕÆÚ
+	 *            æ ¼å¼
+	 * @return è¿”å›å­—ç¬¦å‹æ—¥æœŸ
 	 */
 	public static String format(java.util.Date date, String stly) {
 	    Locale locale =null;
@@ -71,11 +71,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØÄê·İ
+	 * è¿”å›å¹´ä»½
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØÄê·İ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›å¹´ä»½
 	 */
 	public static int getYear(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -84,11 +84,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØÔÂ·İ
+	 * è¿”å›æœˆä»½
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØÔÂ·İ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›æœˆä»½
 	 */
 	public static int getMonth(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -97,11 +97,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØÈÕ·İ
+	 * è¿”å›æ—¥ä»½
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØÈÕ·İ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›æ—¥ä»½
 	 */
 	public static int getDay(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -110,11 +110,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØĞ¡Ê±
+	 * è¿”å›å°æ—¶
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØĞ¡Ê±
+	 *            æ—¥æœŸ
+	 * @return è¿”å›å°æ—¶
 	 */
 	public static int getHour(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -123,10 +123,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»Ø·ÖÖÓ
+	 * è¿”å›åˆ†é’Ÿ
 	 * @param date
-	 * ÈÕÆÚ
-	 * @return ·µ»Ø·ÖÖÓ
+	 * æ—¥æœŸ
+	 * @return è¿”å›åˆ†é’Ÿ
 	 */
 	public static int getMinute(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -135,11 +135,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØÃëÖÓ
+	 * è¿”å›ç§’é’Ÿ
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØÃëÖÓ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›ç§’é’Ÿ
 	 */
 	public static int getSecond(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -148,11 +148,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»ØºÁÃë
+	 * è¿”å›æ¯«ç§’
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»ØºÁÃë
+	 *            æ—¥æœŸ
+	 * @return è¿”å›æ¯«ç§’
 	 */
 	public static long getMillis(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -161,22 +161,22 @@ public class DateUtil {
 	}
 
 	/**
-	 * ·µ»Ø×Ö·ûĞÍÈÕÆÚ
+	 * è¿”å›å­—ç¬¦å‹æ—¥æœŸ
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»Ø×Ö·ûĞÍÈÕÆÚ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›å­—ç¬¦å‹æ—¥æœŸ
 	 */
 	public static String getDate(java.util.Date date) {
 		return format(date, "yyyy-MM-dd");
 	}
 
 	/**
-	 * ·µ»Ø×Ö·ûĞÍÊ±¼ä
+	 * è¿”å›å­—ç¬¦å‹æ—¶é—´
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
-	 * @return ·µ»Ø×Ö·ûĞÍÊ±¼ä
+	 *            æ—¥æœŸ
+	 * @return è¿”å›å­—ç¬¦å‹æ—¶é—´
 	 */
 	public static String getTime(java.util.Date date) {
 		return format(date, "HH:mm:ss");
@@ -187,13 +187,13 @@ public class DateUtil {
 
 
 	/**
-	 * ÈÕÆÚÏà¼Ó
+	 * æ—¥æœŸç›¸åŠ 
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
+	 *            æ—¥æœŸ
 	 * @param day
-	 *            ÌìÊı
-	 * @return ·µ»ØÏà¼ÓºóµÄÈÕÆÚ
+	 *            å¤©æ•°
+	 * @return è¿”å›ç›¸åŠ åçš„æ—¥æœŸ
 	 */
 	public static java.util.Date addDate(java.util.Date date, int day) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -202,20 +202,20 @@ public class DateUtil {
 	}
 
 	/**
-	 * ÈÕÆÚÏà¼õ
+	 * æ—¥æœŸç›¸å‡
 	 * 
 	 * @param date
-	 *            ÈÕÆÚ
+	 *            æ—¥æœŸ
 	 * @param date1
-	 *            ÈÕÆÚ
-	 * @return ·µ»Ødate - date1 Ïà¼õºóµÄÈÕÆÚ
+	 *            æ—¥æœŸ
+	 * @return è¿”å›date - date1 ç›¸å‡åçš„æ—¥æœŸ
 	 */
 	public static int diffDate(java.util.Date date, java.util.Date date1) {
 		return (int) ((getMillis(date) - getMillis(date1)) / (24 * 3600 * 1000));
 	}
 	
 	/**
-	 * ÅĞ¶ÏÈÕÆÚÊÇ·ñ±ÈÏÖÔÚ¿¿ºó
+	 * åˆ¤æ–­æ—¥æœŸæ˜¯å¦æ¯”ç°åœ¨é å
 	 * @param date
 	 * @return
 	 */
@@ -230,7 +230,7 @@ public class DateUtil {
 	
 	
 	/**
-	 * ·µ»ØÈÕÆÚÓë½ñÌìÏà²îµÄÌìÊı today-datestr
+	 * è¿”å›æ—¥æœŸä¸ä»Šå¤©ç›¸å·®çš„å¤©æ•° today-datestr
 	 * @param today
 	 * @param datestr
 	 * @return
@@ -241,11 +241,11 @@ public class DateUtil {
 	}
 	/**
 	 * 
-	 * @param datestr Ê±¼ä×ÜÃëÊı
+	 * @param datestr æ—¶é—´æ€»ç§’æ•°
 	 * @return
 	 */
 	public static Long diffDateBySecond(String datestr){
-        //·¢²¼Ê±¼äÓëµ±Ç°Ê±¼äÏà²îÌìÊı
+        //å‘å¸ƒæ—¶é—´ä¸å½“å‰æ—¶é—´ç›¸å·®å¤©æ•°
 		return (DateUtil.getMillis(new Date())/1000 - Long.parseLong(datestr)) / (24 * 3600);
 	}
 	public static boolean isSameDay(java.util.Date date, java.util.Date date1) {
@@ -285,7 +285,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°Äê·İ <br>
+	 * è·å–å½“å‰å¹´ä»½ <br>
 	 * @param @return   
 	 * @return String
 	 * @throws
@@ -295,7 +295,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÔÂ·İ <br>
+	 * è·å–å½“å‰æœˆä»½ <br>
 	 * @param @return   
 	 * @return String
 	 * @throws
@@ -305,7 +305,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÈÕÆÚ <br>
+	 * è·å–å½“å‰æ—¥æœŸ <br>
 	 * @param @return   
 	 * @return String
 	 */
@@ -314,9 +314,9 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÈÕÆÚ¡£ <br>
-	 * @param format ¸ñÊ½(±ÈÈç£ºyyyyMMdd yyyy/MM/dd HH:MM:ss)
-	 * @return String - ·µ»Øµ±Ç°ÈÕÆÚ
+	 * è·å–å½“å‰æ—¥æœŸã€‚ <br>
+	 * @param format æ ¼å¼(æ¯”å¦‚ï¼šyyyyMMdd yyyy/MM/dd HH:MM:ss)
+	 * @return String - è¿”å›å½“å‰æ—¥æœŸ
 	 */
 	public static String getFormatCurTime(String format) {
 		SimpleDateFormat dataFormat = new SimpleDateFormat(format);
@@ -327,7 +327,7 @@ public class DateUtil {
 	
 	/**
 	  * @Title: getCurrentTimeMillis
-	  * @Description: »ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä´Á
+	  * @Description: è·å–å½“å‰ç³»ç»Ÿæ—¶é—´æˆ³
 	  * @param @return
 	  * @return long
 	  * @throws
@@ -337,8 +337,8 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÈÕÆÚ¡£ <br>¸ñÊ½ yyyyMMdd
-	 * @return String - ·µ»Øµ±Ç°ÈÕÆÚ
+	 * è·å–å½“å‰æ—¥æœŸã€‚ <br>æ ¼å¼ yyyyMMdd
+	 * @return String - è¿”å›å½“å‰æ—¥æœŸ
 	 */
 	public static String getCurDate() {
 		return DateUtil.getFormatCurTime("yyyyMMdd");

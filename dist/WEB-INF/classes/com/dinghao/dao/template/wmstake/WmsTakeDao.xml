@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.wmstake.WmsTakeDao">
+	<resultMap id="BaseResultMap" type="com.dinghao.entity.template.wmstake.WmsTake">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TAKE_NO" property="takeNo" jdbcType="VARCHAR" />
+		<result column="STOCK_ID" property="stockId" jdbcType="INTEGER" />
+		<result column="STATUS" property="status" jdbcType="BIT" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="BUSI_PERSON" property="busiPerson" jdbcType="BIT" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="TIMESTAMP" property="timestamp" jdbcType="TIMESTAMP" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="BIT" />
+		<result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="BIGINT" />
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="TAKE_Name" property="takeName" jdbcType="VARCHAR" />
+		<result column="warehouse_Name" property="warehouseName"
+			jdbcType="VARCHAR" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="Remarks1" property="remarks1" jdbcType="VARCHAR" />
+		<result column="Remarks2" property="remarks2" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		dh_wms_take.ID, dh_wms_take.TAKE_NO, dh_wms_take.STOCK_ID,
+		dh_wms_take.STATUS,
+		dh_wms_take.START_TIME, dh_wms_take.BUSI_PERSON,
+		dh_wms_take.END_TIME, dh_wms_take.MEMO,
+		dh_wms_take.TIMESTAMP,dh_wms_take.IS_DELETED,
+		dh_wms_take.CREATE_BY,dh_wms_take.CREATE_DATE,
+		dh_wms_take.MODIFY_BY,
+		dh_wms_take.MODIFY_DATE, dh_wms_take.TAKE_Name, dh_wms_take.Remarks,
+		dh_wms_take.Remarks1, dh_warehouse.warehouse_Name,
+		dh_wms_take.Remarks2
+	</sql>
+
+
+	<sql id="whereFields">
+		<where>
+			<if test="takeNo != null">
+				and dh_wms_take.TAKE_NO like
+				CONCAT('%',#{takeNo,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="stockId != null">
+				and dh_wms_take.STOCK_ID = #{stockId,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and dh_wms_take.STATUS = #{status,jdbcType=BIT}
+			</if>
+			<if test="startTime != null">
+        		and dh_wms_take.START_TIME = #{startTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="beginDate != null">
+        		<![CDATA[and dh_wms_take.create_Date >= #{beginDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="endDate != null">
+        		<![CDATA[and dh_wms_take.create_Date <= #{endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="busiPerson != null">
+				and dh_wms_take.BUSI_PERSON = #{busiPerson,jdbcType=BIT}
+			</if>
+			<if test="endTime != null">
+				and dh_wms_take.END_TIME = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="memo != null">
+				and dh_wms_take.MEMO = #{memo,jdbcType=VARCHAR}
+			</if>
+			<if test="timestamp != null">
+				and dh_wms_take.TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isDeleted != null">
+				and dh_wms_take.IS_DELETED = #{isDeleted,jdbcType=BIT}
+			</if>
+			<if test="createBy != null">
+				and dh_wms_take.CREATE_BY = #{createBy,jdbcType=BIGINT}
+			</if>
+			<if test="createDate != null">
+				and dh_wms_take.CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyBy != null">
+				and dh_wms_take.MODIFY_BY = #{modifyBy,jdbcType=BIGINT}
+			</if>
+			<if test="modifyDate != null">
+				and dh_wms_take.MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="takeName != null">
+				and dh_wms_take.TAKE_Name = #{takeName,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks != null">
+				and dh_wms_take.Remarks = #{remarks,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks1 != null">
+				and dh_wms_take.Remarks1 = #{remarks1,jdbcType=VARCHAR}
+			</if>
+			<if test="remarks2 != null">
+				and dh_wms_take.Remarks2 = #{remarks2,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_take left join dh_warehouse on dh_warehouse.id=dh_wms_take.STOCK_ID
+		where dh_wms_take.ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByStatement" resultMap="BaseResultMap"
+		parameterType="com.dinghao.entity.template.wmstake.WmsTake">
+		select
+		<include refid="Base_Column_List" />
+		from dh_wms_take left join dh_warehouse on
+		dh_wms_take.stock_Id=dh_warehouse.id
+		<include refid="whereFields" /> order by id desc
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.template.wmstake.WmsTake">
+		select count(1) from dh_wms_take
+		<include refid="whereFields" />
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		dh_wms_take
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<!--标记删除 -->
+	<update id="delteWmsTakeByTag" parameterType="java.lang.Integer">
+		update dh_wms_take
+		set IS_DELETED=b'0' where id=#{id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="insert" parameterType="com.dinghao.entity.template.wmstake.WmsTake">
+		insert into dh_wms_take (ID,
+		TAKE_NO, STOCK_ID,
+		STATUS, START_TIME, BUSI_PERSON,
+		END_TIME, MEMO,
+		TIMESTAMP,
+		IS_DELETED, CREATE_BY, CREATE_DATE,
+		MODIFY_BY, MODIFY_DATE,
+		TAKE_Name,
+		Remarks, Remarks1, Remarks2
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{takeNo,jdbcType=VARCHAR},
+		#{stockId,jdbcType=INTEGER},
+		#{status,jdbcType=BIT}, #{startTime,jdbcType=TIMESTAMP},
+		#{busiPerson,jdbcType=BIT},
+		#{endTime,jdbcType=TIMESTAMP},
+		#{memo,jdbcType=VARCHAR},
+		#{timestamp,jdbcType=TIMESTAMP},
+		#{isDeleted,jdbcType=BIT}, #{createBy,jdbcType=BIGINT},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{modifyBy,jdbcType=BIGINT},
+		#{modifyDate,jdbcType=TIMESTAMP},
+		#{takeName,jdbcType=VARCHAR},
+		#{remarks,jdbcType=VARCHAR}, #{remarks1,jdbcType=VARCHAR},
+		#{remarks2,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.wmstake.WmsTakeVo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into dh_wms_take
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="takeNo != null">
+				TAKE_NO,
+			</if>
+			<if test="stockId != null">
+				STOCK_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="startTime != null">
+				START_TIME,
+			</if>
+			<if test="busiPerson != null">
+				BUSI_PERSON,
+			</if>
+			<if test="endTime != null">
+				END_TIME,
+			</if>
+			<if test="memo != null">
+				MEMO,
+			</if>
+			<if test="timestamp != null">
+				TIMESTAMP,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+			<if test="takeName != null">
+				TAKE_Name,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="remarks1 != null">
+				Remarks1,
+			</if>
+			<if test="remarks2 != null">
+				Remarks2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="takeNo != null">
+				#{takeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="stockId != null">
+				#{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=BIT},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="busiPerson != null">
+				#{busiPerson,jdbcType=BIT},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				#{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="takeName != null">
+				#{takeName,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				#{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				#{remarks2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.template.wmstake.WmsTake">
+		update dh_wms_take
+		<set>
+			<if test="takeNo != null">
+				TAKE_NO = #{takeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="stockId != null">
+				STOCK_ID = #{stockId,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=BIT},
+			</if>
+			<if test="startTime != null">
+				START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="busiPerson != null">
+				BUSI_PERSON = #{busiPerson,jdbcType=BIT},
+			</if>
+			<if test="endTime != null">
+				END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="memo != null">
+				MEMO = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="timestamp != null">
+				TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="takeName != null">
+				TAKE_Name = #{takeName,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks1 != null">
+				Remarks1 = #{remarks1,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks2 != null">
+				Remarks2 = #{remarks2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

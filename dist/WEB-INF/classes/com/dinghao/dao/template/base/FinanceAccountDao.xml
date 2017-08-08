@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dinghao.dao.template.base.FinanceAccountDao">
+	<resultMap id="BaseResultMap"
+		type="com.dinghao.entity.template.base.FinanceAccount">
+		<id column="ID" jdbcType="BIGINT" property="id" />
+		<result column="USER_ID" jdbcType="BIGINT" property="userId" />
+		<result column="TYPE" jdbcType="VARCHAR" property="type" />
+		<result column="BANK_NAME" jdbcType="VARCHAR" property="bankName" />
+		<result column="BANK_NO" jdbcType="VARCHAR" property="bankNo" />
+		<result column="BANK_ACCOUNT" jdbcType="VARCHAR" property="bankAccount" />
+		<result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="ISDEFAULT" jdbcType="INTEGER" property="isdefault" />
+		<result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="MODIFY_BY" jdbcType="BIGINT" property="modifyBy" />
+		<result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, TYPE, BANK_NAME, BANK_NO, BANK_ACCOUNT, AMOUNT, STATUS,
+		ISDEFAULT, CREATE_BY,
+		CREATE_DATE, MODIFY_BY, MODIFY_DATE
+	</sql>
+
+	<sql id="whereFields">
+		<where>
+			<if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="userId != null and userId >0">
+				and user_Id = #{userId,jdbcType=BIGINT}
+			</if>
+			<if test="bankNo != null">
+				and BANK_NO like CONCAT('%',#{bankNo},'%')
+			</if>
+
+		</where>
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dh_finance_account
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from dh_finance_account
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.base.FinanceAccountVo">
+		update dh_finance_account
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="bankName != null">
+				BANK_NAME = #{bankName,jdbcType=VARCHAR},
+			</if>
+			<if test="bankNo != null">
+				BANK_NO = #{bankNo,jdbcType=VARCHAR},
+			</if>
+			<if test="bankAccount != null">
+				BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="isdefault != null">
+				ISDEFAULT = #{isdefault,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=BIGINT},
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dinghao.entity.template.base.FinanceAccount">
+		update dh_finance_account
+		set USER_ID = #{userId,jdbcType=BIGINT},
+		TYPE = #{type,jdbcType=VARCHAR},
+		BANK_NAME = #{bankName,jdbcType=VARCHAR},
+		BANK_NO = #{bankNo,jdbcType=VARCHAR},
+		BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+		AMOUNT = #{amount,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=INTEGER},
+		ISDEFAULT = #{isdefault,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+	<insert id="insert" parameterType="com.dinghao.entity.template.base.FinanceAccount">
+		insert into dh_finance_account (ID, USER_ID, TYPE,
+		BANK_NAME, BANK_NO, BANK_ACCOUNT,
+		AMOUNT, STATUS, ISDEFAULT,
+		CREATE_BY, CREATE_DATE, MODIFY_BY,
+		MODIFY_DATE)
+		values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{type,jdbcType=VARCHAR},
+		#{bankName,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER},
+		#{isdefault,jdbcType=INTEGER},
+		#{createBy,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT},
+		#{modifyDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dinghao.entity.template.base.FinanceAccount">
+		insert into dh_finance_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="bankName != null">
+				BANK_NAME,
+			</if>
+			<if test="bankNo != null">
+				BANK_NO,
+			</if>
+			<if test="bankAccount != null">
+				BANK_ACCOUNT,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isdefault != null">
+				ISDEFAULT,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY,
+			</if>
+			<if test="modifyDate != null">
+				MODIFY_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="bankName != null">
+				#{bankName,jdbcType=VARCHAR},
+			</if>
+			<if test="bankNo != null">
+				#{bankNo,jdbcType=VARCHAR},
+			</if>
+			<if test="bankAccount != null">
+				#{bankAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="isdefault != null">
+				#{isdefault,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="selectAccountListPage"
+		parameterType="com.dinghao.entity.vo.template.base.FinanceAccountVo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dh_finance_account
+		<include refid="whereFields"></include>
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectByStatementCount" resultType="int"
+		parameterType="com.dinghao.entity.vo.template.base.FinanceAccountVo">
+		select count(1) from dh_finance_account zihan
+		<include refid="whereFields" />
+	</select>
+
+</mapper>

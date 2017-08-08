@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinghao.dao.template.business.express.DmsExpressDao" >
+  <resultMap id="BaseResultMap" type="com.dinghao.entity.template.business.express.DmsExpress" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="LINK_PHONE" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="LINK_MAN" property="linkMan" jdbcType="VARCHAR" />
+    <result column="ACTIVED" property="actived" jdbcType="CHAR" />
+    <result column="COMMON_ID" property="commonId" jdbcType="BIGINT" />
+    <result column="VIRTUAL_ID" property="virtualId" jdbcType="BIGINT" />
+    <result column="QUERY_URL" property="queryUrl" jdbcType="VARCHAR" />
+    <result column="EXPRESS_REG" property="expressReg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CODE, NAME, LINK_PHONE, LINK_MAN, ACTIVED, COMMON_ID, VIRTUAL_ID, QUERY_URL, 
+    EXPRESS_REG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dh_dms_express
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dh_dms_express
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" >
+    insert into dh_dms_express (ID, CODE, NAME, 
+      LINK_PHONE, LINK_MAN, ACTIVED, 
+      COMMON_ID, VIRTUAL_ID, QUERY_URL, 
+      EXPRESS_REG)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{linkPhone,jdbcType=VARCHAR}, #{linkMan,jdbcType=VARCHAR}, #{actived,jdbcType=CHAR}, 
+      #{commonId,jdbcType=BIGINT}, #{virtualId,jdbcType=BIGINT}, #{queryUrl,jdbcType=VARCHAR}, 
+      #{expressReg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" >
+    insert into dh_dms_express
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE,
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN,
+      </if>
+      <if test="actived != null" >
+        ACTIVED,
+      </if>
+      <if test="commonId != null" >
+        COMMON_ID,
+      </if>
+      <if test="virtualId != null" >
+        VIRTUAL_ID,
+      </if>
+      <if test="queryUrl != null" >
+        QUERY_URL,
+      </if>
+      <if test="expressReg != null" >
+        EXPRESS_REG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="actived != null" >
+        #{actived,jdbcType=CHAR},
+      </if>
+      <if test="commonId != null" >
+        #{commonId,jdbcType=BIGINT},
+      </if>
+      <if test="virtualId != null" >
+        #{virtualId,jdbcType=BIGINT},
+      </if>
+      <if test="queryUrl != null" >
+        #{queryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="expressReg != null" >
+        #{expressReg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" >
+    update dh_dms_express
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="actived != null" >
+        ACTIVED = #{actived,jdbcType=CHAR},
+      </if>
+      <if test="commonId != null" >
+        COMMON_ID = #{commonId,jdbcType=BIGINT},
+      </if>
+      <if test="virtualId != null" >
+        VIRTUAL_ID = #{virtualId,jdbcType=BIGINT},
+      </if>
+      <if test="queryUrl != null" >
+        QUERY_URL = #{queryUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="expressReg != null" >
+        EXPRESS_REG = #{expressReg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" >
+    update dh_dms_express
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      LINK_PHONE = #{linkPhone,jdbcType=VARCHAR},
+      LINK_MAN = #{linkMan,jdbcType=VARCHAR},
+      ACTIVED = #{actived,jdbcType=CHAR},
+      COMMON_ID = #{commonId,jdbcType=BIGINT},
+      VIRTUAL_ID = #{virtualId,jdbcType=BIGINT},
+      QUERY_URL = #{queryUrl,jdbcType=VARCHAR},
+      EXPRESS_REG = #{expressReg,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="whereFields">
+	  <where>
+		  <if test="id != null and id >0">
+				and ID = #{id,jdbcType=BIGINT}
+		  </if>
+		  <if test="code != null" >
+	        	and CODE = #{code,jdbcType=VARCHAR}
+	      </if>
+	      <if test="name != null" >
+	       	 	and NAME = #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="linkPhone != null" >
+	        	and LINK_PHONE = #{linkPhone,jdbcType=VARCHAR}
+	      </if>
+	      <if test="linkMan != null" >
+	        	and LINK_MAN = #{linkMan,jdbcType=VARCHAR}
+	      </if>
+	      <if test="actived != null" >
+	        	and ACTIVED = #{actived,jdbcType=CHAR}
+	      </if>
+	      <if test="commonId != null" >
+	        	and COMMON_ID = #{commonId,jdbcType=BIGINT}
+	      </if>
+	      <if test="virtualId != null" >
+	        	and VIRTUAL_ID = #{virtualId,jdbcType=BIGINT}
+	      </if>
+	      <if test="queryUrl != null" >
+	        	and QUERY_URL = #{queryUrl,jdbcType=VARCHAR}
+	      </if>
+	      <if test="expressReg != null" >
+	        	and EXPRESS_REG = #{expressReg,jdbcType=VARCHAR}
+	      </if>
+	      <if test="keyWord != null" >
+	        	and (NAME like CONCAT('%',#{keyWord},'%') )
+	      </if>
+	  </where>
+  </sql>
+  
+   <select id="selectExpressListCount" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" resultType="int">
+  		select
+		count(1)
+		from dh_dms_express
+		<include refid="whereFields"></include>
+    </select>
+  
+    <select id="selectExpressListGrid" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_dms_express
+		<include refid="whereFields"></include>
+		order by ACTIVED DESC
+		limit #{offset},#{rows}
+    </select>
+    
+    <select id="selectExpressList" parameterType="com.dinghao.entity.vo.template.business.express.DmsExpressVo" resultMap="BaseResultMap">
+    	select
+		<include refid="Base_Column_List" />
+		from dh_dms_express
+		<include refid="whereFields"></include>
+    </select>
+    
+</mapper>
