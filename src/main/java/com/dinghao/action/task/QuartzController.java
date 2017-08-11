@@ -6,6 +6,7 @@ import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,9 +35,10 @@ public class QuartzController {
 	 * @throws SchedulerException
 	 */
 	@RequestMapping(value="/listJob")
-	public String listJob(HttpServletRequest request,HttpServletResponse response) throws SchedulerException {
+	public String listJob(ModelMap modelMap,HttpServletRequest request, HttpServletResponse response) throws SchedulerException {
 		List<JobEntity> jobInfos = this.getSchedulerJobInfo();
 		request.setAttribute("jobInfos", jobInfos);
+		modelMap.put("jobInfos2", jobInfos);
 		return "quartz/listjob";
 	}
 	
