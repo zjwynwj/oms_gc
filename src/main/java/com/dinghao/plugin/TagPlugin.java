@@ -21,7 +21,7 @@ public abstract class TagPlugin extends ApplicationObjectSupport implements
 
 	private Logger logger = Logger.getLogger(this.getClass());
 
-	@Autowired
+	@Autowired(required=false)
 	protected HttpServletRequest request;
 
 	@Autowired

@@ -1,8 +1,11 @@
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
+import com.alibaba.fastjson.JSON;
+import com.dinghao.process.task.service.job.HelloJob;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
+
+import java.util.List;
+import java.util.Set;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -26,6 +29,8 @@ public class QuartzTest {
             scheduler.start();
 
             doSomthing(scheduler);
+
+            scheduler.getListenerManager();
             System.out.println("111");
             Thread.sleep(60000);
             scheduler.shutdown();

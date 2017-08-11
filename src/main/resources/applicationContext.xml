@@ -68,8 +68,8 @@
 			<mvc:exclude-mapping path="/login.jhtml"/>
 			<mvc:exclude-mapping path="/loginJson.jhtml"/>
 			<mvc:exclude-mapping path="/admin/captcha.jhtml"/>
-		 
-		    
+
+			<mvc:exclude-mapping path="/**/*.jsp"/>
 			<mvc:exclude-mapping path="/**/*.html"/>
 			<mvc:exclude-mapping path="/**/*.js"/>
 			<mvc:exclude-mapping path="/**/*.css"/>
