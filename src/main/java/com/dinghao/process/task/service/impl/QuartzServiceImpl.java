@@ -1,9 +1,14 @@
 package com.dinghao.process.task.service.impl;
 
 import com.dinghao.process.task.service.QuartzService;
+import com.dinghao.process.task.service.job.HelloJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 @Service("quartzService")
 public class QuartzServiceImpl implements QuartzService {
@@ -14,7 +19,12 @@ public class QuartzServiceImpl implements QuartzService {
     @Override
     public void addJob(String jobName, String jobGroupName, String triggerName,
                        String triggerGroupName, Class cls, String cron) {
+
+
         try {
+
+//            doSomthing(quartzScheduler);
+
             // 获取调度器
             Scheduler sched = quartzScheduler;
             // 创建一项作业
@@ -158,5 +168,23 @@ public class QuartzServiceImpl implements QuartzService {
         }
     }
 
+    private static void doSomthing(Scheduler scheduler) throws Exception {
 
+        // define the job and tie it to our HelloJob class
+        JobDetail job = newJob(HelloJob.class)
+                .withIdentity("job1", "group1")
+                .build();
+
+        // Trigger the job to run now, and then repeat every 40 seconds
+        Trigger trigger = newTrigger()
+                .withIdentity("trigger1", "group1")
+                .startNow()
+                .withSchedule(simpleSchedule()
+                        .withIntervalInSeconds(40)
+                        .repeatForever())
+                .build();
+
+        // Tell quartz to schedule the job using our trigger
+        scheduler.scheduleJob(job, trigger);
+    }
 }

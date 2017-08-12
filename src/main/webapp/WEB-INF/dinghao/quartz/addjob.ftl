@@ -1,8 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<#include "../template/front/header.ftl">
 <html>
   <head>
     
@@ -15,7 +12,7 @@
   </head>
   
   <body style="background: beige; margin: 300px 600px 200px;" >
-  <form action="${pageContext.request.contextPath }/quartz/add" method="post">
+  <form action="${BASE_PATH}/quartz/add" method="post">
   <span>新增Trigger</span>
 	<hr/>
    <table id="table_report" class="table table-striped table-bordered table-hover">
@@ -48,7 +45,6 @@
   </form>
   </body>
 </html>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 	$(".cancel").click(function(){

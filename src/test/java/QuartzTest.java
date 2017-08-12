@@ -44,12 +44,12 @@ public class QuartzTest {
 
         // define the job and tie it to our HelloJob class
         JobDetail job = newJob(HelloJob.class)
-                .withIdentity("job1", "group1")
+                .withIdentity("job2", "group2")
                 .build();
 
         // Trigger the job to run now, and then repeat every 40 seconds
         Trigger trigger = newTrigger()
-                .withIdentity("trigger1", "group1")
+                .withIdentity("trigger2", "group2")
                 .startNow()
                 .withSchedule(simpleSchedule()
                         .withIntervalInSeconds(40)
