@@ -6,6 +6,8 @@ import org.quartz.JobDataMap;
 
 public class JobEntity {
 
+    private String jobText;
+
     private int jobId;
 
     private String jobType;
@@ -45,6 +47,18 @@ public class JobEntity {
     private int count;
 
     private JobDataMap jobDataMap;
+
+
+//
+
+
+    public String getJobText() {
+        return jobText;
+    }
+
+    public void setJobText(String jobText) {
+        this.jobText = jobText;
+    }
 
     public int getJobId() {
         return jobId;

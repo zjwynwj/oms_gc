@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <#include "../template/front/header.ftl">
 
- <html>
+<html>
 <head>
     <title>任务列表</title>
     <meta http-equiv="pragma" content="no-cache">
@@ -46,22 +46,11 @@
     <thead>
     <tr>
         <!-- th class="center">序号</th-->
-        <th class="center">任务组名称</th>
-        <th class="center">定时任务名称</th>
-        <th class="center">触发器组名称</th>
-        <th class="center">触发器名称</th>
+        <th class="center">任务名</th>
         <th class="center">时间表达式</th>
-        <th class="center">上次运行时间</th>
-        <th class="center">下次运行时间</th>
+         <th class="center">下次运行时间</th>
         <th class="center">任务状态</th>
-         <th class="center">已经运行时间</th>
-         <th class="center">持续运行时间</th>
         <th class="center">开始时间</th>
-        <th class="center">结束时间</th>
-        <th class="center">任务类名</th>
-          <th class="center">方法名称</th>
-          <th class="center">jobObject</th>
-        <  <th class="center">运行次数</th>
         <th class="center" width="15%">操作</th>
     </tr>
     </thead>
@@ -69,27 +58,21 @@
     <#if (jobInfos?size>0)> <#list jobInfos as job>
 
     <tr>
-        <td class='center' style="width: auto;">${job.jobGroup}</td>
-        <td class='center' style="width: auto;">${job.jobName}</td>
-          <td class='center' style="width: auto;">${job.triggerGroupName}</td>
-        <td class='center' style="width: auto;">${job.triggerName}</td>
+        <td class='center' style="width: auto;">${job.jobText}</td>
         <td class='center' style="width: auto;">${job.cronExpr}</td>
-        <td class='center' style="width: auto;"> ${job.previousFireTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
-        <td class='center' style="width: auto;"> ${job.nextFireTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
+         <td class='center' style="width: auto;"> ${job.nextFireTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
         <td class='center' style="width: auto;">${job.jobStatus}</td>
-        <td class='center' style="width: auto;">${job.runTimes}</td>
-        <td class='center' style="width: auto;">${job.duration}</td>
         <td class='center' style="width: auto;">${job.startTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
-        <td class='center' style="width: auto;">${job.endTime} </td>
-        <td class='center' style="width: auto;">${job.jobClass}</td>
-          <td class='center' style="width: auto;">${job.jobMethod}</td>
-          <td class='center' style="width: auto;">${job.jobObject}</td>
-          <td class='center' style="width: auto;">${job.count}</td>
         <td class='center' style="width: auto;">
-            <a class="btn btn-minier btn-success" onclick="edit('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>编辑</a><br>
-            <a class="btn btn-minier btn-warning" onclick="pauseJob('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>暂停</a>
-            <a class="btn btn-minier btn-purple" onclick="resumeJob('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>恢复</a>
-            <a class="btn btn-minier btn-danger" onclick="deleteJob('${job.jobName}','${job.jobGroup}','${job.triggerName}','${job.triggerGroupName}');"><i class="icon-edit"></i>删除</a>
+            <a class="btn btn-minier btn-success" onclick="edit('${job.jobName}','${job.jobGroup}');"><i
+                    class="icon-edit"></i>编辑</a><br>
+            <a class="btn btn-minier btn-warning" onclick="pauseJob('${job.jobName}','${job.jobGroup}');"><i
+                    class="icon-edit"></i>暂停</a>
+            <a class="btn btn-minier btn-purple" onclick="resumeJob('${job.jobName}','${job.jobGroup}');"><i
+                    class="icon-edit"></i>恢复</a>
+            <a class="btn btn-minier btn-danger"
+               onclick="deleteJob('${job.jobName}','${job.jobGroup}','${job.triggerName}','${job.triggerGroupName}');"><i
+                    class="icon-edit"></i>删除</a>
         </td>
     </tr>
 
@@ -101,8 +84,9 @@
 <div style="width: 90%;margin: 0 auto;text-align: center;margin-top: 25px;">
     <button type="button" onclick="add();" class="btn">新增任务</button>
 </div>
- <script type="text/javascript">
+<script type="text/javascript">
     var url = "${BASE_PATH}";
+
     function add() {
         window.location.href = url + "/quartz/toAdd";
     }

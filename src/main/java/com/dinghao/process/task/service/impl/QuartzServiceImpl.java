@@ -23,8 +23,6 @@ public class QuartzServiceImpl implements QuartzService {
 
         try {
 
-//            doSomthing(quartzScheduler);
-
             // 获取调度器
             Scheduler sched = quartzScheduler;
             // 创建一项作业

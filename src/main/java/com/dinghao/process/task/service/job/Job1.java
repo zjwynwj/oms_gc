@@ -7,10 +7,13 @@ import org.quartz.JobExecutionException;
 
 import java.util.Date;
 
-public class HelloJob implements Job {
+/**
+ * 测试job任务
+ */
+public class Job1 implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("HelloJob doing something..."+ DateUtil.getDateTime(new Date()));
+        System.out.println("Job1 doing something..."+ DateUtil.getDateTime(new Date()));
     }
 }
 
