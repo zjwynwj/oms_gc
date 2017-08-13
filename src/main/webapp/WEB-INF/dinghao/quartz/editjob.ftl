@@ -1,8 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<#include "../template/front/header.ftl">
 <html>
   <head>
     <title>编辑任务</title>
@@ -14,7 +11,7 @@
   </head>
   
  <body style="background: beige; margin: 300px 600px 200px;" >
-  <form action="${pageContext.request.contextPath }/quartz/edit" method="post">
+  <form action="${BASE_PATH}/quartz/edit" method="post">
 	<input type="hidden" name="oldjobName" value="${pd.jobName}" >
 	<input type="hidden" name="oldjobGroup" value="${pd.jobGroup}" >
 	<input type="hidden" name="oldtriggerName" value="${pd.triggerName}" >
@@ -38,7 +35,6 @@
   </form>
   </body>
 </html>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 	$(".cancel").click(function(){

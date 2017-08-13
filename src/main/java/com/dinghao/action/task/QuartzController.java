@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+/**
+ * 定时任务控制层
+ * @author nwj
+ */
 @Controller
 @RequestMapping("quartz")
 public class QuartzController {
@@ -218,6 +222,7 @@ public class QuartzController {
 					jobInfo.setStartTime(trigger.getStartTime());
 					jobInfo.setEndTime(trigger.getEndTime());
 					jobInfo.setJobClass(jd.getJobClass().getCanonicalName());
+//					jobInfo.getRunTimes();
 					// jobInfo.setDuration(Long.parseLong(jd.getDescription()));
 					Trigger.TriggerState triggerState = quartzScheduler
 							.getTriggerState(trigger.getKey());

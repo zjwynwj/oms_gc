@@ -48,20 +48,20 @@
         <!-- th class="center">序号</th-->
         <th class="center">任务组名称</th>
         <th class="center">定时任务名称</th>
-        <!-- <th class="center">触发器组名称</th>
-        <th class="center">触发器名称</th> -->
+        <th class="center">触发器组名称</th>
+        <th class="center">触发器名称</th>
         <th class="center">时间表达式</th>
         <th class="center">上次运行时间</th>
         <th class="center">下次运行时间</th>
         <th class="center">任务状态</th>
-        <!-- <th class="center">已经运行时间</th> -->
-        <!-- <th class="center">持续运行时间</th> -->
+         <th class="center">已经运行时间</th>
+         <th class="center">持续运行时间</th>
         <th class="center">开始时间</th>
         <th class="center">结束时间</th>
         <th class="center">任务类名</th>
-        <!-- <th class="center">方法名称</th> -->
-        <!-- <th class="center">jobObject</th> -->
-        <!-- <th class="center">运行次数</th> -->
+          <th class="center">方法名称</th>
+          <th class="center">jobObject</th>
+        <  <th class="center">运行次数</th>
         <th class="center" width="15%">操作</th>
     </tr>
     </thead>
@@ -71,24 +71,21 @@
     <tr>
         <td class='center' style="width: auto;">${job.jobGroup}</td>
         <td class='center' style="width: auto;">${job.jobName}</td>
-        <%-- <td class='center' style="width: auto;">${job.triggerGroupName}</td>
-        <td class='center' style="width: auto;">${job.triggerName}</td> --%>
-        <td class='center' style="width: auto;">${var.cronExpr}</td>
-        <td class='center' style="width: auto;"> ${job.previousFireTime}</td>
-        <td class='center' style="width: auto;"> ${job.nextFireTime}</td>
-        <td class='center' style="width: auto;">
-
-        </td>
-        <%-- <td class='center' style="width: auto;">${job.runTimes}</td> --%>
-        <%-- <td class='center' style="width: auto;">${job.duration}</td> --%>
-        <td class='center' style="width: auto;"></td>
-        <td class='center' style="width: auto;"></td>
+          <td class='center' style="width: auto;">${job.triggerGroupName}</td>
+        <td class='center' style="width: auto;">${job.triggerName}</td>
+        <td class='center' style="width: auto;">${job.cronExpr}</td>
+        <td class='center' style="width: auto;"> ${job.previousFireTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
+        <td class='center' style="width: auto;"> ${job.nextFireTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
+        <td class='center' style="width: auto;">${job.jobStatus}</td>
+        <td class='center' style="width: auto;">${job.runTimes}</td>
+        <td class='center' style="width: auto;">${job.duration}</td>
+        <td class='center' style="width: auto;">${job.startTime?string("yyyy-MM-dd HH:mm:ss zzzz")}</td>
+        <td class='center' style="width: auto;">${job.endTime} </td>
         <td class='center' style="width: auto;">${job.jobClass}</td>
-        <%-- <td class='center' style="width: auto;">${job.jobMethod}</td> --%>
-        <%-- <td class='center' style="width: auto;">${job.jobObject}</td> --%>
-        <%-- <td class='center' style="width: auto;">${job.count}</td> --%>
+          <td class='center' style="width: auto;">${job.jobMethod}</td>
+          <td class='center' style="width: auto;">${job.jobObject}</td>
+          <td class='center' style="width: auto;">${job.count}</td>
         <td class='center' style="width: auto;">
-            <%-- <a class="btn btn-minier btn-info" onclick="triggerJob('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>运行</a> --%>
             <a class="btn btn-minier btn-success" onclick="edit('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>编辑</a><br>
             <a class="btn btn-minier btn-warning" onclick="pauseJob('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>暂停</a>
             <a class="btn btn-minier btn-purple" onclick="resumeJob('${job.jobName}','${job.jobGroup}');"><i class="icon-edit"></i>恢复</a>
@@ -97,62 +94,7 @@
     </tr>
 
     </#list> </#if>
-    <!-- 开始循环 -->
-    <#--  <c:choose>
-          <c:when test="${jobInfos.size()>0}">
-              <c:forEach items="${jobInfos}" var="var" varStatus="vs">
-                  <tr>
-                      <td class='center' style="width: auto;">${var.jobGroup}</td>
-                      <td class='center' style="width: auto;">${var.jobName}</td>
-                      <%-- <td class='center' style="width: auto;">${var.triggerGroupName}</td>
-                      <td class='center' style="width: auto;">${var.triggerName}</td> --%>
-                      <td class='center' style="width: auto;">${var.cronExpr}</td>
-                      <td class='center' style="width: auto;"><fmt:formatDate value="${var.previousFireTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                      <td class='center' style="width: auto;"><fmt:formatDate value="${var.nextFireTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                      <td class='center' style="width: auto;">
-                          <c:if test="${var.jobStatus == 'NONE'}">
-                          <span class="label">未知</span>
-                          </c:if>
-                          <c:if test="${var.jobStatus == 'NORMAL'}">
-                          <span class="label label-success arrowed">正常运行</span>
-                          </c:if>
-                          <c:if test="${var.jobStatus == 'PAUSED'}">
-                          <span class="label label-warning">暂停状态</span>
-                          </c:if>
-                          <c:if test="${var.jobStatus == 'COMPLETE'}">
-                          <span class="label label-important arrowed-in">完成状态</span>
-                          </c:if>
-                          <c:if test="${var.jobStatus == 'ERROR'}">
-                          <span class="label label-info arrowed-in-right arrowed">错误状态</span>
-                          </c:if>
-                          <c:if test="${var.jobStatus == 'BLOCKED'}">
-                          <span class="label label-inverse">锁定状态</span>
-                          </c:if>
-                      </td>
-                      <%-- <td class='center' style="width: auto;">${var.runTimes}</td> --%>
-                      <%-- <td class='center' style="width: auto;">${var.duration}</td> --%>
-                      <td class='center' style="width: auto;"><fmt:formatDate value="${var.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                      <td class='center' style="width: auto;"><fmt:formatDate value="${var.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                      <td class='center' style="width: auto;">${var.jobClass}</td>
-                      <%-- <td class='center' style="width: auto;">${var.jobMethod}</td> --%>
-                      <%-- <td class='center' style="width: auto;">${var.jobObject}</td> --%>
-                      <%-- <td class='center' style="width: auto;">${var.count}</td> --%>
-                      <td class='center' style="width: auto;">
-                          <%-- <a class="btn btn-minier btn-info" onclick="triggerJob('${var.jobName}','${var.jobGroup}');"><i class="icon-edit"></i>运行</a> --%>
-                          <a class="btn btn-minier btn-success" onclick="edit('${var.jobName}','${var.jobGroup}');"><i class="icon-edit"></i>编辑</a><br>
-                          <a class="btn btn-minier btn-warning" onclick="pauseJob('${var.jobName}','${var.jobGroup}');"><i class="icon-edit"></i>暂停</a>
-                          <a class="btn btn-minier btn-purple" onclick="resumeJob('${var.jobName}','${var.jobGroup}');"><i class="icon-edit"></i>恢复</a>
-                          <a class="btn btn-minier btn-danger" onclick="deleteJob('${var.jobName}','${var.jobGroup}','${var.triggerName}','${var.triggerGroupName}');"><i class="icon-edit"></i>删除</a>
-                      </td>
-                  </tr>
-              </c:forEach>
-          </c:when>
-          <c:otherwise>
-              <tr class="main_info">
-                  <td colspan="100" class="center">没有相关数据</td>
-              </tr>
-          </c:otherwise>
-      </c:choose>-->
+
     </tbody>
 </table>
 
